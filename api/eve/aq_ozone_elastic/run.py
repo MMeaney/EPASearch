@@ -24,8 +24,9 @@ app.config['SWAGGER_INFO'] = {
     'license': {
         'name': 'BSD',
         'url': 'https://github.com/pyeve/eve-swagger/blob/master/LICENSE',
-    },
-    'schemes': ['http', 'https'],
+    }
+    #,
+    #'schemes': ['http', 'https'],
 }
 
 #### End
