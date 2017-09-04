@@ -29,6 +29,7 @@ RESOURCE_METHODS = ['GET']
 ITEM_METHODS = ['GET']
 
 #####ITEMS = 'results'
+ITEMS = 'records'
 
 description = 'Description of the user resource',
 
