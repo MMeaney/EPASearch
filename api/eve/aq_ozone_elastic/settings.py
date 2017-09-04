@@ -1,4 +1,4 @@
-# Let's just use the local mongod instance. Edit as needed.
+ds# Let's just use the local mongod instance. Edit as needed.
 
 # Please note that MONGO_HOST and MONGO_PORT could very well be left
 # out as they already default to a bare bones local 'mongod' instance.
@@ -29,7 +29,7 @@ RESOURCE_METHODS = ['GET']
 ITEM_METHODS = ['GET']
 
 #####ITEMS = 'results'
-ITEMS = 'results'
+ITEMS = 'records'
 description = 'Description of the user resource',
 
 schema = {
