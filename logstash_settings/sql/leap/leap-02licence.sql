@@ -321,4 +321,4 @@ JOIN 	Filteredepa_site 			AS SiteView 	ON LicenceView.epa_siteid = SiteView.epa_
 WHERE 	LicenceView.[epa_licencetype] IN (919780000, 919780001, 919780002, 919780003,953210004, 953210001, 953210002)
 AND 	LicenceView.[epa_regno] 	IS NOT NULL
 AND 	LicenceView.[epa_regno] 	NOT LIKE '[a-z]%99%[0-9][0-9]-[0-9][0-9]'
---AND		LicenceView.[modifiedon] >= :sql_last_value
+--AND		LicenceView.[modifiedon] >= :sql_last_value --TEXT
