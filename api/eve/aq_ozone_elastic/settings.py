@@ -30,7 +30,6 @@ ITEM_METHODS = ['GET']
 
 #####ITEMS = 'results'
 #####ITEMS = 'records'
-ITEMS = 'asdfadfhdghjfhjgkj;l'
 
 description = 'Description of the user resource',
 
