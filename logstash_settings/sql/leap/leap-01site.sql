@@ -103,4 +103,4 @@ SiteView.[utcconversiontimezonecode]
 FROM  Filteredepa_site AS SiteView
 JOIN  Filteredepa_licence AS LicenceView ON SiteView.epa_siteid = LicenceView.epa_siteid
 WHERE LicenceView.[epa_licencetype] IN (919780000, 919780001, 919780002, 919780003,953210004, 953210001, 953210002)
---AND	  SiteView.[modifiedonutc] >= :sql_last_value
+--AND	  SiteView.[modifiedonutc] >= :sql_last_value --OTHER TEXT
