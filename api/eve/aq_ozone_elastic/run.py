@@ -13,18 +13,22 @@ app.register_blueprint(swagger)
 
 # required. See http://swagger.io/specification/#infoObject for details.
 app.config['SWAGGER_INFO'] = {
-    'title': 'My Supercool API',
+    'title': 'Air Quality Open Data API (Ozone)',
     'version': '1.0',
-    'description': 'an API description',
-    'termsOfService': 'my terms of service',
+    'description': 'Air Quality Open Data API (Ozone)',
+    'termsOfService': "terms.html",
     'contact': {
-        'name': 'nicola',
-        'url': 'http://nicolaiarocci.com'
+      "url": 'http://www.epa.ie',
+      "name": 'EPA'
     },
     'license': {
-        'name': 'BSD',
-        'url': 'https://github.com/pyeve/eve-swagger/blob/master/LICENSE',
+      'url': "https://creativecommons.org/licenses/by/4.0/",
+      'name': "Creative Commons Attribution 4.0 International License (CC BY 4.0)"
     }
+    #'host': "maurice-vm.epa.ie",
+    'schemes': [
+    "http"
+  ],
     #,
     #'schemes': ['http', 'https'],
 }
