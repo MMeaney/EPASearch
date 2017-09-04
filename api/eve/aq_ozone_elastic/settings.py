@@ -29,7 +29,7 @@ RESOURCE_METHODS = ['GET']
 ITEM_METHODS = ['GET']
 
 #####ITEMS = 'results'
-
+ITEMS = 'results'
 description = 'Description of the user resource',
 
 schema = {
