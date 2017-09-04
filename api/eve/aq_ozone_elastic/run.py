@@ -25,7 +25,7 @@ app.config['SWAGGER_INFO'] = {
       'url': "https://creativecommons.org/licenses/by/4.0/",
       'name': "Creative Commons Attribution 4.0 International License (CC BY 4.0)"
     }
-    '
+    ,
     #'host': "maurice-vm.epa.ie",
     'schemes': ["http"]
     #,
