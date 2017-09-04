@@ -2025,7 +2025,7 @@ GitHub: <https://github.com/swagger-api/swagger-ui>
 Tutorial: <http://swagger.io/docs/swagger-tools/#swagger-ui-documentation-29>  
 Install:  <https://github.com/swagger-api/swagger-ui/archive/master.zip>  
 
-Copy `Dist` folder to server, e.g. `C:\Apache24\htdocs\swagger-ui\dist`
+Copy `Dist` folder to server, e.g. `C:\Apache24\htdocs\public\swagger-ui\dist`
 
 Edit `index.html`, set `url` to Python-Eve address (ensuring that ‘Eve-Swagger’ is installed and configured)
 
