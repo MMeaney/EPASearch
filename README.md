@@ -27,7 +27,7 @@ EPA Data Catalogue Search - ElasticSearch
       - [Python 2.7 (ElastAlert)](#python-27-elastalert)
         - [Pip-review 2.7](#pip-review-27)	
     - [Ruby](#ruby)    
-      - [Ruby 23-x64](#ruby-23-64)
+      - [Ruby 23-x64](#ruby-23-x64)
       - [RubyGems 2.6.13](#rubygems-2613)
         - [Bundler](#bundler)	
       - [JRuby 9.1.12.0](#jruby-91120)      
