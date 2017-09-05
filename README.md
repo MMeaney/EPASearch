@@ -28,7 +28,7 @@ EPA Data Catalogue Search - ElasticSearch
         - [Pip-review 2.7](#pip-review-27)	
     - [Ruby](#ruby)    
       - [Ruby 23-x64](#ruby-23-x64)
-      - [RubyGems 2.6.13](#rubygems-2613)
+      - [RubyGems 2.6.11](#rubygems-2611)
         - [Bundler](#bundler)	
       - [JRuby 9.1.12.0](#jruby-91120)      
     - [Perl](#perl)
@@ -365,9 +365,9 @@ c:\dev\python\python27\Scripts\pip-review --local --interactive
 Install: <https://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-2.3.3-x64.exe>  
 Install path suggestion: `c:\dev\ruby\ruby23-x64`  
 
-#### RubyGems 2.6.13
+#### RubyGems 2.6.11
 
-Install: <https://rubygems.org/rubygems/rubygems-2.6.13.zip>  
+Install: <https://rubygems.org/rubygems/rubygems-2.6.11.zip>  
 Install path suggestion: `c:\dev\ruby\rubygems-2.6.11`  
 
 ##### Bundler  
