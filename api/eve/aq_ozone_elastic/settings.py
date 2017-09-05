@@ -77,6 +77,7 @@ aq_ozone_measurements = {
     
     'additional_lookup': {'url': 'regex("[\w]+")','field': 'samplingpoint'},
     'additional_lookup': {'url': 'regex("[\w]+")', 'field': '_id'},
+    'additional_lookup': {'url': 'regex("[\w]+")', 'field': 'raw_reading_measurement_time'},
 
 
     # We choose to override global cache-control directives for this resource.
