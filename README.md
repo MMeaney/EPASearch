@@ -25,7 +25,12 @@ EPA Data Catalogue Search - ElasticSearch
       - [Pip-review](#pip-review)
       - [Virtualenv](#virtualenv)
       - [Python 2.7 (ElastAlert)](#python-27-elastalert)
-        - [Pip-review 2.7](#pip-review-27)
+        - [Pip-review 2.7](#pip-review-27)	
+    - [Ruby](#ruby)    
+      - [Ruby 23-x64](#ruby-23---x64)
+      - [RubyGems 2.6.13](#rubygems-2613)
+        - [Bundler](#bundler)	
+      - [JRuby 9.1.12.0](#jruby-91120)      
     - [Perl](#perl)
       - [cpanm](#cpanm)
     - [Scala](#scala)
@@ -351,6 +356,30 @@ At CLI, note that full path is used as this version of Python is not references 
 c:\dev\python\python27\Scripts\pip install pip-review
 c:\dev\python\python27\Scripts\pip-review --local --interactive
 ```
+
+
+### Ruby
+
+#### Ruby 23-x64
+
+Install: <https://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-2.3.3-x64.exe>  
+Install path suggestion: `c:\dev\ruby\ruby23-x64`  
+
+#### RubyGems 2.6.13
+
+Install: <https://rubygems.org/rubygems/rubygems-2.6.13.zip>  
+Install path suggestion: `c:\dev\ruby\rubygems-2.6.11`  
+
+##### Bundler  
+Environment Variables  
+Add `;c:\dev\ruby\rubygems-2.6.11\bundler\lib` to System `PATH`  
+
+
+#### JRuby 9.1.12.0
+
+Install (Win 64 Exe): <https://s3.amazonaws.com/jruby.org/downloads/9.1.12.0/jruby_windows_x64_9_1_12_0.exe>   
+Install path suggestion: `c:\dev\ruby\jruby-9.1.12.0`  
+
 
 ### Perl 
 <img  alt="logo" height="28" src="http://www.douglasputnam.com/wp-content/uploads/2015/09/perl_logo_oreilly.jpg"/>
