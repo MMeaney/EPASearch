@@ -77,7 +77,7 @@ aq_ozone_measurements = {
     
     'additional_lookup': {'url': 'regex("[\w]+")','field': 'samplingpoint'},
     'additional_lookup': {'url': 'regex("[\w]+")', 'field': '_id'},
-    'additional_lookup': {'url': 'regex("[\w]+")', 'field': 'raw_reading_measurement_time'},
+    #'additional_lookup': {'url': 'regex("[\w]+")', 'field': 'raw_reading_measurement_time'},
 
 
     # We choose to override global cache-control directives for this resource.
@@ -92,7 +92,7 @@ aq_ozone_measurements = {
 }
 
 #SERVER_NAME = '0.0.0.0:5014'
-SERVER_NAME = None
+#SERVER_NAME = "http://maurice-vm.epa.ie:5014"
 XML = False
 PAGINATION = True
 PAGINATION_LIMIT = 999999999
