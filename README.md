@@ -446,6 +446,19 @@ To remove ‘origin’ (if desired to re-use)
 git remote rm origin
 ```
 
+To stage and push edited files:
+```bash
+git add .
+git status
+git push
+```
+
+
+If `git push` is not updating files in the remote repo, try:
+```bash
+git push origin master:master
+```
+
 #### Configure GIT Cert Path
 
 ```bash
