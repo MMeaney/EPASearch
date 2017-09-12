@@ -316,18 +316,18 @@ http {
     server {
         listen       88;
         server_name  wiki.epa.ie;
+	root   html;
 
         location / {
-            root   html;
             index  index.html index.htm;
         }
 
-        error_page  404              404/404.html;
+        error_page  403              error/403.html;
+        error_page  404              error/404.html;
 
         error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   html;
-        }
+        #location = /50x.html {
+        #}
 
         # proxy the PHP scripts to Apache listening on 127.0.0.1:80
         #
@@ -339,7 +339,6 @@ http {
         # Pass the PHP scripts to FastCGI server listening on 127.0.0.1:9123
 
         location ~ \.php$ {
-            root           html;
             fastcgi_pass   127.0.0.1:9123;
             fastcgi_index  index.php;
             fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
