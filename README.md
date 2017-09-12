@@ -172,6 +172,8 @@ Re-run `RClientSetup.exe` in folder `Microsoft.R.Open.Exe,version=3.3.2.1026,chi
 
 Download: <http://nginx.org/download/nginx-1.13.4.zip> (Windows)  
 Tutorial: <http://nginx.org/en/docs/windows.html>  
+Discussion: <https://arstechnica.com/information-technology/2011/11/a-faster-web-server-ripping-out-apache-for-nginx/>  
+
 
 ```bash
 start nginx
