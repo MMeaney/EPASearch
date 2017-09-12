@@ -190,6 +190,42 @@ cd c:\dev\php
 php-cgi.exe -b 127.0.0.1:9000
 ```
 
+
+
+#### Nginx With PHP FastCGI
+
+Tutorial: <https://www.nginx.com/resources/wiki/start/topics/examples/phpfastcgionwindows/>  
+Tutorial: <https://gist.github.com/maiorano84/2b1a40926f49a55f9afd+&cd=2&hl=en&ct=clnk&gl=ie>  
+RunHiddenConsole: <http://redmine.lighttpd.net/attachments/660/RunHiddenConsole.zip>  
+
+
+Add/unzip `RunHiddenConsole.exe` to `c:\dev\server\nginx-1.13.4\bin`. (This might require manual creation of the `bin` folder, this is just to keep the required files in one place).
+
+Environment Variables  
+Add `;c:\dev\server\nginx-1.13.4\bin` to `PATH`  
+
+Create a batch file `start-php-fcgi.bat` (e.g. in c:\dev\server\nginx-1.13.4\bin)
+
+```
+@ECHO OFF
+ECHO Starting PHP FastCGI...
+set PATH=c:\dev\php;%PATH%
+c:\dev\server\nginx-1.13.4\bin\RunHiddenConsole.exe c:\dev\php\php-cgi.exe -b 127.0.0.1:9123
+````
+
+Edit `nginx.conf` (e.g. `c:\dev\server\nginx-1.13.4\conf\nginx.conf`)
+
+```
+root c:/www;
+
+location ~ \.php$ {
+    fastcgi_pass   127.0.0.1:9123;
+    fastcgi_index  index.php;
+    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+    include        fastcgi_params;
+}
+```
+
 ### Eclipse
 
 Install: https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-win32-x86_64.zip
