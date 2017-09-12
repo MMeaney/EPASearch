@@ -182,7 +182,7 @@ start nginx
 
 nginx -s stop	fast shutdown
 nginx -s quit	graceful shutdown
-nginx -s reload	changing configuration, starting new worker processes with a new configuration, graceful shutdown of old worker processes
+nginx -s reload	changing config, starting new worker processes with a new config, graceful shutdown of old worker procs
 nginx -s reopen	re-opening log files
 ```
 
@@ -209,11 +209,15 @@ c:\dev\server\nginx-1.13.4\bin\RunHiddenConsole.exe c:\dev\php\php-cgi.exe -b 12
 
 Edit `nginx.conf` (e.g. `c:\dev\server\nginx-1.13.4\conf\nginx.conf`)
 
-```apacheconf
+```yaml
 http {
-......
+.
+.
+.
     server {
-    ......
+    .
+    .
+    .
         location ~ \.php$ {
             root           html;
             fastcgi_pass   127.0.0.1:9123;
@@ -222,9 +226,13 @@ http {
             #fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
             include        fastcgi_params;
         }
-    ......
+    .
+    .
+    .
     }
- ......   
+.
+.
+.
 }
 
 ```
@@ -239,7 +247,7 @@ start nginx
 
 
 Full `nginx.conf`:
-```apacheconf
+```yaml
 worker_processes  5;  ## Default: 1
 error_log  logs/error.log;
 pid        logs/nginx.pid;
