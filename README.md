@@ -186,14 +186,6 @@ nginx -s reload	changing configuration, starting new worker processes with a new
 nginx -s reopen	re-opening log files
 ```
 
-
-```bash
-cd c:\dev\php
-php-cgi.exe -b 127.0.0.1:9000
-```
-
-
-
 #### Nginx With PHP FastCGI
 
 Tutorial: <https://www.nginx.com/resources/wiki/start/topics/examples/phpfastcgionwindows/>  
