@@ -202,7 +202,7 @@ Add `;c:\dev\server\nginx-1.13.4\bin` to `PATH`
 
 ##### Slightly neater batch files than superseded example below. 
 
-- These `nginx-start.bat` and `nginx-stop.bat` batch commands can be run anywhere once the `c:\dev\server\nginx-1.13.4\bin folder added to `PATH` 
+- These `nginx-start.bat` and `nginx-stop.bat` batch commands can be run anywhere once the `c:\dev\server\nginx-1.13.4\bin` folder has been added to `PATH`. 
 
 Create a batch file `nginx-start.bat` (e.g. in c:\dev\server\nginx-1.13.4\bin)
 
