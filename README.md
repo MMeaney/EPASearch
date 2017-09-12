@@ -218,14 +218,23 @@ c:\dev\server\nginx-1.13.4\bin\RunHiddenConsole.exe c:\dev\php\php-cgi.exe -b 12
 Edit `nginx.conf` (e.g. `c:\dev\server\nginx-1.13.4\conf\nginx.conf`)
 
 ```
-root c:/www;
-
-location ~ \.php$ {
-    fastcgi_pass   127.0.0.1:9123;
-    fastcgi_index  index.php;
-    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-    include        fastcgi_params;
+http {
+......
+    server {
+    ......
+        location ~ \.php$ {
+            root           html;
+            fastcgi_pass   127.0.0.1:9123;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            #fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+    ......
+    }
+ ......   
 }
+
 ```
 
 To run at CLI:
@@ -236,6 +245,82 @@ cd c:\dev\server\nginx-1.13.4
 start nginx
 ```
 
+
+Full `nginx.conf`:
+```
+worker_processes  5;  ## Default: 1
+error_log  logs/error.log;
+pid        logs/nginx.pid;
+worker_rlimit_nofile 8192;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    #include         \conf\mime.types;
+    #include         \conf\proxy.conf;
+    #index           index.html index.htm index.php;
+    default_type    application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+    server {
+        listen       88;
+        server_name  wiki.epa.ie;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+
+        error_page  404              404/404.html;
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+
+        # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+        #
+        #location ~ \.php$ {
+        #    proxy_pass   http://127.0.0.1;
+        #}
+
+
+        # Pass the PHP scripts to FastCGI server listening on 127.0.0.1:9123
+
+        location ~ \.php$ {
+            root           html;
+            fastcgi_pass   127.0.0.1:9123;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            #fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+        #location ~ /\.ht {
+        #    deny  all;
+        #}
+    }
+}
+
+```
 
 
 ### Eclipse
