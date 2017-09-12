@@ -190,6 +190,7 @@ nginx -s reopen	re-opening log files
 
 Tutorial: <https://www.nginx.com/resources/wiki/start/topics/examples/phpfastcgionwindows/>  
 Tutorial: <https://gist.github.com/maiorano84/2b1a40926f49a55f9afd+&cd=2&hl=en&ct=clnk&gl=ie>  
+Cached Gist: <https://webcache.googleusercontent.com/search?q=cache:2s9e3AkC6YIJ:https://gist.github.com/maiorano84/2b1a40926f49a55f9afd+&cd=2&hl=en&ct=clnk&gl=ie>  
 RunHiddenConsole: <http://redmine.lighttpd.net/attachments/660/RunHiddenConsole.zip>  
 
 
@@ -199,7 +200,9 @@ Environment Variables
 Add `;c:\dev\server\nginx-1.13.4\bin` to `PATH`  
 
 
-Slightly neater than superseded example below. These `nginx-start.bat` and `nginx-stop.bat` batch commands can be run anywhere with the `bin` folder added to `PATH` 
+##### Slightly neater batch files than superseded example below. 
+
+These `nginx-start.bat` and `nginx-stop.bat` batch commands can be run anywhere with the `bin` folder added to `PATH` 
 
 Create a batch file `nginx-start.bat` (e.g. in c:\dev\server\nginx-1.13.4\bin)
 
