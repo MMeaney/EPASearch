@@ -200,7 +200,7 @@ Add `;c:\dev\server\nginx-1.13.4\bin` to `PATH`
 
 Create a batch file `start-php-fcgi.bat` (e.g. in c:\dev\server\nginx-1.13.4\bin)
 
-```
+```bash
 @ECHO OFF
 ECHO Starting PHP FastCGI...
 set PATH=c:\dev\php;%PATH%
@@ -209,7 +209,7 @@ c:\dev\server\nginx-1.13.4\bin\RunHiddenConsole.exe c:\dev\php\php-cgi.exe -b 12
 
 Edit `nginx.conf` (e.g. `c:\dev\server\nginx-1.13.4\conf\nginx.conf`)
 
-```
+```json
 http {
 ......
     server {
@@ -239,7 +239,7 @@ start nginx
 
 
 Full `nginx.conf`:
-```
+```conf
 worker_processes  5;  ## Default: 1
 error_log  logs/error.log;
 pid        logs/nginx.pid;
