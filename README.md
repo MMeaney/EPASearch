@@ -209,7 +209,7 @@ c:\dev\server\nginx-1.13.4\bin\RunHiddenConsole.exe c:\dev\php\php-cgi.exe -b 12
 
 Edit `nginx.conf` (e.g. `c:\dev\server\nginx-1.13.4\conf\nginx.conf`)
 
-```yaml
+```apacheconf
 http {
 ......
     server {
@@ -239,7 +239,7 @@ start nginx
 
 
 Full `nginx.conf`:
-```powershell
+```apacheconf
 worker_processes  5;  ## Default: 1
 error_log  logs/error.log;
 pid        logs/nginx.pid;
