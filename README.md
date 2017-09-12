@@ -198,6 +198,38 @@ Add/unzip `RunHiddenConsole.exe` to `c:\dev\server\nginx-1.13.4\bin`. (This migh
 Environment Variables  
 Add `;c:\dev\server\nginx-1.13.4\bin` to `PATH`  
 
+
+Slightly neater than superseded example below. These `nginx-start.bat` and `nginx-stop.bat` batch commands can be run anywhere with the `bin` folder added to `PATH` 
+
+Create a batch file `nginx-start.bat` (e.g. in c:\dev\server\nginx-1.13.4\bin)
+
+```sh
+@ECHO OFF
+
+pushd c:\dev\server\nginx-1.13.4
+
+ECHO Starting PHP FastCGI...
+
+c:\dev\server\nginx-1.13.4\bin\RunHiddenConsole.exe c:\dev\php\php-cgi.exe -b 127.0.0.1:9123
+
+ECHO Starting NGINX
+start nginx.exe
+
+popd
+EXIT /b
+```
+
+Create a batch file `nginx-stop.bat` (e.g. in c:\dev\server\nginx-1.13.4\bin)
+
+```sh
+@ECHO OFF
+taskkill /f /IM nginx.exe
+taskkill /f /IM php-cgi.exe
+EXIT /b
+```
+
+** Superseded **
+
 Create a batch file `start-php-fcgi.bat` (e.g. in c:\dev\server\nginx-1.13.4\bin)
 
 ```bash
@@ -206,6 +238,15 @@ ECHO Starting PHP FastCGI...
 set PATH=c:\dev\php;%PATH%
 c:\dev\server\nginx-1.13.4\bin\RunHiddenConsole.exe c:\dev\php\php-cgi.exe -b 127.0.0.1:9123
 ````
+
+To run at CLI:
+```bash
+cd c:\dev\server\nginx-1.13.4
+.\bin\start-php-fcgi.bat
+
+start nginx
+```
+** Superseded End **
 
 Edit `nginx.conf` (e.g. `c:\dev\server\nginx-1.13.4\conf\nginx.conf`)
 
@@ -237,13 +278,6 @@ http {
 
 ```
 
-To run at CLI:
-```bash
-cd c:\dev\server\nginx-1.13.4
-.\bin\start-php-fcgi.bat
-
-start nginx
-```
 
 
 Full `nginx.conf`:
