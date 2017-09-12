@@ -2390,6 +2390,7 @@ Tutorial: <https://help.github.com/articles/basic-writing-and-formatting-syntax>
 Tutorial: <https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#lists>  
 TOC: <https://tableofcontents.herokuapp.com/>  
 
+Syntax Highlighting: <https://support.codebasehq.com/articles/tips-tricks/syntax-highlighting-in-markdown>  
 
 ## Deprecated
 
