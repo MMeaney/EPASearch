@@ -228,6 +228,16 @@ location ~ \.php$ {
 }
 ```
 
+To run at CLI:
+```bash
+cd c:\dev\server\nginx-1.13.4
+.\bin\start-php-fcgi.bat
+
+start nginx
+```
+
+
+
 ### Eclipse
 
 Install: https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-win32-x86_64.zip
