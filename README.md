@@ -104,7 +104,9 @@ EPA Data Catalogue Search - ElasticSearch
       - [Windows CLI](#windows-abbr-titlecommand-line-interfacecliabbr)
       - [Windows CLI – Composer](#windows-abbr-titlecommand-line-interfacecliabbr-composer)
       - [Windows CLI – NPM (Node Package Manager)](#a-nameproxysettingsnpmawindows-abbr-titlecommand-line-interfacecliabbr-npm-node-package-manager)
-      - [ Linux CLI (e.g. MinTTY, MINGW64 (Git Bash))](#a-nameproxysettingsbasha-linux-abbr-titlecommand-line-interfacecliabbr-eg-mintty-mingw64-git-bash)
+      - [ Linux CLI (e.g. MinTTY, MINGW64 (Git Bash))](#a-nameproxysettingsbasha-linux-abbr-titlecommand-line-interfacecliabbr-eg-mintty-mingw64-git-bash)            
+    - [Useful Miscellaneous](#useful-miscellaneous)
+      - [Environment Variables Shortcut](e#nvironment-variables-shortcut)      
     - [MD/Github Editing](#mdgithub-editing)
   - [Deprecated](#deprecated)
     - [HDFSExplorer (Hadoop - deprecated)](#hdfsexplorer-hadoop-deprecated)
@@ -2284,6 +2286,15 @@ or (with domain)
 export http_proxy=http://epa\\username:password@proxy.host.ie:8888
 export https_proxy=https://epa\\username:password@proxy.hostie:8888
 ```
+
+
+### Useful Miscellaneous
+
+#### Environment Variables Shortcut
+
+Target: %windir%\System32\rundll32.exe sysdm.cpl,EditEnvironmentVariables  
+Start In: %windir%
+
 
 ### MD/Github Editing
 
