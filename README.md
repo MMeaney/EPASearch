@@ -361,13 +361,31 @@ http {
 
 ### Eclipse
 
-Install: <http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/epp/downloads/release/oxygen/R/eclipse-php-oxygen-R-win32-x86_64.zip>  
+Install: <aram  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            #fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+            include        fastcgi_params;
+        }
 
-Eclipse PHP 64-bit
 
-https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-win32-x86_64.zip
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+        #location ~ /\.ht {
+        #    deny  all;
+        #}
+    }
+}
 
-Eclipse JEE Developers 64-Bit
+```
+
+
+### Eclipse
+
+Install:  
+
+Eclipse PHP 64-bit: <https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-php-oxygen-R-win32-x86_64.zip>  
+
+Eclipse JEE 64-Bit: <https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-win32-x86_64.zip>  
 
 
 ### PHP 
