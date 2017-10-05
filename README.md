@@ -361,26 +361,6 @@ http {
 
 ### Eclipse
 
-Install: <aram  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-            #fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
-            include        fastcgi_params;
-        }
-
-
-        # deny access to .htaccess files, if Apache's document root
-        # concurs with nginx's one
-        #
-        #location ~ /\.ht {
-        #    deny  all;
-        #}
-    }
-}
-
-```
-
-
-### Eclipse
-
 Install:  
 
 Eclipse PHP 64-bit: <https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-php-oxygen-R-win32-x86_64.zip>  
