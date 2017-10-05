@@ -361,7 +361,11 @@ http {
 
 ### Eclipse
 
-Install: https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-win32-x86_64.zip
+Install: <http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/epp/downloads/release/oxygen/R/eclipse-php-oxygen-R-win32-x86_64.zip>  
+
+Eclipse PHP 64-bit
+
+https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-win32-x86_64.zip
 
 Eclipse JEE Developers 64-Bit
 
