@@ -414,6 +414,7 @@ Installation:
 Extract zip file
 -	Add `;c:\dev\php` to environment variable `PATH`
 -	Configure `php.ini`
+-	Under `[Session]` set `session.save_path = "c:\dev\php\sessionfolder"`
 -	`$HTTP_RAW_POST_DATA` is deprecated. Set:
    `always_populate_raw_post_data = -1`
 -	Ensure `Apache httpd.conf` is configured for PHP:
