@@ -22,7 +22,7 @@ EPA Data Catalogue Search - ElasticSearch
       - [Laravel](#laravel)
       - [PECL Intl](#pecl-intl)
     - [Python 3.4](#python-34)
-      - [Pip-Upgrade](#pip-upgrade)
+      - [Pip Upgrade](#pip-upgrade)
       - [Pip-review](#pip-review)
       - [Virtualenv](#virtualenv)
       - [Python 2.7 (ElastAlert)](#python-27-elastalert)
