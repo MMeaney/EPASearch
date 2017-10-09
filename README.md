@@ -136,6 +136,20 @@ Install: <https://www.microsoft.com/en-us/download/details.aspx?id=48145>
 
 Required for Python 3.4  
 
+
+Tutorial: <https://blog.ionelmc.ro/2014/12/21/compiling-python-extensions-on-windows/#for-python-3-4>  
+
+Visual C++ 2010 Express: <http://download.microsoft.com/download/1/D/9/1D9A6C0E-FC89-43EE-9658-B9F0E3A76983/vc_web.exe>  
+Windows SDK for Visual Studio 2010 (v7.1): <https://download.microsoft.com/download/A/6/A/A6AC035D-DA3F-4F0C-ADA4-37C8E5D34E3D/winsdk_web.exe>  
+Create a `vcvars64.bat` file in `C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\amd64` that contains 
+```
+CALL "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
+```
+
+Try `py -3 setup.py clean --all build_ext --force`
+
+Deprecated below?
+
 Tutorial: <https://wiki.python.org/moin/WindowsCompilers#Microsoft_Visual_C.2B-.2B-_10.0_standalone:_Windows_SDK_7.1_.28x86.2C_x64.2C_ia64.29>  
 
 MS .NET Framework 4: <https://www.microsoft.com/en-us/download/details.aspx?id=24872>  
