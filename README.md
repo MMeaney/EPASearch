@@ -134,7 +134,7 @@ Install: <https://www.microsoft.com/en-us/download/details.aspx?id=48145>
 
 #### Microsoft Visual C++ 2010 Redistributable Package (Python 3.4)
 
-Required for Python 3.4  
+Required for Python 3.4 (use Python 3.5 instead) 
 
 
 Tutorial: <https://blog.ionelmc.ro/2014/12/21/compiling-python-extensions-on-windows/#for-python-3-4>  
@@ -514,10 +514,18 @@ For MediaWiki: The intl PECL extension is installed to handle Unicode normalizat
 Bundled?
 
 
+### Python 3.5 
+
+<img alt="logo" height="28" src="https://www.python.org/static/community_logos/python-logo-inkscape.svg" />
+
+
+Install: https://www.python.org/ftp/python/3.5.4/python-3.5.4rc1-amd64.exe
+-	c:\dev\python\python35
+
 
 ### Python 3.4 
 
-<img alt="logo" height="28" src="https://www.python.org/static/community_logos/python-logo-inkscape.svg" />
+Deprecated - use Python 3.5 (Microsoft compiler dependencies not worth the aggravation)
 
 
 Install: https://www.python.org/ftp/python/3.4.3/python-3.4.3rc1.amd64.msi
