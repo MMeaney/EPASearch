@@ -22,6 +22,7 @@ EPA Data Catalogue Search - ElasticSearch
       - [Laravel](#laravel)
       - [PECL Intl](#pecl-intl)
     - [Python 3.4](#python-34)
+      - [Pip-Upgrade](#pip-upgrade)
       - [Pip-review](#pip-review)
       - [Virtualenv](#virtualenv)
       - [Python 2.7 (ElastAlert)](#python-27-elastalert)
@@ -491,15 +492,26 @@ Install: https://www.python.org/ftp/python/3.4.3/python-3.4.3rc1.amd64.msi
 -	c:\dev\python\python34
 
 
+#### Pip Upgrade 
+
+Upgrade Pip installer
+
+Set `http_proxy` at CLI <sup>[[Proxy Settings]](#proxysettings)</sup>
+
+```sh
+pip install --upgrade pip
+```
+
+
 #### Pip-review 
 
 Used to upgrade PIP installs
 
 Set `http_proxy` at CLI <sup>[[Proxy Settings]](#proxysettings)</sup>
 
-```
-> pip install pip-review
-> pip-review --local --interactive
+```sh
+pip install pip-review
+pip-review --local --interactive
 ```
 
 #### Virtualenv
