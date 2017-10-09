@@ -8,6 +8,7 @@ EPA Data Catalogue Search - ElasticSearch
     - [Port Checking](#port-checking)
     - [Microsoft Dependencies and Development Tools](#microsoft-dependencies-and-development-tools)
       - [VCRUNTIME140.dll C++ Redistributable for Visual Studio 2015 RC](#vcruntime140dll-c-redistributable-for-visual-studio-2015-rc)
+      - [Microsoft Visual C++ 2010 Redistributable Package (Python 3.4)](#microsoft-visual-c-2010-redistributable-package-python-34)
       - [Microsoft Visual C++ 2010 Redistributable Package (x86)](#microsoft-visual-c-2010-redistributable-package-x86)
       - [Microsoft Visual C++ Build Tools 2015](#microsoft-visual-c-build-tools-2015)
       - [Microsoft Visual Studio 2017 and .NET Core](#microsoft-visual-studio-2017-and-net-core)
@@ -131,7 +132,22 @@ Install: <https://www.microsoft.com/en-us/download/details.aspx?id=48145>
 `vc\_redist.x64.exe`
 
 
+#### Microsoft Visual C++ 2010 Redistributable Package (Python 3.4)
+
+Required for Python 3.4  
+
+Tutorial: <https://wiki.python.org/moin/WindowsCompilers#Microsoft_Visual_C.2B-.2B-_10.0_standalone:_Windows_SDK_7.1_.28x86.2C_x64.2C_ia64.29>  
+
+MS .NET Framework 4: <https://www.microsoft.com/en-us/download/details.aspx?id=24872>  
+Windows SDK for Windows 7 and .NET Framework 4: <https://www.microsoft.com/en-us/download/details.aspx?id=8279>  
+- Check Windows headers and libraries, Visual C++ Compilers and Windows Native Code Development\Tools options only. 
+Visual C++ 2010 SP1 Compiler Update SDK 7.1: <https://www.microsoft.com/en-us/download/details.aspx?id=4422>
+Visual C++ 2010 SP1 Redistributable MFC Security Update: <https://www.microsoft.com/en-us/download/details.aspx?id=26999>   
+- Install both `vcredist_x64.exe` and `vcredist_x86.exe`
+
 #### Microsoft Visual C++ 2010 Redistributable Package (x86)
+
+Deprecated?
 
 Required for Python 3.6  
 
@@ -141,6 +157,8 @@ Direct: <https://download.microsoft.com/download/5/B/C/5BC5DBB3-652D-4DCE-B14A-4
 
 
 #### Microsoft Visual C++ Build Tools 2015
+
+Deprecated?
 
 Required for Python  
 
