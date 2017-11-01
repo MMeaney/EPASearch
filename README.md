@@ -16,6 +16,7 @@ EPA Data Catalogue Search - ElasticSearch
         - [MS VS2017 R Client Setup](#ms-vs2017-r-client-setup)
     - [Nginx](#nginx)
     - [Eclipse](#eclipse)
+    - [Sublime Text](#sublime-text)
     - [PHP](#php)
       - [Composer](#composer)
       - [Pear](#pear)
@@ -399,6 +400,11 @@ Install:
 Eclipse PHP 64-bit: <https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-php-oxygen-R-win32-x86_64.zip>  
 
 Eclipse JEE 64-Bit: <https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/R/eclipse-jee-oxygen-R-win32-x86_64.zip>  
+
+
+### Sublime Text
+
+Install:  
 
 
 ### PHP 
