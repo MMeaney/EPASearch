@@ -68,6 +68,7 @@ EPA Data Catalogue Search - ElasticSearch
     - [Apache Ant 1.9.7](#apache-ant-197)
     - [Apache Tika 1.15](#apache-tika-115)
         - [Tika JAR recompile (deprecated)](#tika-jar-recompile-deprecated)
+    - [Apache Solr 7.1.0](#apache-solr-710)
     - [Apache Zookeeper 3.4.6](#apache-zookeeper-346)
     - [Apache Kafka 0.10.1.1](#apache-kafka-01011)
     - [Apache Spark](#apache-spark)
@@ -1406,6 +1407,21 @@ Others:
 <http://www.apache.org/dyn/closer.cgi/tika/tika-app-1.12.jar>  
 
 
+### Apache Solr 7.1.0
+
+For use with CKAN
+
+Install: <http://archive.apache.org/dist/lucene/solr/7.1.0/solr-7.1.0.zip>  
+Tutorial: <https://lucene.apache.org/solr/guide/6_6/installing-solr.html>  
+
+Unzip to folder, e.g. `c:\dev\apache\solr-7.1.0`
+
+```bash
+cd c:\dev\apache\solr-7.1.0\bin
+solr start
+```
+
+If successful a port number should be assigned to Sole, e.g. <http://localhost:8983>  
 
 
 ### Apache Zookeeper 3.4.6
