@@ -102,6 +102,9 @@ EPA Data Catalogue Search - ElasticSearch
     - [MediaWiki 1.28.0](#mediawiki-1280)
     - [Wikibase](#wikibase)
     - [ImageMagick 7.0.3 Win64](#imagemagick-703-win64)
+  - [CKAN](#ckan)
+    - [CKAN 2.5.2 Windows](#ckan-252-windows)
+    - [Python Requirements](#python-requirements)
   - [Appendix](#appendix)
     - [Proxy Settings](#a-nameproxysettingsaproxy-settings)
       - [Windows CLI](#windows-abbr-titlecommand-line-interfacecliabbr)
@@ -114,6 +117,9 @@ EPA Data Catalogue Search - ElasticSearch
   - [Deprecated](#deprecated)
     - [HDFSExplorer (Hadoop - deprecated)](#hdfsexplorer-hadoop-deprecated)
   - [Sandbox](#sandbox)
+  
+
+
 ## Required Languages and Technologies  
 
 ### Port Checking
@@ -2436,6 +2442,34 @@ Used for Mediawiki and OCR.
  
 
 
+## CKAN
+
+### CKAN 2.5.2 Windows
+
+Tutorial: <https://github.com/ckan/ckan/wiki/How-to-Install-CKAN-2.5.2-on-Windows-7>  
+
+
+### Python Requirements 
+
+Python 2.7.112 (Python 3.3.3rc1 installed)
+
+
+Install the Windows distribution of psycopg2: 
+
+```bash
+pip install psycopg2
+```
+
+virtualenv
+```bash
+pip install virtualenv
+```
+
+Install `virtualenvwrapper-win` <https://github.com/davidmarble/virtualenvwrapper-win>  
+
+```bash
+pip install virtualenvwrapper-win
+```
 
 
 ## Appendix
