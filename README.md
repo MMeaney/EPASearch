@@ -1419,6 +1419,7 @@ Unzip to folder, e.g. `c:\dev\apache\solr-7.1.0`
 ```bash
 cd c:\dev\apache\solr-7.1.0\bin
 solr start
+solr stop -p 8983
 ```
 
 If successful a port number should be assigned to Sole, e.g. <http://localhost:8983>  
