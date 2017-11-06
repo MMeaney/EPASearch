@@ -1256,7 +1256,9 @@ db.measurements.remove( {'_id': ObjectId("58f88808c864b17558000001")} );
 ```
 ```
 db.measurements.createIndex( { "measurementid": 1 }, { unique: true } )
-```
+``` 
+
+
 ### Postgres 9.6.2
 Install: <http://oscg-downloads.s3.amazonaws.com/packages/PostgreSQL-9.6.2-2-win64-bigsql.exe>  
 Admin: <http://localhost:8051/#/>  
@@ -1271,6 +1273,15 @@ Run “pgAdmin3 LTS by BigSQL” (GUI from Start Menu)
 
 ![pgadmin3](https://user-images.githubusercontent.com/11856005/28210840-748008c0-6891-11e7-8b1a-47241d02a4e8.png)
 
+
+### Postgres 10
+Note: Postgres 9.6.2 and  Using pgAdmin III
+Install: <https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows>  
+Install: <https://www.enterprisedb.com/thank-you?anid=1255494>  
+
+
+#### PGAdmin 4 Postgres 9.6.2
+Install: <https://ftp.postgresql.org/pub/pgadmin/pgadmin4/v2.0/windows/pgadmin4-2.0-x86.exe> 
 
 #### PostgreSQL 9.3 (Deprecated) 
 Install: <http://get.enterprisedb.com/postgresql/postgresql-9.3.13-1-windows-x64-binaries.zip>  
