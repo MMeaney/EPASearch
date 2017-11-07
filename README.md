@@ -25,7 +25,8 @@ EPA Data Catalogue Search - ElasticSearch
       - [PECL Intl](#pecl-intl)
     - [Python 3.4](#python-34)
       - [Pip Upgrade](#pip-upgrade)
-      - [Pip-review](#pip-review)
+      - [Pip Review](#pip-review)
+      - [Alternative Pip Version](#alternative-pip-version)
       - [Virtualenv](#virtualenv)
       - [Python 2.7 (ElastAlert)](#python-27-elastalert)
         - [Pip-review 2.7](#pip-review-27)	
@@ -546,6 +547,14 @@ Deprecated - use Python 3.5 (Microsoft compiler dependencies not worth the aggra
 Install: https://www.python.org/ftp/python/3.4.3/python-3.4.3rc1.amd64.msi
 -	c:\dev\python\python34
 
+
+#### Alternative Pip Version
+
+To use an alternative Pip version, for example from a legacy Python 2.7 install, use the full path to the `python.exe` and use the `-m` switch followed by `pip install`.
+
+```sh
+c:\dev\python\python27\python.exe -m pip install repoze.who-friendlyform==1.0.8
+```
 
 #### Pip Upgrade 
 
