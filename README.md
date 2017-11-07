@@ -105,7 +105,8 @@ EPA Data Catalogue Search - ElasticSearch
     - [MediaWiki 1.28.0](#mediawiki-1280)
     - [Wikibase](#wikibase)
     - [ImageMagick 7.0.3 Win64](#imagemagick-703-win64)
-  - [CKAN](#ckan)
+  - [CKAN](#ckan)  
+    - [CKAN 2.5.2 Ubuntu](#ckan-252-ubuntu)
     - [CKAN 2.5.2 Windows](#ckan-252-windows)
     - [Python Requirements](#python-requirements)
   - [Appendix](#appendix)
@@ -2487,6 +2488,12 @@ Used for Mediawiki and OCR.
 
 
 ## CKAN
+
+### CKAN 2.5.2 Ubuntu
+
+Install Ubuntu on Virtualbox. Link: [[Ubuntu 16.04.3]](#ubuntu-16043)
+
+Tutorial: <http://docs.ckan.org/en/ckan-1.7.4/install-from-package-virtualbox.html>  
 
 ### CKAN 2.5.2 Windows
 
