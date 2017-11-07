@@ -2493,7 +2493,7 @@ Used for Mediawiki and OCR.
 
 Install Ubuntu on Virtualbox. Link: [[Ubuntu 16.04.3]](#ubuntu-16043)
 
-Tutorial: <http://docs.ckan.org/en/ckan-1.7.4/install-from-package-virtualbox.html>  
+Tutorial: <http://docs.ckan.org/en/ckan-2.7.2/maintaining/installing/install-from-package.html>  
 
 ### CKAN 2.5.2 Windows
 
