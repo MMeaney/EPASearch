@@ -46,8 +46,10 @@ EPA Data Catalogue Search - ElasticSearch
       - [Docker Cygwin](#docker-cygwin)
     - [Virtual Machines](#virtual-machines)
       - [Vagrant](#vagrant)
-      - [Oracle VM VirtualBox](#oracle-vm-virtualbox)    
-        - [Ubuntu 16.04.3](#ubuntu-16043)
+      - [Oracle VM VirtualBox](#oracle-vm-virtualbox)   
+    - [Linux](#linux)
+      - [Ubuntu 14.04.5](#ubuntu-14045)
+      - [Ubuntu 16.04.3](#ubuntu-16043)
     - [Cygwin](#cygwin)
     - [NodeJS](#nodejs)
     - [React](#react)
@@ -844,12 +846,25 @@ Ensure `VT-x` is enabled in BIOS
 
 <a target='_blank' href="https://www.howtogeek.com/213795/how-to-enable-intel-vt-x-in-your-computers-bios-or-uefi-firmware/">How to Enable Intel VT-x in Your Computer's BIOS or UEFI Firmware</a>
 
-##### Ubuntu 16.04.3
+### Linux 
+
+Ubunto ISOs: <https://mirror.umd.edu/ubuntu-iso/>  
+
+#### Ubuntu 14.04.5 
 
 Install Ubuntu on Oracle VirtualBox 
-
 Tutorial: <https://linus.nci.nih.gov/bdge/installUbuntu.html>  
-Install: <http://releases.ubuntu.com/16.04/ubuntu-16.04.3-desktop-amd64.iso>  
+
+Install: <https://mirror.umd.edu/ubuntu-iso/14.04/ubuntu-14.04.5-desktop-amd64.iso>  
+
+#### Ubuntu 16.04.3
+
+Install Ubuntu on Oracle VirtualBox 
+Tutorial: <https://linus.nci.nih.gov/bdge/installUbuntu.html>  
+
+
+Install (slow): <http://releases.ubuntu.com/16.04/ubuntu-16.04.3-desktop-amd64.iso>  
+Install (faster): <https://mirror.umd.edu/ubuntu-iso/16.04/ubuntu-16.04.3-desktop-amd64.iso>  
 
 ### Cygwin
 
