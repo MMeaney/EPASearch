@@ -2506,11 +2506,23 @@ Used for Mediawiki and OCR.
 
 ### CKAN 2.5.2 Ubuntu
 
-Install Ubuntu on Virtualbox. Link: [[Ubuntu 16.04.3]](#ubuntu-16043)
+Install Ubuntu 14..04.5 on Virtualbox. Link: [[Ubuntu 14.04.5]](#ubuntu-14045)
 
 Tutorial: <http://docs.ckan.org/en/ckan-2.7.2/maintaining/installing/install-from-package.html>  
 
+Solr JSP Error Workaround: <https://stackoverflow.com/questions/30355839/>  
+(link to solution: <https://github.com/ckan/ckan/pull/2966>)  
+
+```bash
+wget https://launchpad.net/~vshn/+archive/ubuntu/solr/+files/solr-jetty-jsp-fix_1.0.2_all.deb
+dpkg -i solr-jetty-jsp-fix_1.0.2_all.deb
+service jetty restart
+```
+
+
 ### CKAN 2.5.2 Windows
+
+(DEPRECATED - Windows install unreliable)
 
 Tutorial: <https://github.com/ckan/ckan/wiki/How-to-Install-CKAN-2.5.2-on-Windows-7>  
 
