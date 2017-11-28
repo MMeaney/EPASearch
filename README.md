@@ -976,6 +976,7 @@ Environment Variables:
 -	Add `;c:\dev\hadoop\hadoop-2.7.1\bin` to environment variable `PATH`
 -	Add `;c:\dev\hadoop\hadoop-2.7.1\sbin` to environment variable `PATH`
 -	Create new environment variable `HADOOP_HOME`, set to `c:\dev\hadoop\hadoop-2.7.1`
+-	Create new environment variable `HADOOP_BIN_PATH`, set to `c:\dev\hadoop\hadoop-2.7.1\bin`
 
 Create the folders `c:\dev\hadoop\hadoop-2.7.1\data\namenode` and `c:\dev\hadoop\hadoop-2.7.1\data\datanode` if they don't exist:
 
@@ -1057,6 +1058,9 @@ c:\dev\hadoop\hadoop-2.7.1\bin\yarn jar c:\dev\hadoop\hadoop-2.7.1\share\hadoop\
 ```
 
 **Troubleshooting**
+
+If there is an error with `start-yarn.cmd` looking for `packages.json` ensure that environment variable `HADOOP_BIN_PATH` exists and is set to `c:\dev\hadoop\hadoop-2.7.1\bin`
+
 
 To format NameNodes
 
