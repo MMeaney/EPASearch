@@ -11,14 +11,14 @@ if (count($resultsLEAPLicence) > 0) { //*/
 <nav class="navbar navbar-default" role="navigation" id="navUL">
 <ul class="nav nav-pills" role="tablist">
 
-<!-- 
+<!--
 <li class="active" style="width:0px; "><a data-toggle="tab" href="#Dummy"></a>
 </li>
  -->
 
 <li class="active">
-	<a href="#LEAPLicence" 
-		data-toggle="pill"		
+	<a href="#LEAPLicence"
+		data-toggle="pill"
 		data-tab-history="true"
 		data-tab-history-changer="push"
 		data-tab-history-update-url="true"
@@ -31,8 +31,8 @@ Licences
 </li>
 
 <li>
-	<a href="#LEAPComplaint" 
-		data-toggle="pill"		
+	<a href="#LEAPComplaint"
+		data-toggle="pill"
 		data-tab-history="true"
 		data-tab-history-changer="push"
 		data-tab-history-update-url="true"
@@ -45,8 +45,8 @@ Complaints
 </li>
 
 <li>
-	<a href="#LEAPNonCompliance" 
-		data-toggle="pill"		
+	<a href="#LEAPNonCompliance"
+		data-toggle="pill"
 		data-tab-history="true"
 		data-tab-history-changer="push"
 		data-tab-history-update-url="true"
@@ -59,8 +59,8 @@ Non-Compliance
 </li>
 
 <li>
-	<a href="#LEAPComplianceInvestigation" 
-		data-toggle="pill"		
+	<a href="#LEAPComplianceInvestigation"
+		data-toggle="pill"
 		data-tab-history="true"
 		data-tab-history-changer="push"
 		data-tab-history-update-url="true"
@@ -73,8 +73,8 @@ Compliance Investigation
 </li>
 
 <li>
-	<a href="#LEAPDocuments" 
-		data-toggle="pill"		
+	<a href="#LEAPDocuments"
+		data-toggle="pill"
 		data-tab-history="true"
 		data-tab-history-changer="push"
 		data-tab-history-update-url="true"
@@ -86,24 +86,24 @@ SharePoint
 </a>
 </li>
 
-<!-- 
+
 <li>
 	<a href="#PRTRMeasurements"
-		data-toggle="pill"		
+		data-toggle="pill"
 		data-tab-history="true"
 		data-tab-history-changer="push"
 		data-tab-history-update-url="true"
 		>
-		
+
 PRTR Meas
-<?php /* if($resultsPRTRMeasurements > 0){ ?>
+<?php if($resultsPRTRMeasurements > 0){ ?>
 <span class="badge"><?php echo $resultsCountPRTRMeasurements; ?></span>
-<?php } */?>
+<?php } ?>
 </a>
 </li>
- -->
- 
-<!-- 
+
+
+<!--
 <li><a data-toggle="pill" href="#searchFileshare">
 Network Files
 <?php /* if($resultscountfileshare > 0){ ?>
@@ -112,7 +112,7 @@ Network Files
 </a>
 </li>
  -->
- 
+
 </ul>
 </nav><!-- ./nav-pills -->
 <?php
@@ -127,10 +127,10 @@ Network Files
 <!-- LEAP LICENCE -->
 <!-- ************************************************************************************************* -->
 
-<!-- 
+<!--
 <div id="Dummy" class="tab-pane active">
 </div><!-- ./LEAPLicence -->
-<!-- 
+<!--
 <div id="LEAPLicence" class="tab-pane">
  -->
 
@@ -224,9 +224,9 @@ if (isset($_REQUEST['submitted'])) {
 
 <!------------------------------- *** NETWORK FILE SHARE Tab *** ------------------------>
 
-<!--  
+<!--
 <div id="searchFileshare" class="tab-pane">
-	
+
 <div id="wrapper">
 
 <div class="divcontainleftright">
@@ -247,8 +247,8 @@ if (isset($_REQUEST['submitted'])) {
 
 <!-- ************************************************************************************************* -->
 <!-- Display FILESHARE Results PHP File -->
-<!-- ************************************************************************************************* -->		
-<!-- 
+<!-- ************************************************************************************************* -->
+<!--
 <div id="page-content-wrapper">
 
 <?php
@@ -262,9 +262,9 @@ if (isset($_REQUEST['submitted'])) {
 </div>
  -->
 <!-- /#page-content-wrapper -->
-<!-- 				
+<!--
 </div><!-- ./divcontainleftright -->
-<!-- 
+<!--
 </div><!-- /#wrapper -->
 
 <!-- Menu Toggle Script -->
@@ -274,7 +274,7 @@ if (isset($_REQUEST['submitted'])) {
 //	$("#wrapper").toggleClass("toggled");
 //});
 </script>
-<!-- 
+<!--
 </div><!-- /.searchFileshare -->
 
 </div><!-- ./tab-content -->

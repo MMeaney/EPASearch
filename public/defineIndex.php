@@ -1,12 +1,24 @@
-<?php 
+<?php
 
-$param['index'] = ['docs', 'images'];
+$leapIndex = 'leap3';
+
+//$param['index'] = ['owl_oea_central_files_docs_doc'];
+//$param['index'] = ['docs'];
+//$param['type']  = ['doc'];
+
+//$paramfileshare['index'] =  ['owl_oea_central_files_docs_doc'];
+$paramfileshare['index'] =  ['docs'];
+$paramfileshare['type']  = ['doc'];
+
+
+/*
+$param['index'] = ['owl_oea_central_files_docs_doc', 'docs', 'images'];
 $param['type']  = ['doc', 'people', 'image'];
 
 $paramMainTest['index'] = ['docs', 'images'];
 $paramMainTest['type']  = ['doc', 'people', 'image'];
 
-$paramfileshare['index'] =  ['doc', 'people', 'image'];
+$paramfileshare['index'] =  ['owl_oea_central_files_docs_doc', 'doc', 'people', 'image'];
 $paramfileshare['type']  = ['doc', 'image'];
 
 $paramopendata['index'] = "gismetadatatest";
@@ -15,15 +27,11 @@ $paramopendata['type']  = ['rivers', 'radon'];
 $paramdatadictionary['index'] = "epametadatatest";
 $paramdatadictionary['type']  = "datadictionary";
 
-$paramPeople['index'] = "docs";
-$paramPeople['type']  = "people";
 
-$paramSnippetMain['index'] = "epasystems";
-$paramSnippetMain['type']  = "system";
 
 $paramResearch['index'] = "safer";
 $paramResearch['type']  = "saferdata";
-
+*/
 
 $paramLEAP['index'] = "leap3";
 //$paramLEAP['type'] = "saferdata";
@@ -38,6 +46,13 @@ $paramopendata['size'] = 10;
 
 $paramdatadictionary['size'] = 1000;
 
+
+//$paramSnippetMain['index'] = "epasystems";
+//$paramSnippetMain['type']  = "system";
+
+
+$paramPeople['index'] = "people";
+$paramPeople['type']  = "staff";
 $paramPeople['size'] = 20;
 
 

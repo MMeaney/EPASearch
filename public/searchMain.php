@@ -13,16 +13,16 @@ require __DIR__ . '/../vendor/autoload.php';
 // Get search results from Elasticsearch if the user searched for something
 $results = [];
 
-if (!empty($_REQUEST['submitted'])) {	
-	
+if (!empty($_REQUEST['submitted'])) {
+
 	include __DIR__ . "/defineClient.php";
 	include __DIR__ . "/defineIndex.php";
-	include __DIR__ . "/defineQuery.php";	
+	include __DIR__ . "/defineQuery.php";
 	include __DIR__ . "/definePagination.php";
-	
+
 }
-	
-$searchText = $_REQUEST['q']; 
+
+$searchText = $_REQUEST['q'];
 
 $paramSize = $param['size'];
 $paramFrom = $param['from'];
@@ -42,7 +42,7 @@ include("layout/headDataTables.php");
 <body>
 <div class="wrapper">
 
-<?php 
+<?php
 include __DIR__ . "/searchNavSearchBar.php";
 ?>
 
@@ -50,7 +50,7 @@ include __DIR__ . "/searchNavSearchBar.php";
 <nav class="navbar navbar-default" role="navigation">
 <ul class="nav nav-pills" role="tablist">
 
-<!-- 
+<!--
 <li class="active"><a data-toggle="tab" href="#searchMain"
 All
 <span class="badge">
@@ -100,7 +100,7 @@ Open Data
 </a>
 </li>
 
-<!-- 
+<!--
 <li><a data-toggle="pill" href="#searchDataDictionary">
 Data Dictionaries
 <?php /* if($resultscountdatadictionary > 0){ ?>
@@ -119,7 +119,7 @@ CRM Data Dict
 </li>
 
 
-<!-- 
+<!--
 
 <li><a data-toggle="pill" href="#LEAP">
 LEAP
@@ -130,7 +130,7 @@ LEAP
 </li>
  -->
 
-<!-- 
+<!--
 <li><a data-toggle="pill" href="#searchResearch">
 Research
 <?php /*if($resultsCountResearch>0){ ?>
@@ -140,7 +140,7 @@ Research
 </a>
 </li>
 
-<!-- 
+<!--
 <li><a href="/searchTest.php"><i class="fa fa-inbox"></i>&nbsp;Test</a></li>
  -->
 </ul>
@@ -148,18 +148,18 @@ Research
 
 
 <!-----------------------------------------------------------------------------------------------------------
---- *** NAVIGATION TABS *** 
------------------------------------------------------------------------------------------------------------->	
-	
+--- *** NAVIGATION TABS ***
+------------------------------------------------------------------------------------------------------------>
+
 <div class="tab-content">
 
 <!------------------------------- *** MAIN SEARCH Tab *** ------------------------------->
-<!-- 
+<!--
 <div id="searchMain" class="tab-pane active">
 
 <!-- ************************************************************************************************* -->
 <!-- Display MAIN Results PHP File -->
-<!-- ************************************************************************************************* -->		
+<!-- ************************************************************************************************* -->
 
 <?php
 /*
@@ -169,10 +169,10 @@ if (isset($_REQUEST['submitted'])) {
 
 */
 ?>
-<!-- 
+<!--
 <h4>Query JSON</h4>
 <pre><code class="language-json">
-<?php 
+<?php
 //$json_query_main_print = json_decode($param['body']);
 //echo json_encode($json_query_main_print, JSON_PRETTY_PRINT);
 /*
@@ -181,7 +181,7 @@ echo json_encode($paramMainTest['body'], JSON_PRETTY_PRINT);
 ?>
 </code></pre>
  -->
- <!-- 
+ <!--
 </div>
  -->
 <!-- /.searchMainTest -->
@@ -195,7 +195,7 @@ echo json_encode($paramMainTest['body'], JSON_PRETTY_PRINT);
 
 <!-- ************************************************************************************************* -->
 <!-- Display MAIN TEST Results PHP File -->
-<!-- ************************************************************************************************* -->		
+<!-- ************************************************************************************************* -->
 
 
 <div class="divFlexLeftRight">
@@ -216,18 +216,18 @@ if (isset($_REQUEST['submitted'])) {
 <?php
 
 if (isset($_REQUEST['submitted'])) {
-	include __DIR__ . "/snippetsMain.php"; 	
+	include __DIR__ . "/snippetsMain.php";
 }
 ?>
 
 </div><!-- ./divRightSnippet -->
-				
+
 </div><!-- ./divFlexLeftRight -->
 
 
 <h4>Query JSON</h4>
 <pre><code class="language-json">
-<?php 
+<?php
 //$json_query_main_print = json_decode($param['body']);
 //echo json_encode($json_query_main_print, JSON_PRETTY_PRINT);
 
@@ -241,7 +241,7 @@ echo json_encode($param['body'], JSON_PRETTY_PRINT);
 <!------------------------------- *** NETWORK FILE SHARE Tab *** ------------------------>
 
 <div id="searchFileshare" class="tab-pane">
-	
+
 <div id="wrapper">
 
 <div class="divcontainleftright">
@@ -259,7 +259,7 @@ if (isset($_REQUEST['submitted'])) {
 
 <!-- ************************************************************************************************* -->
 <!-- Display FILESHARE Results PHP File -->
-<!-- ************************************************************************************************* -->		
+<!-- ************************************************************************************************* -->
 
 <div id="page-content-wrapper">
 
@@ -272,7 +272,7 @@ if (isset($_REQUEST['submitted'])) {
 ?>
 
 </div><!-- /#page-content-wrapper -->
-				
+
 </div><!-- ./divcontainleftright -->
 
 </div><!-- /#wrapper -->
@@ -293,7 +293,7 @@ $("#menu-toggle").click(function(e) {
 
 <!-- ************************************************************************************************* -->
 <!-- Display EPA WEB Results PHP File -->
-<!-- ************************************************************************************************* -->		
+<!-- ************************************************************************************************* -->
 
 <?php
 
@@ -312,7 +312,7 @@ if (isset($_REQUEST['submitted'])) {
 
 <!-- ************************************************************************************************* -->
 <!-- Display PEOPLE Results PHP File -->
-<!-- ************************************************************************************************* -->		
+<!-- ************************************************************************************************* -->
 
 <?php
 
@@ -340,13 +340,14 @@ if (isset($_REQUEST['submitted'])) {
 
 </div><!-- ./searchPeople -->
 
-<!------------------------------- *** RESEARCH SEARCH Tab *** ----------------------------->
-<!-- 
+
+<!-- ************************************************************************************************* -->
+<!-- Display Research Results PHP File -->
+<!-- ************************************************************************************************* -->
+
+<!--
 <div id="searchResearch" class="tab-pane">
  -->
-<!-- ************************************************************************************************* -->
-<!-- Display PEOPLE Results PHP File -->
-<!-- ************************************************************************************************* -->		
 
 <?php
 /*
@@ -355,19 +356,19 @@ if (isset($_REQUEST['submitted'])) {
 }
 //*/
 ?>
-<!-- 
+<!--
 </div>
  -->
 <!-- ./searchResearch -->
 
-<!------------------------------- *** LEAP Tab *** ----------------------------->
-
-<!-- 
-<div id="LEAP" class="tab-pane">
- -->
 <!-- ************************************************************************************************* -->
 <!-- Display LEAP Results PHP File -->
-<!-- ************************************************************************************************* -->		
+<!-- ************************************************************************************************* -->
+
+<!--
+<div id="LEAP" class="tab-pane">
+ -->
+
 
 <?php
 /*
@@ -376,90 +377,36 @@ if (isset($_REQUEST['submitted'])) {
 }
 */
 ?>
-<!--  
+<!--
 </div>
 -->
 <!-- ./LEAP -->
 
-<!------------------------------- *** OPEN DATA Tab *** --------------------------------->
+<!-- ************************************************************************************************* -->
+<!-- OPEN DATA Tab -->
+<!-- ************************************************************************************************* -->
 
-<div id="searchOpenData" class="tab-pane">
 <?php
-if (count($resultsopendata) > 0) {
+///*
+if (isset($_REQUEST['submitted'])) {
+  include __DIR__ . "/resultsOpenData.php";
+}
+//*/
 ?>
-<table class="table table-hover table-striped table-responsive">
-<thead>
-<tr>
-	<th>Title</th>
-	<th>Description</th>
-	<th>Format</th>
-	<th>Type</th>
-	<th>Date</th>
-</tr>
-</thead>
-<?php
-	foreach ($resultsopendata as $result) {
-		$searchresult = $result['_source'];
-?>
-<tr>
-	<td><a href="/viewOpenData.php?id=<?php echo $result['_id']; ?>">
-		<?php echo $searchresult['title']; ?>
-		<img src="<?php echo $searchresult['identificationInfo']['MD_DataIdentification']['graphicOverview']['MD_BrowseGraphic']['fileName']['CharacterString']; ?>">
-		</a>
-	</td>
-	<td>
-		<?php echo $searchresult['description']; ?>
-		<?php echo $searchresult['identificationInfo']['MD_DataIdentification']['abstract']['CharacterString']; ?><br />
-		<?php echo $searchresult['identificationInfo']['MD_DataIdentification']['purpose']['CharacterString']; ?>
-	</td>
-	<td>
-		<?php echo $searchresult['format']; ?>
-		<?php echo $searchresult['distributionInfo']['MD_Distribution']['distributionFormat']['MD_Format']['name']['CharacterString']; ?>
-		<?php echo $searchresult['distributionInfo']['MD_Distribution']['distributionFormat']['MD_Format']['version']['CharacterString']; ?>
-	</td>
-	<td>
-		<?php echo $searchresult['type']; ?>
-		<?php echo $searchresult['metadataStandardName']['CharacterString']?>
-		<?php echo $searchresult['metadataStandardVersion']['CharacterString']?>
-	</td>
-	<td>
-		<?php echo $searchresult['Creation-Date']; ?>
-		<?php echo $searchresult['dateStamp']['DateTime']; ?>
-	</td>
-</tr>
-<?php
-	} // END foreach loop over results
-?>
-</table>
-<?php
-} // END if there are search results
-else {
-?>
-	<div class="well">Sorry, nothing found</div><!-- ./well -->
-<?php
-} // END elseif there are no search results
-?>
-</div><!-- /.searchOpenData -->
-
 
 <!-- ************************************************************************************************* -->
 <!-- CRM DATA DICTIONARY -->
 <!-- ************************************************************************************************* -->
 
-<div id="CRMDataDictionary" class="tab-pane">
-
 <?php
 
 if (isset($_REQUEST['submitted'])) {
-  include __DIR__ . "/crmDataDictionary.php";
+  include __DIR__ . "/resultsCRMDataDictionary.php";
 }
 
 ?>
 
-</div><!-- /.CRMDataDictionary -->
-
-<!------------------------------- *** DATA DICTIONARIES Tab *** ------------------------->
-<!-- 
+<!--
 <div id="searchDataDictionary" class="tab-pane">
 
 <br />
@@ -521,6 +468,6 @@ else {
 
 </div><!-- ./container -->
 
-<?php 
+<?php
 include("layout/footer.php");
 ?>

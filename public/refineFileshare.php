@@ -1,7 +1,7 @@
 <?php
 if (count($resultsfileshare) > 0) {
 ?>
-		
+
 <div class="tags">
 <!-- Options to Refine/Filter results -->
 <div class="divleftrefine">
@@ -41,7 +41,7 @@ if (count($resultsfileshare) > 0) {
 
 <?php if (!empty($_REQUEST['From'])){ ?>
 <span class="tag label label-info">
-  <span>From: 
+  <span>From:
 	<?php echo $_REQUEST['From']; ?>
   </span>
 <a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
@@ -51,7 +51,7 @@ if (count($resultsfileshare) > 0) {
 
 <?php if (!empty($_REQUEST['To'])){ ?>
 <span class="tag label label-info">
-  <span>To: 
+  <span>To:
 	<?php echo $_REQUEST['To']; ?>
   </span>
 <a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
@@ -61,8 +61,8 @@ if (count($resultsfileshare) > 0) {
 
 
 </div><!-- ./divRefineShowFilters -->
-<br /> 
-<?php } // End check If $_REQUEST['Author'] 
+<br />
+<?php } // End check If $_REQUEST['Author']
 ?>
 
 <!-- -------------------- Div Panel For "Created By" ------------------- -->
@@ -77,7 +77,7 @@ if (count($resultsfileshare) > 0) {
 	<button type="button" id="btnRefineFileshareAuthorLess" class="btn btn-info btn-xs">Less</button>
 </span><!-- ./pull-right -->
 
-</div><!-- ./panel-heading -->	
+</div><!-- ./panel-heading -->
 
 <div id="divRefineFileshareAuthorHideShow">
 <div class="panel-body" id="divRefinePanelBody">
@@ -99,7 +99,7 @@ for ($i = 0; $i < count($aggAuthor); ++$i) {
 ?>
 
 <div id="divPanelRefineResultsSpacer"></div>
-</div><!-- ./divRefineFileshareAuthor -->  
+</div><!-- ./divRefineFileshareAuthor -->
 </div><!-- ./panel-body (#divRefinePanelBody) -->
 
 
@@ -112,7 +112,7 @@ for ($i = 0; $i < count($aggAuthor); ++$i) {
 	</label>
 </div><!-- ./panel-footer -->
 
-</div><!-- ./divRefineFileshareAuthorHideShow -->  
+</div><!-- ./divRefineFileshareAuthorHideShow -->
 </div><!-- ./panel -->
 
 <!-- -------------------- ./Div Panel For "Created By" ----------------- -->
@@ -145,23 +145,23 @@ for ($i = 0; $i < count($aggAuthor); ++$i) {
 
 for ($i = 0; $i < count($aggContentType); ++$i) {
 	$aggContentTypeResult = $aggContentType[$i];
-	
+
 	//if($aggContentTypeResult['key'] == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {$displayFileShareMimeType = "Microsoft Office Spreadsheet";}
-	
+
 
 	if (isset($_REQUEST['submitted'])) {
 	  include __DIR__ . "/switchLookUp.php";
 	}
 
-	
-	echo('<dd><input type="checkbox" 
-			name="FileType"'. $_REQUEST['FileType'].' 
-			id="'.$aggContentTypeResult['key']. '" 
-			title="'.$aggContentTypeResult['key']. '" 
+
+	echo('<dd><input type="checkbox"
+			name="FileType"'. $_REQUEST['FileType'].'
+			id="'.$aggContentTypeResult['key']. '"
+			title="'.$aggContentTypeResult['key']. '"
 			value="'.$aggContentTypeResult['key']. '" />
-		<label 
-			id="labelRefine" 
-			title="'.$aggContentTypeResult['key']. '" 
+		<label
+			id="labelRefine"
+			title="'.$aggContentTypeResult['key']. '"
 			for="'.$aggContentTypeResult['key']. '" >'. $displayFileShareMimeType . '
 		</label>
 		<span id="spanRefine">(' . $aggContentTypeResult['doc_count']. ')</span></dd>');
@@ -175,11 +175,11 @@ for ($i = 0; $i < count($aggContentType); ++$i) {
 		<span id="spanRefine">(' . $aggFileTypeResult['doc_count']. ')</span></dd>');
 
 }*/ // End FOR loop check
-?> 
+?>
 
 <div id="divPanelRefineResultsSpacer"></div>
-</div><!-- ./divRefineFileshareFileType -->  
-</div><!-- ./panel-body (#divRefinePanelBody) --> 
+</div><!-- ./divRefineFileshareFileType -->
+</div><!-- ./panel-body (#divRefinePanelBody) -->
 
 <!--<hr style="margin-bottom:7px !important; margin-top:7px !important; " />-->
 
@@ -190,7 +190,7 @@ for ($i = 0; $i < count($aggContentType); ++$i) {
 	</label>
 </div><!-- ./panel-footer -->
 
-</div><!-- ./divRefineFileshareFileTypeHideShow --> 
+</div><!-- ./divRefineFileshareFileTypeHideShow -->
 </div><!-- ./panel -->
 
 <!-- -------------------- ./Div Panel For "File Type" ------------------- -->
@@ -214,18 +214,18 @@ for ($i = 0; $i < count($aggContentType); ++$i) {
 <div id="divPanelRefineResultsSpacer"></div>
 
 <div class="input-group" id="datepicker">
-    <input 
+    <input
     	type="number"
-    	class="input-sm form-control" 
-    	id="inputFileSizeLow"  
-    	name="FileSizeLow" 
+    	class="input-sm form-control"
+    	id="inputFileSizeLow"
+    	name="FileSizeLow"
     	value="<?php echo $_REQUEST['FileSizeLow']; ?>"
 		placeholder="bytes"  />
     <span class="input-group-addon">to</span>
-    <input 
-    	type="number" 
-    	class="input-sm form-control" 
-    	id="inputFileSizeHigh"  
+    <input
+    	type="number"
+    	class="input-sm form-control"
+    	id="inputFileSizeHigh"
     	name="FileSizeHigh"
     	value="<?php echo $_REQUEST['FileSizeHigh']; ?>"
 		placeholder="bytes" />
@@ -233,10 +233,10 @@ for ($i = 0; $i < count($aggContentType); ++$i) {
 
 <div id="divPanelRefineResultsSpacer"></div>
 
-</div><!-- ./divRefineFileshareFileCreated -->  
+</div><!-- ./divRefineFileshareFileCreated -->
 </div><!-- ./panel-body (#divRefinePanelBodyNarrowLeftRight) -->
 
-</div><!-- ./divRefineFileshareFileCreatedHideShow -->  
+</div><!-- ./divRefineFileshareFileCreatedHideShow -->
 </div><!-- ./panel -->
 
 <!-- -------------------- ./Div Panel For "File Size Range" ------------------- -->
@@ -252,7 +252,7 @@ for ($i = 0; $i < count($aggContentType); ++$i) {
 	<button type="button" id="btnRefineFileshareFileCreatedShow" class="btn btn-info btn-xs">Show</button>
 </span><!-- ./pull-right -->
 
-</div><!-- ./panel-heading -->	
+</div><!-- ./panel-heading -->
 
 <div id="divRefineFileshareFileCreatedHideShow">
 <div class="panel-body" id="divRefinePanelBodyNarrowLeftRight">
@@ -260,28 +260,28 @@ for ($i = 0; $i < count($aggContentType); ++$i) {
 <div id="divPanelRefineResultsSpacer"></div>
 
 <div class="input-daterange input-group" id="datepicker">
-    <input 
-    	type="text" 
-    	class="input-sm form-control" 
-    	id="inputDateFileCreateFrom"  
-    	name="FileCreateFrom" 
+    <input
+    	type="text"
+    	class="input-sm form-control"
+    	id="inputDateFileCreateFrom"
+    	name="FileCreateFrom"
     	value="<?php echo $_REQUEST['FileCreateFrom']; ?>"
 		placeholder="yyyy-mm-dd"  />
     <span class="input-group-addon">to</span>
-    <input 
-    	type="text" 
-    	class="input-sm form-control" 
-    	id="inputDateFileCreateTo"  
-    	name="FileCreateTo" 
+    <input
+    	type="text"
+    	class="input-sm form-control"
+    	id="inputDateFileCreateTo"
+    	name="FileCreateTo"
     	value="<?php echo $_REQUEST['FileCreateTo']; ?>"
 		placeholder="yyyy-mm-dd"  />
 </div>
 
 <div id="divPanelRefineResultsSpacer"></div>
-</div><!-- ./divRefineFileshareFileCreated -->  
+</div><!-- ./divRefineFileshareFileCreated -->
 </div><!-- ./panel-body (#divRefinePanelBodyDateRange) -->
 
-</div><!-- ./divRefineFileshareFileCreatedHideShow -->  
+</div><!-- ./divRefineFileshareFileCreatedHideShow -->
 </div><!-- ./panel -->
 
 
@@ -313,31 +313,31 @@ for ($i = 0; $i < count($aggContentType); ++$i) {
 
 <div id="divPanelRefineResultsSpacer"></div>
 
-</div><!-- ./divRefineFileshareMatchPhrase -->  
+</div><!-- ./divRefineFileshareMatchPhrase -->
 
 </div><!-- ./panel-body (#divRefinePanelBodyNarrowLeftRight) -->
 
-</div><!-- ./divRefineFileshareMatchPhraseHideShow -->  
+</div><!-- ./divRefineFileshareMatchPhraseHideShow -->
 
 </div><!-- ./panel -->
 
 <!-- -------------------- ./Div Panel For "Match Phrase" ------------------- -->
 
 
-<!-- 
+<!--
 
 <div class="row">
 <form class="form-inline">
 
 	<div class="col-xs-6">
-	
-	<label id="spanToggleRefine" for="From">From</label>	
+
+	<label id="spanToggleRefine" for="From">From</label>
 	<div class="form-group">
 		<input name="From" value="<?php /*echo $_REQUEST['From']; */?>" type="number" placeholder="From" class="form-control" />
 	</div><!-- ./form-group -->
-<!-- 	
+<!--
 	</div><!-- ./col-xs-6 -->
-	
+
 
 <!-- </form><!-- ./form-inline -->
 <!-- </div><!-- ./div-row -->
@@ -348,8 +348,8 @@ for ($i = 0; $i < count($aggContentType); ++$i) {
 
 </div><!-- ./divleftrefine -->
 </div><!-- ./tags -->
-		
-				
+
+
 <?php
 	} // END foreach loop over results
 ?>
@@ -376,19 +376,25 @@ $('.input-daterange').datepicker({
 <!-- Assign PHP Aggregation Counts to Javascript variables -->
 
 <script type="text/javascript">
-<?php if(!empty($aggAuthorCount)){ ?> var aggAuthorCountJS = <?php echo $aggAuthorCount; } // End check if empty $aggAuthorCount ?>;
-var aggFileTypeCountJS 		= <?php echo $aggFileTypeCount; ?>;
-var aggContentTypeCountJS 	= <?php echo $aggContentTypeCount; ?>;
-var aggApplicationCountJS 	= <?php echo $aggApplicationCount; ?>;
+<?php if(!empty($aggAuthorCount)){ ?> var aggAuthorCountJS = <?php echo $aggAuthorCount; } // End check if empty $aggAuthorCount ?>//;
+  <?php if(!empty($aggFileTypeCount)) { ?>
+    var aggFileTypeCountJS 		= <?php echo $aggFileTypeCount; ?>;
+  <?php } ?>
+  <?php if(!empty($aggContentTypeCount)) { ?>
+    var aggContentTypeCountJS 	= <?php echo $aggContentTypeCount; ?>;
+  <?php } ?>
+  <?php if(!empty($aggApplicationCount)) { ?>
+    var aggApplicationCountJS 	= <?php echo $aggApplicationCount; ?>;
+  <?php } ?>
 </script>
-			
-<!-- Toggle Check Boxes -->	
+
+<!-- Toggle Check Boxes -->
 
 
 <script type="text/javascript">
 function checkCheckboxes( id, pID ) {
 	$('#'+pID).find(':checkbox').each(function() {
 		jQuery(this).prop('checked', $('#' + id).is(':checked'));
-    });     
+    });
 }
 </script>

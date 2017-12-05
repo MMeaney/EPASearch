@@ -9,7 +9,7 @@
 <meta name="DC.Creator" 	content="Environmental Protection Agency (EPA)" />
 <meta name="DC.Publisher"	content="Environmental Protection Agency (EPA)" />
 <meta name="DC.Format" 		content="text/xhtml" />
-<meta name="DC.Copyright"	content="All material (c) Copyright <?php echo date("Y"); ?> Environmental Protection Agency (EPA)" />
+<meta name="DC.Copyright"	content="All material (c) Copyright <?php echo date("Y");?> Environmental Protection Agency (EPA)" />
 <meta name="DC.Source" 		content="Environmental Protection Agency (EPA)" />
 <meta name="DC.Language"	content="en" />
 <meta name="DC.Author" 		content="Environmental Protection Agency (EPA)" />

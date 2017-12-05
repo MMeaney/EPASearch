@@ -93,6 +93,8 @@ aq_ozone_measurements = {
 
 #SERVER_NAME = '0.0.0.0:5014'
 #SERVER_NAME = "http://maurice-vm.epa.ie:5014"
+#URL_PREFIX = 'a'
+#QUERY_MAX_RESULTS = 'num'
 XML = False
 PAGINATION = True
 PAGINATION_LIMIT = 999999999

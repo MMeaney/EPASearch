@@ -1,4 +1,4 @@
-<!-- 
+<!--
 <div>
 <table class="table">
         <thead>
@@ -22,6 +22,7 @@
 </div>
  -->
 
+<div id="CRMDataDictionary" class="tab-pane">
 
 
 <?php
@@ -32,7 +33,7 @@ if (count($resultsCRMDataDictionary) > 0) {
 
 
 <table class="table table-hover table-striped table-bordered table-responsive filterable" id="tableCRMDataDictionary">
-<!-- 
+<!--
 <table class="display" id="tableCRMDataDictionary">
 -->
 <thead id="inputTHeadSearch">
@@ -43,7 +44,7 @@ if (count($resultsCRMDataDictionary) > 0) {
 	<!-- <th>pluraldisplayname</th> -->
 	<th>system</th>
 	<th>description</th>
-	<th>metadatalastmodified</th>	
+	<th>metadatalastmodified</th>
 </tr>
 </thead>
 <tfoot id="TFootSearch">
@@ -54,7 +55,7 @@ if (count($resultsCRMDataDictionary) > 0) {
 	<!-- <th>pluraldisplayname</th> -->
 	<th>system</th>
 	<th>description</th>
-	<th>metadatalastmodified</th>		
+	<th>metadatalastmodified</th>
 </tr>
 </tfoot>
 <tbody>
@@ -91,6 +92,9 @@ else {
 
 <br />
 
+
+</div><!-- /.CRMDataDictionary -->
+
 <script type="text/javascript">
 //<!--
 
@@ -109,7 +113,7 @@ $(document).ready(function() {
 		//"dom": '<"top"i>rt<"bottom"flp><"clear">',
 		"iDisplayLength": 25,
 		//buttons: ['copy', 'excel', 'pdf']
-		
+
 	} );
 } );
 //*/
@@ -129,14 +133,14 @@ $(document).ready(function() {
         dom:
 			"<'row'<'col-sm-4'l><'col-sm-4'B><'col-sm-4'f>>" +
 			"<'row'<'col-sm-12'tr>>" +
-			"<'row'<'col-sm-5'i><'col-sm-7'p>>",        
+			"<'row'<'col-sm-5'i><'col-sm-7'p>>",
         "iDisplayLength": 25,
     	//"stateSave": true,
 		language: {
 			searchPlaceholder: "Type to filter..."
 		},
-        
-        buttons: [ 
+
+        buttons: [
 			{ extend: 'colvis', text: 'Show / Hide Columns' }
 		],
 
@@ -194,7 +198,7 @@ $(document).ready(function() {
     } );
 
     // DataTable
-    var table = $('#tableCRMDataDictionary').DataTable(); 
+    var table = $('#tableCRMDataDictionary').DataTable();
 
     // Apply the search
     table.columns().every( function () {
@@ -237,7 +241,7 @@ $(document).ready(function (){
 	    dom:
 			"<'row'<'col-sm-4'l><'col-sm-4'B><'col-sm-4'f>>" +
 			"<'row'<'col-sm-12'tr>>" +
-			"<'row'<'col-sm-5'i><'col-sm-7'p>>", 
+			"<'row'<'col-sm-5'i><'col-sm-7'p>>",
         buttons: [
             {
                 text: 'Btn1',
@@ -251,7 +255,7 @@ $(document).ready(function (){
                     alert( 'Button activated' );
                 }
             }
-            
+
         ]
     });
 });
@@ -263,7 +267,7 @@ $(document).ready(function (){
 /*
 $(document).ready( function() {
 	$('#tableCRMDataDictionary').dataTable( {
-		
+
 	} );
 } );
 

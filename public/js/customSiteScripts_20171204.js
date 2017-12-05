@@ -18,8 +18,8 @@
  */
 
 $(function(){
-    //$("#header").load("header.html");
-    $("#footerCopyright").load("../layout/footerCopyright.html");
+	//$("#header").load("header.html");
+	$("#footerCopyright").load("../public/layout/footerCopyright.html");
 });
 
 
@@ -44,19 +44,48 @@ function extractDomain(url) {
     return domain;
 }
 
+
+
+/**
+ * Hide 'Tab-Content' and display 'Spinner' while Ajax loading
+ *
+ */
+
+$(document).ajaxStart(function(){
+	$('.tab-content').hide();
+    $('.loading').show();
+ }).ajaxStop(function(){
+    $('.loading').hide();
+    $('.tab-content').show();
+    $('#navUL').css('display', 'block');
+ });
+
+
+/**
+ * Prevent jump to 'Active' Tab on page load
+ * (makes 'Active' tab disappear - not working)
+ */
+/*
+$(document).ready(function () {
+    $('.active').hide();
+    var hash = window.location.hash;
+
+    if (hash) {
+        var selectedTab = $('.nav li a[href="' + hash + '"]');
+        selectedTab.trigger('click', true);
+    }
+});
+*/
+
 /**
  *
  * Get current year
  */
 
-var jsDate = new Date();
-var jsYear = jsDate.getFullYear();
-document.getElementById("spanYear").innerHTML = jsYear;
+
 //document.write(jsYear);
-//document.getElementById("demo").innerHTML = jsYear;
+//document.getElementById("s").innerHTML = jsYear;
 //*/
-
-
 
 /*
  * *******************************************************************************
@@ -64,32 +93,79 @@ document.getElementById("spanYear").innerHTML = jsYear;
  * *******************************************************************************
  */
 
+/*
+$(".nav a").on("click", function(){
+	   $(".nav").find(".active").removeClass("active");
+	   $(this).parent().addClass("active");
+	});
+//*/
 
 /**
- * Keep selected Tab active on Navigation away from and back to page
+ * Keep selected Tab active on Navigation away from and back to page *** Replaced with bootstrap-tab-history.js ***
  *
  */
-
+/*
+// V01  - This is the version that has been demo'd
 $(document).ready(function() {
-    // Show active tab on reload
-    if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
+	// Show active tab on reload
+	if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
 
-    // Remember the hash in the URL without jumping
-    return $('a[data-toggle="pill"]').on('shown.bs.tab', function(e) {
-        if(history.pushState) {
-            history.pushState(null, null, '#'+$(e.target).attr('href').substr(1));
-        }
-        else {
-            location.hash = '#'+$(e.target).attr('href').substr(1);
-        }
+	// Remember the hash in the URL without jumping
+	return $('a[data-toggle="pill"]').on('shown.bs.tab', function(e) {
+		if(history.pushState) {
+			history.pushState(null, null, '#'+$(e.target).attr('href').substr(1));
+		}
+		else {
+			location.hash = '#'+$(e.target).attr('href').substr(1);
+		}
+	});
+});
+//*/
+
+/*
+// V02 Tested 20170511 - Quicker than V01 but still jumps to First Tab, then tab in memory
+$(document).ready(function() {
+    if (location.hash) {
+        $("a[href='" + location.hash + "']").tab("show");
+        //$("[data-target='" + location.hash + "']").tab("show");
+    }
+    $(document.body).on("click", "a[data-toggle]", function(event) {
+        location.hash = this.getAttribute("href");
     });
 });
+$(window).on("popstate", function() {
+
+    var anchor = location.hash || $("a[data-toggle='pill']").first().attr("href");
+    $("a[href='" + anchor + "']").tab("show");
+});
+//*/
+
+/*
+//V03 Tested 20170511 - Slower than V02, still jumps to First Tab, then tab in memory
+$('#navUL a').click(function(e) {
+	  e.preventDefault();
+	  $(this).tab('show');
+	});
+
+	// store the currently selected tab in the hash value
+	$("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
+	  var id = $(e.target).attr("href").substr(1);
+	  window.location.hash = id;
+	});
+
+	// on load of the page: switch to the currently selected tab
+	var hash = window.location.hash;
+	$('#navUL a[href="' + hash + '"]').tab('show');
+//*/
 
 
 /**
  * Keep selected Tab active on form Submit
  *
  */
+
+///*
+// V01 - This is the version that has been demo'd
 
 $(function() {
     // for bootstrap 3 use 'shown.bs.tab', for bootstrap 2 use 'shown' in the next line
@@ -101,10 +177,65 @@ $(function() {
     // go to the latest tab, if it exists:
     var lastTab = localStorage.getItem('lastTab');
     if (lastTab) {
+
+    	//$(".loading").show();
         $('[href="' + lastTab + '"]').tab('show');
+
+    	//$(".loading").hide();
     }
 });
+//*/
 
+
+
+
+/**
+ * Keep selected Tab active on form Submit AND navigation *** Replaced with bootstrap-tab-history.js ***
+ *
+ */
+
+/*
+//V01 Tested 20170511 - works on submit and navigate. Jumps to first tab, then active, but seems to be the quickest
+
+$('.nav-tabs li a').click( function(e) {
+    history.pushState( null, null, $(this).attr('href') );
+});
+
+
+$(document).ready(function(){
+    $('a[data-toggle="pill"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('activeTab', $(e.target).attr('href'));
+    });
+    var activeTab = localStorage.getItem('activeTab');
+    if(activeTab){
+        $('#navUL a[href="' + activeTab + '"]').tab('show');
+    }
+    $(document.body).on("click", "a[data-toggle]", function(event) {
+        location.hash = this.getAttribute("href");
+    });
+});
+
+//$(window).on("popstate", function() {
+
+//    var anchor = location.hash || $("a[data-toggle='pill']").first().attr("href");
+//    $("a[data-target='" + anchor + "']").tab("show");
+//});
+
+//*/
+/*
+$(document).ready(function() {
+    if (location.hash) {
+        $("a[href='" + location.hash + "']").tab("show");
+    }
+    $(document.body).on("click", "a[data-toggle]", function(event) {
+        location.hash = this.getAttribute("href");
+    });
+});
+$(window).on("popstate", function() {
+    var anchor = location.hash || $("a[data-toggle='pill']").first().attr("href");
+    $("a[href='" + anchor + "']").tab("show");
+});
+//*/
 
 /**
  * Show Hide Query JSON Div (for Testing)
@@ -134,6 +265,118 @@ $(document).ready(function(){
     });
 });
 
+/**
+ * Show Hide Query JSON Div (for Testing)
+ *
+ */
+
+$(document).ready(function(){
+    $('#btnLEAPLicenceQueryJSONHide').css('display','none');
+    $("#btnLEAPLicenceQueryJSONShow").css('display','inline-flex');
+    $("#divLEAPLicenceQueryJSONHideShow").css('display','none');
+});
+
+$(document).ready(function(){
+    $("#btnLEAPLicenceQueryJSONShow").click(function(){
+        $("#divLEAPLicenceQueryJSONHideShow").css('display','inline');
+        $(this).css('display','none');
+        $("#btnLEAPLicenceQueryJSONHide").css('display','inline-flex');
+    });
+});
+
+
+$(document).ready(function(){
+    $("#btnLEAPLicenceQueryJSONHide").click(function(){
+        $("#divLEAPLicenceQueryJSONHideShow").css('display','none');
+        $(this).css('display','none');
+        $("#btnLEAPLicenceQueryJSONShow").css('display','inline-flex');
+    });
+});
+
+/**
+ * Show Hide Query JSON Div (for Testing)
+ *
+ */
+
+$(document).ready(function(){
+    $('#btnLEAPNonComplianceQueryJSONHide').css('display','none');
+    $("#btnLEAPNonComplianceQueryJSONShow").css('display','inline-flex');
+    $("#divLEAPNonComplianceQueryJSONHideShow").css('display','none');
+});
+
+$(document).ready(function(){
+    $("#btnLEAPNonComplianceQueryJSONShow").click(function(){
+        $("#divLEAPNonComplianceQueryJSONHideShow").css('display','inline');
+        $(this).css('display','none');
+        $("#btnLEAPNonComplianceQueryJSONHide").css('display','inline-flex');
+    });
+});
+
+
+$(document).ready(function(){
+    $("#btnLEAPNonComplianceQueryJSONHide").click(function(){
+        $("#divLEAPNonComplianceQueryJSONHideShow").css('display','none');
+        $(this).css('display','none');
+        $("#btnLEAPNonComplianceQueryJSONShow").css('display','inline-flex');
+    });
+});
+
+/**
+ * Show Hide Query JSON Div (for Testing)
+ *
+ */
+
+$(document).ready(function(){
+    $('#btnLEAPComplaintQueryJSONHide').css('display','none');
+    $("#btnLEAPComplaintQueryJSONShow").css('display','inline-flex');
+    $("#divLEAPComplaintQueryJSONHideShow").css('display','none');
+});
+
+$(document).ready(function(){
+    $("#btnLEAPComplaintQueryJSONShow").click(function(){
+        $("#divLEAPComplaintQueryJSONHideShow").css('display','inline');
+        $(this).css('display','none');
+        $("#btnLEAPComplaintQueryJSONHide").css('display','inline-flex');
+    });
+});
+
+
+$(document).ready(function(){
+    $("#btnLEAPComplaintQueryJSONHide").click(function(){
+        $("#divLEAPComplaintQueryJSONHideShow").css('display','none');
+        $(this).css('display','none');
+        $("#btnLEAPComplaintQueryJSONShow").css('display','inline-flex');
+    });
+});
+
+/**
+ * Show Hide Query JSON Div (for Testing)
+ *
+ */
+
+$(document).ready(function(){
+    $('#btnPRTRMeasurementsQueryJSONHide').css('display','none');
+    $("#btnPRTRMeasurementsQueryJSONShow").css('display','inline-flex');
+    $("#divPRTRMeasurementsQueryJSONHideShow").css('display','none');
+});
+
+$(document).ready(function(){
+    $("#btnPRTRMeasurementsQueryJSONShow").click(function(){
+        $("#divPRTRMeasurementsQueryJSONHideShow").css('display','inline');
+        $(this).css('display','none');
+        $("#btnPRTRMeasurementsQueryJSONHide").css('display','inline-flex');
+    });
+});
+
+
+$(document).ready(function(){
+    $("#btnPRTRMeasurementsQueryJSONHide").click(function(){
+        $("#divPRTRMeasurementsQueryJSONHideShow").css('display','none');
+        $(this).css('display','none');
+        $("#btnPRTRMeasurementsQueryJSONShow").css('display','inline-flex');
+    });
+});
+
 
 
 /*
@@ -157,11 +400,11 @@ var numResultsForDivHeight = 6;
 $(document).ready(function(){
     if (aggAuthorCountJS < numResultsForDivHeight){
         $("#divRefineFileshareAuthor").css('height','auto');
-        $("#divRefineFileshareAuthor").css('overflow-y','hidden');
+    	$("#divRefineFileshareAuthor").css('overflow-y','hidden');
         $("#btnRefineFileshareAuthorMore").css('display','none');
     }
     else {
-        $("#divRefineFileshareAuthor").height(122);
+    	$("#divRefineFileshareAuthor").height(122);
     }
 
     $('#btnRefineFileshareAuthorLess').css('display','none');
@@ -183,20 +426,20 @@ $(document).ready(function(){
 $(document).ready(function(){
     $("#btnRefineFileshareAuthorShow").click(function(){
         if (aggAuthorCountJS < numResultsForDivHeight){
-            $("#divRefineFileshareAuthorHideShow").css('display','inline');
-            $("#divRefineFileshareAuthor").css('height','auto');
-            $("#divRefineFileshareAuthor").css('overflow-y','hidden');
-            $(this).css('display','none');
-            $("#btnRefineFileshareAuthorHide").css('display','inline-flex');
-            $("#btnRefineFileshareAuthorMore").css('display','none');
-        }
+	        $("#divRefineFileshareAuthorHideShow").css('display','inline');
+	        $("#divRefineFileshareAuthor").css('height','auto');
+	        $("#divRefineFileshareAuthor").css('overflow-y','hidden');
+	        $(this).css('display','none');
+	        $("#btnRefineFileshareAuthorHide").css('display','inline-flex');
+	        $("#btnRefineFileshareAuthorMore").css('display','none');
+	    }
         else{
-            $("#divRefineFileshareAuthorHideShow").css('display','inline');
-            $("#divRefineFileshareAuthor").height(122);
-            $("#divRefineFileshareAuthor").css('overflow-y','scroll');
-            $(this).css('display','none');
-            $("#btnRefineFileshareAuthorHide").css('display','inline-flex');
-            $("#btnRefineFileshareAuthorMore").css('display','inline-flex');
+	        $("#divRefineFileshareAuthorHideShow").css('display','inline');
+	        $("#divRefineFileshareAuthor").height(122);
+	        $("#divRefineFileshareAuthor").css('overflow-y','scroll');
+	        $(this).css('display','none');
+	        $("#btnRefineFileshareAuthorHide").css('display','inline-flex');
+	        $("#btnRefineFileshareAuthorMore").css('display','inline-flex');
         }
     })
 });
@@ -227,11 +470,11 @@ $(document).ready(function(){
 $(document).ready(function(){
     if (aggApplicationCountJS < numResultsForDivHeight){
         $("#divRefineFileshareApplication").css('height','auto');
-        $("#divRefineFileshareApplication").css('overflow-y','hidden');
+    	$("#divRefineFileshareApplication").css('overflow-y','hidden');
         $("#btnRefineFileshareApplicationMore").css('display','none');
     }
     else {
-        $("#divRefineFileshareApplication").height(122);
+    	$("#divRefineFileshareApplication").height(122);
     }
     $('#btnRefineFileshareApplicationLess').css('display','none');
     $('#btnRefineFileshareApplicationShow').css('display','none');
@@ -255,20 +498,20 @@ $(document).ready(function(){
 $(document).ready(function(){
     $("#btnRefineFileshareApplicationShow").click(function(){
         if (aggApplicationCountJS < numResultsForDivHeight){
-            $("#divRefineFileshareApplicationHideShow").css('display','inline');
-            $("#divRefineFileshareApplication").css('height','auto');
-            $("#divRefineFileshareApplication").css('overflow-y','hidden');
-            $(this).css('display','none');
-            $("#btnRefineFileshareApplicationHide").css('display','inline-flex');
-            $("#btnRefineFileshareApplicationMore").css('display','none');
-        }
+	        $("#divRefineFileshareApplicationHideShow").css('display','inline');
+	        $("#divRefineFileshareApplication").css('height','auto');
+	        $("#divRefineFileshareApplication").css('overflow-y','hidden');
+	        $(this).css('display','none');
+	        $("#btnRefineFileshareApplicationHide").css('display','inline-flex');
+	        $("#btnRefineFileshareApplicationMore").css('display','none');
+	    }
         else{
-            $("#divRefineFileshareApplicationHideShow").css('display','inline');
-            $("#divRefineFileshareApplication").height(122);
-            $("#divRefineFileshareApplication").css('overflow-y','scroll');
-            $(this).css('display','none');
-            $("#btnRefineFileshareApplicationHide").css('display','inline-flex');
-            $("#btnRefineFileshareApplicationMore").css('display','inline-flex');
+	        $("#divRefineFileshareApplicationHideShow").css('display','inline');
+	        $("#divRefineFileshareApplication").height(122);
+	        $("#divRefineFileshareApplication").css('overflow-y','scroll');
+	        $(this).css('display','none');
+	        $("#btnRefineFileshareApplicationHide").css('display','inline-flex');
+	        $("#btnRefineFileshareApplicationMore").css('display','inline-flex');
         }
     })
 });
@@ -301,11 +544,11 @@ $(document).ready(function(){
 $(document).ready(function(){
     if (aggContentTypeCountJS < numResultsForDivHeight){
         $("#divRefineFileshareFileType").css('height','auto');
-        $("#divRefineFileshareFileType").css('overflow-y','hidden');
+    	$("#divRefineFileshareFileType").css('overflow-y','hidden');
         $("#btnRefineFileshareFileTypeMore").css('display','none');
     }
     else {
-        $("#divRefineFileshareFileType").height(122);
+    	$("#divRefineFileshareFileType").height(122);
     }
     $('#btnRefineFileshareFileTypeLess').css('display','none');
     $('#btnRefineFileshareFileTypeShow').css('display','none');
@@ -573,9 +816,9 @@ $(el).on("focus blur", function(e) {
 $('div.item:lt(3)').show();
 
 $('div.item:lt(3)').each(function (index, elt)
-        {
-            $('<span></span>', {text: 'Station ' + index}).prependTo(this);
-        }).show();
+		{
+		    $('<span></span>', {text: 'Station ' + index}).prependTo(this);
+		}).show();
 
 
 var threshold = 5;
