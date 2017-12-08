@@ -706,10 +706,19 @@ git push
 ```
 
 
-If `git push` is not updating files in the remote repo, try:
+1. If `git push` is not updating files in the remote repo, try:
 ```bash
 git push origin master:master
 ```
+
+2. If `git push` is not updating files in the remote repo, try:
+```bash
+git reset HEAD~1
+git add .
+git commit -M "Update"
+git push
+```
+
 
 #### Configure GIT Cert Path
 
