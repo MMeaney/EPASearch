@@ -238,62 +238,50 @@ echo json_encode($param['body'], JSON_PRETTY_PRINT);
 </div><!-- /.searchMain -->
 
 
-<!------------------------------- *** NETWORK FILE SHARE Tab *** ------------------------>
+
+<!-- ************************************************************************************************* -->
+<!-- NETWORK FILES Tab -->
+<!-- ************************************************************************************************* -->
 
 <div id="searchFileshare" class="tab-pane">
+	<div id="wrapper">
+		<div class="divcontainleftright">
+			<div id="sidebar-wrapper">
 
-<div id="wrapper">
+				<?php
+				if (isset($_REQUEST['submitted'])) {
+				  include __DIR__ . "/refineFileshare.php";
+				}
+				?>
 
-<div class="divcontainleftright">
+			</div><!-- /#sidebar-wrapper -->
 
-<div id="sidebar-wrapper">
+			<div id="page-content-wrapper">
+				<?php
+				if (isset($_REQUEST['submitted'])) {
+				  include __DIR__ . "/resultsFileshare.php";
+				}
+				?>
+			</div><!-- /#page-content-wrapper -->
+		</div><!-- ./divcontainleftright -->
+	</div><!-- /#wrapper -->
 
-<?php
+	<!-- Menu Toggle Script -->
+	<script>
+	$("#menu-toggle").click(function(e) {
+		e.preventDefault();
+		$("#wrapper").toggleClass("toggled", 10000);
+	});
+	</script>
 
-if (isset($_REQUEST['submitted'])) {
-  include __DIR__ . "/refineFileshare.php";
-}
-?>
+</div><!-- ./searchFileshare -->
 
-</div><!-- /#sidebar-wrapper -->
 
 <!-- ************************************************************************************************* -->
-<!-- Display FILESHARE Results PHP File -->
+<!-- EPA WEB Tab -->
 <!-- ************************************************************************************************* -->
-
-<div id="page-content-wrapper">
-
-<?php
-
-if (isset($_REQUEST['submitted'])) {
-  include __DIR__ . "/resultsFileshare.php";
-}
-
-?>
-
-</div><!-- /#page-content-wrapper -->
-
-</div><!-- ./divcontainleftright -->
-
-</div><!-- /#wrapper -->
-
-<!-- Menu Toggle Script -->
-<script>
-$("#menu-toggle").click(function(e) {
-	e.preventDefault();
-	$("#wrapper").toggleClass("toggled", 10000);
-});
-</script>
-
-</div><!-- /.searchFileshare -->
-
-<!------------------------------- *** EPA Web Tab *** ----------------------------->
 
 <div id="searchEPAWeb" class="tab-pane">
-
-<!-- ************************************************************************************************* -->
-<!-- Display EPA WEB Results PHP File -->
-<!-- ************************************************************************************************* -->
 
 <?php
 
@@ -304,45 +292,23 @@ if (isset($_REQUEST['submitted'])) {
 ?>
 </div><!-- ./searchEPAWeb -->
 
-
-
-<!------------------------------- *** PEOPLE SEARCH Tab *** ----------------------------->
+<!-- ************************************************************************************************* -->
+<!--  PEOPLE Tab -->
+<!-- ************************************************************************************************* -->
 
 <div id="searchPeople" class="tab-pane">
 
-<!-- ************************************************************************************************* -->
-<!-- Display PEOPLE Results PHP File -->
-<!-- ************************************************************************************************* -->
-
 <?php
-
-function get_title($url){
-  $str = file_get_contents($url);
-  if(strlen($str)>0){
-    $str = trim(preg_replace('/\s+/', ' ', $str)); // supports line breaks inside <title>
-    preg_match("/\<title\>(.*)\<\/title\>/i",$str,$title); // ignore case
-    return $title[1];
-  }
-}
-
-echo get_title("http://extranet.edenireland.ie/Person.aspx?accountname=EPA%5Cmeaneym");
-
-$doc = new DOMDocument();
-@$doc->loadHTMLFile('http://epamysites/Person.aspx?accountname=EPA%5Cmeaneym');
-$xpath = new DOMXPath($doc);
-echo $xpath->query('//title')->item(0)->nodeValue."\n";
-
 if (isset($_REQUEST['submitted'])) {
   include __DIR__ . "/resultsPeople.php";
 }
-
 ?>
 
 </div><!-- ./searchPeople -->
 
 
 <!-- ************************************************************************************************* -->
-<!-- Display Research Results PHP File -->
+<!-- RESEARCH Tab -->
 <!-- ************************************************************************************************* -->
 
 <!--
@@ -362,7 +328,7 @@ if (isset($_REQUEST['submitted'])) {
 <!-- ./searchResearch -->
 
 <!-- ************************************************************************************************* -->
-<!-- Display LEAP Results PHP File -->
+<!-- LEAP Tab -->
 <!-- ************************************************************************************************* -->
 
 <!--
