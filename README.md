@@ -2124,6 +2124,7 @@ Set `http_proxy` at CLI <sup>[[Proxy Settings]](#proxysettings)</sup>
 
 ```bash
 pip install eve
+pip install bcrypt
 ```
 
 Edit `settings.py`
