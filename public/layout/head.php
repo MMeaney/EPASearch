@@ -47,5 +47,3 @@
 <link rel="stylesheet" type="text/css" href="./css/pikaday.css" />
 <link rel="stylesheet" type="text/css" href="./css/prism.css" />
 <link rel="stylesheet" type="text/css" href="./css/simple-sidebar.css" />
-
-<link rel="stylesheet" type="text/css" href="./css/Site.css" />

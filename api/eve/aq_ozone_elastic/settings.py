@@ -36,20 +36,31 @@ description = 'Description of the user resource',
 schema = {
     # Schema definition, based on Cerberus grammar. Check the Cerberus project
     # (https://github.com/pyeve/cerberus) for details.
-    
-    ##'datasource': 
+
+    ##'datasource':
     ##{
     ##    'backend': 'elastic',
     ##    'facets': {'raw_reading_measurement_time': {'date_histogram': {'field': 'raw_reading_measurement_time', 'interval': 'hour'}}}
     ##},
+
+    # User accounts for Authorisation
+    'username': {
+        'type': 'string',
+        'required': True,
+        'unique': True,
+        },
+    'password': {
+        'type': 'string',
+        'required': True,
+    },
 
     'rawreadingid': {'type': 'int64'},
     'raw_reading_measurement_time': {'type': 'datetime'},
     'rawdatavalue': {'type': 'double'},
     'pollutantname': {'type': 'string'},
     'samplingpoint': {'type': 'string'}
-    
-    
+
+
     ## 'role' is a list, and can only contain values from 'allowed'.
     #'role': {
     #    'type': 'list',
@@ -65,6 +76,24 @@ schema = {
     #},
 }
 
+accounts = {
+    # the standard account entry point is defined as
+    # '/accounts/<ObjectId>'. We define  an additional read-only entry
+    # point accessible at '/accounts/<username>'.
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'username',
+    },
+
+    # We also disable endpoint caching as we don't want client apps to
+    # cache account data.
+    'cache_control': '',
+    'cache_expires': 0,
+
+    # Finally, let's add the schema definition for this endpoint.
+    'schema': schema,
+}
+
 aq_ozone_measurements = {
     # 'title' tag used in item links. Defaults to the resource title minus
     # the final, plural 's' (works fine in most cases but not for 'people')
@@ -74,7 +103,7 @@ aq_ozone_measurements = {
     # '/people/<ObjectId>'. We leave it untouched, and we also enable an
     # additional read-only entry point. This way consumers can also perform
     # GET requests at '/people/<lastname>'.
-    
+
     'additional_lookup': {'url': 'regex("[\w]+")','field': 'samplingpoint'},
     'additional_lookup': {'url': 'regex("[\w]+")', 'field': '_id'},
     #'additional_lookup': {'url': 'regex("[\w]+")', 'field': 'raw_reading_measurement_time'},
@@ -101,4 +130,5 @@ PAGINATION_LIMIT = 999999999
 PAGINATION_DEFAULT = 25
 DOMAIN = {
     'aq_ozone_measurements': aq_ozone_measurements,
+    'accounts': accounts,
 }

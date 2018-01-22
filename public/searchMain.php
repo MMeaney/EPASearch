@@ -36,6 +36,7 @@ include("layout/headDataTables.php");
 //include("layout/headScripts.php");  // Moved to End of Page
 ?>
 
+<link rel="stylesheet" type="text/css" href="./css/Site.css" />
 <title>EPA Data Catalogue Search <?php echo $searchText; ?></title>
 </head>
 

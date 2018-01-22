@@ -12,10 +12,10 @@ use Search\Constants;
 // Get search results from Elasticsearch if the user searched for something
 $results = [];
 if (!empty($_REQUEST['submitted'])) {
-	
+
 	include __DIR__ . "/defineClient.php";
 	include __DIR__ . "/defineIndex.php";
-	
+
 	//$param['body']['query']['match']['_all'] = $_REQUEST['q']; // what to search for
 	$param['body']  = [
 			'query' => [
@@ -32,12 +32,12 @@ if (!empty($_REQUEST['submitted'])) {
 	$param['size'] = 10000;
 	//$param['from'] = 10;
 	//$param = $_REQUEST['q']; // what to search for
-	
+
 	// Send search query to Elasticsearch and get results
 	$result = $client->search($param);
 	$results = $result['hits']['hits'];
 	//$results = $client->search($param);
-	
+
 	//$GLOBALS['searched_term'] = $_REQUEST['q'];
 }
 
@@ -47,6 +47,7 @@ if (!empty($_REQUEST['submitted'])) {
 <?php include("layout/head.php"); ?>
 <?php include("layout/headFonts.php"); ?>
 
+<link rel="stylesheet" type="text/css" href="./css/Site.css" />
 <title>EPA Data Catalogue Search</title>
 </head>
 
@@ -56,7 +57,7 @@ if (!empty($_REQUEST['submitted'])) {
 <br />
 
 <?php include("layout/brandingIndexLogo.php"); ?>
-<!-- 
+<!--
 <img src=".\img\epa-logo-small-trns-data-cat.jpg">
  -->
 <!--<h3>EPA Data Catalogue</h3>-->
@@ -64,17 +65,17 @@ if (!empty($_REQUEST['submitted'])) {
 <form method="get" action="searchMain.php" class="form-inline" role="search" autocomplete="on">
   <div class="input-group">
   <div class="form-group has-feedback has-clear">
-  
-  <input id="inputSearchString" 
-  		name="q" 
-  		value="<?php echo $_REQUEST['q']; ?>" 
-  		type="text" 
-  		placeholder="What would you like to search for?" 
-  		class="form-control input-md" 
-  		size="50" 
-  		autofocus 
+
+  <input id="inputSearchString"
+  		name="q"
+  		value="<?php echo $_REQUEST['q']; ?>"
+  		type="text"
+  		placeholder="What would you like to search for?"
+  		class="form-control input-md"
+  		size="50"
+  		autofocus
   		onfocus="this.value = this.value;" />
-  		
+
   <span class="form-control-clear glyphicon glyphicon-remove-circle form-control-feedback hidden" id="searchClear"></span>
   </div><!-- ./form-group -->
     <input type="hidden" name="submitted" value="true" />
@@ -84,15 +85,15 @@ if (!empty($_REQUEST['submitted'])) {
   </div><!-- ./input-group -->
 </form>
 
-<!-- 
+<!--
 <div>
 <iframe src="http://webchat.freenode.net?channels=epaireland&uio=d4" width="647" height="400"></iframe>
 </div>
  -->
- 
+
 <!-----------------------------------------------------------------------------------------------------------
---- *** SCRIPTS *** 
------------------------------------------------------------------------------------------------------------->	
+--- *** SCRIPTS ***
+------------------------------------------------------------------------------------------------------------>
 
 
 <!-- Clear search box -->
@@ -118,7 +119,7 @@ var el = $("#inputSearchString");
 el[0].onfocus = el[0].onblur = null;
 
 $(el).on("focus blur", function(e) {
-    this.value = $.trim(this.value);    
+    this.value = $.trim(this.value);
     if ((e.type === "focus") && this.createTextRange) {
         var r = this.createTextRange();
         r.moveStart("character", this.value.length);
@@ -131,23 +132,23 @@ $(el).on("focus blur", function(e) {
 <!-- Search Box Autocomplete (powered by Wikipedia) -->
 
 <script type="text/javascript">
- $("#inputSearchString").autocomplete({ 
-	source: function(request, response) { 
-		$.ajax({ 
-			url: "http://en.wikipedia.org/w/api.php", 
+ $("#inputSearchString").autocomplete({
+	source: function(request, response) {
+		$.ajax({
+			url: "http://en.wikipedia.org/w/api.php",
 			dataType: "jsonp",
-			data: { 
-				'action': "opensearch", 
-				'format': "json", 
-				'search': request.term  
-			}, 
+			data: {
+				'action': "opensearch",
+				'format': "json",
+				'search': request.term
+			},
 
-			success: function(data) { 
-				response(data[1]); 
-			} 
-		}); 
-	} 
-}); 
+			success: function(data) {
+				response(data[1]);
+			}
+		});
+	}
+});
 </script>
 
 

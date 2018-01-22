@@ -10,17 +10,17 @@
 			<span class="icon-bar"></span>
 		</button>
 		<a href="./index.php" class="navbar-left">
-			<img src=".\img\epa-logo-small-trns.gif" alt="Environmental Protection Agency (EPA) Ireland" 
+			<img src="./img/epa-logo-small-trns.gif" alt="Environmental Protection Agency (EPA) Ireland"
 				style="width:83px;height:50px;">
-		</a><!-- ./navbar-left img -->	
-		
+		</a><!-- ./navbar-left img -->
+
 	</div><!-- ./navbar-header -->
-		
-		
+
+
 	<div class="navbar-header pull-left">
 		<div class="col-sm-8 col-md-8">
 		<form method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="navbar-form navbar-center" role="search" id="formSearchDataCatalogue">
-			
+
 			<div class="input-group" id="divNavSearchBar">
 				<div class="form-group has-feedback has-clear">
 					<input id="inputSearchString" name="q" value="<?php echo $_REQUEST['q']; ?>" type="text" placeholder="What would you like to search for?" class="form-control input-md" size="50" autofocus onfocus="this.value = this.value;" />
@@ -34,22 +34,22 @@
 						<!-- <i class="fa fa-search" aria-hidden="true"></i> --> <!-- Font Awesome Search Icon -->
 					</button>
 					</span><!-- ./input-group-btn -->
-			</div><!-- ./input-group -->	
-			
+			</div><!-- ./input-group -->
+
 			<!-- &nbsp; &nbsp; -->
-			<!-- 
+			<!--
 				<span id="show" class="btn btn-info btn-xs">+ Expand All Results</span>
 				<span id="expand_delimiter">|</span>
 				<span id="hide" class="btn btn-info btn-xs">- Collapse All Results</span>
 			 -->
-			
+
 				<!-- <span id="show" class="expand">+ Expand all</span> -->
 				<!-- <span id="expand_delimiter" class="expand">|</span> -->
-				<!-- <span id="hide" class="expand">- Collapse all</span> -->	
+				<!-- <span id="hide" class="expand">- Collapse all</span> -->
 			<!-- </form> -->
 		</div><!-- ./col-sm-8 col-md-8 -->
 	</div><!-- ./navbar-header pull-left -->
-	
+
 	<div id="navbar" class="navbar-collapse collapse">
 		<ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -67,7 +67,7 @@
             <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
             <li>
 				<ul class="nav pull-left">
-	            <li class="nav navbar-text" id="navSignedInUser">User Name</li>	            
+	            <li class="nav navbar-text" id="navSignedInUser">User Name</li>
 		            <li class="dropdown pull-right">
 						<a href="#" data-toggle="dropdown" style="color:#777; margin-top: 5px;" class="dropdown-toggle">
 							<span class="glyphicon glyphicon-user"></span>
@@ -81,7 +81,7 @@
 				</ul><!-- ./nav pull-left -->
 			</li>
 		</ul><!-- ./navbar-right -->
-	</div><!--/.nav-collapse -->		
+	</div><!--/.nav-collapse -->
 
 </div><!-- /.container-fluid -->
 </nav>
