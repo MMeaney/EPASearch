@@ -2124,6 +2124,8 @@ Set `http_proxy` at CLI <sup>[[Proxy Settings]](#proxysettings)</sup>
 
 ```bash
 pip install eve
+pip install flask
+pip install bcrypt
 ```
 
 Edit `settings.py`
