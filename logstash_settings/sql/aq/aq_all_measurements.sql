@@ -17,7 +17,6 @@ INNER JOIN	[Air_Quality].config.Measure		ON	[Air_Quality].config.SiteMeasure.Mea
 LEFT OUTER JOIN	[Air_Quality].config.MeasureType 	ON 	[Air_Quality].config.Measure.MeasureTypeID	= [Air_Quality].config.MeasureType.MeasureTypeID
 LEFT OUTER JOIN [Air_Quality].config.Unit		ON 	[Air_Quality].config.Measure.UnitID		= [Air_Quality].config.Unit.UnitID
 
-
 WHERE	[Air_Quality].data.RawReading.MeasuredAt <=	GETDATE()
 AND		[Air_Quality].data.RawReading.MeasuredAt >= :sql_last_value
 AND		[Air_Quality].data.RawReading.RawValue	 IS NOT NULL
