@@ -1,5 +1,4 @@
-/****** Script for SelectTopNRows command from SSMS  ******/
-SELECT --TOP 10 --DISTINCT
+SELECT
 	LOC.LocationId
 	, LOC.Code
 	, LOC.Name
@@ -8,7 +7,6 @@ SELECT --TOP 10 --DISTINCT
 	, LOC.OrganisationName
 	, ORG.Code	AS [OrganisationCode]
 	, LOC.EdenMonitoredStationCode
-	, LOC.Shape
 	, LOC.Easting
 	, LOC.Northing
 	, LOC.EtrsX
@@ -78,6 +76,7 @@ SELECT --TOP 10 --DISTINCT
 	, LOC.IsRecyclingFacilityAvailable
 	, LOC.RecyclingFacilityAvailableDetails
 	, LOC.LastUpdatedOn    AS [lastupdatedon]
+	--, LOC.Shape
 	--, LOC.CountyId
 	--, LOC.OrganisationId
 	--, LOC.WaterQualityId
@@ -87,5 +86,11 @@ SELECT --TOP 10 --DISTINCT
 	--, LOC.StatusTypeId
 	--, LOC.RestrictionTypeId
 	--, LOC.ClosedTypeId
+
 FROM			[BathingWater-STG].[dbo].[Location]			LOC
 LEFT JOIN	[BathingWater-STG].[dbo].[Organisation]	ORG	ON ORG.OrganisationId	= LOC.OrganisationId
+
+WHERE			LastUpdatedOn 	<=	GETDATE()
+AND				LastUpdatedOn 	>= :sql_last_value
+
+ORDER BY 	LastUpdatedOn
