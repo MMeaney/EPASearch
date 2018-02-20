@@ -1279,15 +1279,50 @@ Filename: `mongodb-win32-x86_64-2008plus-ssl-3.4.2-signed.msi`
 
 Tutorial: <https://www.tutorialspoint.com/mongodb/mongodb_environment.htm>  
 
+If it doesn't exist, it is a good idead to create a configuration file, e.g. `c:\dev\MongoDB\Server\3.4\etc\mongod.conf`.
+
+```sh
+#store data here
+#  dbpath: c:\dev\MongoDB\Data
+
+#all output go here
+#  logpath: C:\dev\MongoDB\Server\3.4\log
+
+#log read and write operations
+#  diaglog: 3
+
+#security:
+#  authorization: 'enabled'
+
+# network interfaces
+net:
+  port: 9214
+  bindIp: 127.0.0.1,192.168.65.150 # Localhost, Private IP
+```
+
+
+> Note: Set `bindIp` to include the IP address of the host machine. This can then be accessed from another machine. 
+> 
+> For example, if the 'Python-Eve' API framwework is running on a public facing server, the `settings.py` file could include the IP set in the example above:
+> ```python
+> MONGO_HOST = '192.168.65.150'
+> ```
+
+
 Open CLI 1:
 ```
 cd c:\dev\MongoDB\Server\3.4\bin
-mongod.exe --dbpath "c:\dev\MongoDB\Data"
+mongod.exe --dbpath "c:\dev\MongoDB\Data" -f "c:\dev\MongoDB\Server\3.4\etc\mongod.conf"
 ```
 Open CLI 2 
 ```
 cd c:\dev\MongoDB\Server\3.4\bin
 mongo
+```
+If MongoDB is listening on a port other than the default (27017), spcify it using the `--port` switch.
+```
+cd c:\dev\MongoDB\Server\3.4\bin
+mongo --port 9214
 ```
 
 #### RoboMongo UI
