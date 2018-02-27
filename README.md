@@ -96,6 +96,8 @@ EPA Data Catalogue Search - ElasticSearch
     - [Python-EVE](#python-eve)
       - [Eve-Swagger](#eve-swagger)
       - [Eve-Elastic](#eve-elastic)
+      - [SQLAlchemy](#sqlalchemy)
+      - [EVE-SQLAlchemy](#eve-sqlalchemy)
     - [Zend_Rest_Server()](#zend_rest_server)
     - [Ramses, Elasticsearch, Postgres, MongoDB](#ramses-elasticsearch-postgres-mongodb)
     - [Swagger](#swagger)
@@ -2248,6 +2250,27 @@ Set `http_proxy` at CLI <sup>[[Proxy Settings]](#proxysettings)</sup>
 ```bash
 pip install Eve-Elastic
 ```
+
+#### SQLAlchemy
+Home: <https://www.sqlalchemy.org/>  
+
+
+Set `http_proxy` at CLI <sup>[[Proxy Settings]](#proxysettings)</sup>
+
+```bash
+pip install sqlalchemy
+```
+
+#### EVE-SQLAlchemy
+Github: <https://github.com/pyeve/eve-sqlalchemy>  
+Tutorial: <http://eve-sqlalchemy.readthedocs.io/en/latest/tutorial.html>  
+
+Set `http_proxy` at CLI <sup>[[Proxy Settings]](#proxysettings)</sup>
+
+```bash
+pip install sqlalchemy
+```
+
 
 ### Zend_Rest_Server() 
 Tutorial: <https://www.packtpub.com/mapt/book/web-development/9781847195524/6/ch06lvl1sec32/Services+with+Zend_Rest_Server>  
