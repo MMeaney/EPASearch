@@ -2268,7 +2268,7 @@ Tutorial: <http://eve-sqlalchemy.readthedocs.io/en/latest/tutorial.html>
 Set `http_proxy` at CLI <sup>[[Proxy Settings]](#proxysettings)</sup>
 
 ```bash
-pip install sqlalchemy
+pip install eve-sqlalchemy
 ```
 
 
