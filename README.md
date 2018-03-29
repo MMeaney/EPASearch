@@ -1284,22 +1284,56 @@ Tutorial: <https://www.tutorialspoint.com/mongodb/mongodb_environment.htm>
 If it doesn't exist, it is a good idead to create a configuration file, e.g. `c:\dev\MongoDB\Server\3.4\etc\mongod.conf`.
 
 ```sh
-#store data here
-#  dbpath: c:\dev\MongoDB\Data
+# mongod.conf
 
-#all output go here
-#  logpath: C:\dev\MongoDB\Server\3.4\log
+# for documentation of all options, see:
+#   http://docs.mongodb.org/manual/reference/configuration-options/
 
-#log read and write operations
-#  diaglog: 3
+# where to write logging data.
+systemLog:
+  destination: file
+  logAppend: true
+  path: c:\dev\MongoDB\Server\3.4\logmongod_27017.log
 
-#security:
-#  authorization: 'enabled'
+# Where and how to store data.
+storage:
+  dbPath: c:\dev\MongoDB\Data_27017
+  journal:
+    enabled: true
+#  engine:
+#  mmapv1:
+#  wiredTiger:
 
+# how the process runs
+#processManagement:
+  #fork: true  # fork and run in background
+  #pidFilePath: /var/run/mongodb/mongod.pid  # location of pidfile
+  #timeZoneInfo: /usr/share/zoneinfo
+
+  
 # network interfaces
 net:
-  port: 9214
+  port: 27017
+  # Enter 0.0.0.0,:: to bind to all IPv4 and IPv6 addresses or, alternatively, use the net.bindIpAll setting.
   bindIp: 127.0.0.1,192.168.65.150 # Localhost, Private IP
+  #bindIp: 192.168.194.130 # Debian server
+  #bindIp: 0.0.0.0
+  #bindIp: 192.168.65.150
+
+#security:
+
+#operationProfiling:
+
+#replication:
+
+#sharding:
+
+## Enterprise-Only Options
+
+#auditLog:
+
+#snmp:
+
 ```
 
 
@@ -1315,6 +1349,8 @@ Open CLI 1:
 ```
 cd c:\dev\MongoDB\Server\3.4\bin
 mongod.exe --dbpath "c:\dev\MongoDB\Data" -f "c:\dev\MongoDB\Server\3.4\etc\mongod.conf"
+or
+mongod.exe -f "c:\dev\MongoDB\Server\3.4\etc\mongod_27017.conf"
 ```
 Open CLI 2 
 ```
