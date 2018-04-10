@@ -94,6 +94,7 @@ EPA Data Catalogue Search - ElasticSearch
     - [Apache ManifoldCF](#apache-manifoldcf)
   - [REST API](#rest-api)
     - [Python-EVE](#python-eve)
+      - [uWSGI](#uwsgi)
       - [Eve-Swagger](#eve-swagger)
       - [Eve-Elastic](#eve-elastic)
       - [SQLAlchemy](#sqlalchemy)
@@ -140,7 +141,7 @@ Resource Monitor can be used to investigate port binding issues (this crops up w
 
 #### VCRUNTIME140.dll C++ Redistributable for Visual Studio 2015 RC 
 
-Required for Apache HTTPD Server 2.4   
+Required for Apache HTTPD Server 2.4   
 
 Install: <https://www.microsoft.com/en-us/download/details.aspx?id=48145>
 
@@ -178,7 +179,7 @@ Visual C++ 2010 SP1 Redistributable MFC Security Update: <https://www.microsoft.
 
 Deprecated?
 
-Required for Python 3.6  
+Required for Python 3.6  
 
 Install: <https://www.microsoft.com/en-ie/download/details.aspx?id=5555>
 
@@ -624,7 +625,7 @@ Install path suggestion: `c:\dev\ruby\ruby23-x64`
 Install: <https://rubygems.org/rubygems/rubygems-2.6.11.zip>  
 Install path suggestion: `c:\dev\ruby\rubygems-2.6.11`  
 
-##### Bundler  
+##### Bundler  
 Environment Variables  
 Add `;c:\dev\ruby\rubygems-2.6.11\bundler\lib` to System `PATH`  
 
@@ -1228,9 +1229,9 @@ Install: <https://github.com/apache/drill.git>
 
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Apache_Drill):
-> Apache Drill is an open-source software framework that supports data-intensive distributed applications for interactive analysis of large-scale datasets. Drill is the open source version of Google's Dremel system which is available as an infrastructure service called Google BigQuery. One explicitly stated design goal is that Drill is able to scale to 10,000 servers or more and to be able to process petabytes of data and trillions of records in seconds. Drill is an Apache top-level project.
+> Apache Drill is an open-source software framework that supports data-intensive distributed applications for interactive analysis of large-scale datasets. Drill is the open source version of Google's Dremel system which is available as an infrastructure service called Google BigQuery. One explicitly stated design goal is that Drill is able to scale to 10,000 servers or more and to be able to process petabytes of data and trillions of records in seconds. Drill is an Apache top-level project.
 
-> Drill supports a variety of NoSQL databases and file systems, including HBase, MongoDB, MapR-DB, HDFS, MapR-FS, Amazon S3, Azure Blob Storage, Google Cloud Storage, Swift, NAS and local files. A single query can join data from multiple datastores. For example, you can join a user profile collection in MongoDB with a directory of event logs in Hadoop.
+> Drill supports a variety of NoSQL databases and file systems, including HBase, MongoDB, MapR-DB, HDFS, MapR-FS, Amazon S3, Azure Blob Storage, Google Cloud Storage, Swift, NAS and local files. A single query can join data from multiple datastores. For example, you can join a user profile collection in MongoDB with a directory of event logs in Hadoop.
 
 
 
@@ -2201,7 +2202,75 @@ pip install flask
 pip install bcrypt
 ```
 
-Edit `settings.py`
+Edit `settings.py`:
+
+```py
+MONGO_HOST = '192.168.65.150'
+MONGO_PORT = 9214
+
+MONGO_DBNAME = 'aq'
+
+RESOURCE_METHODS = ['GET']
+ITEM_METHODS = ['GET']
+
+#ITEMS = 'results'
+#ITEMS = 'records'
+
+schema = {
+    # Schema definition, based on Cerberus grammar. Check the Cerberus project
+    # (https://github.com/pyeve/cerberus) for details.
+
+    # User accounts for Authorisation
+    'username': {
+        'type': 'string',
+        'required': True,
+        'unique': True,
+        },
+    'password': {
+        'type': 'string',
+        'required': True,
+    },
+
+    'rawreadingid': {'type': 'int64'},
+    'raw_reading_measurement_time': {'type': 'datetime'},
+    'rawdatavalue': {'type': 'double'},
+    'pollutantname': {'type': 'string'},
+    'samplingpoint': {'type': 'string'},
+    'measurementtype': {'type': 'string'},
+    'measurementunit': {'type': 'string'}
+}
+
+accounts = {
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'username',
+    },
+    'cache_control': '',
+    'cache_expires': 0,
+    'schema': schema,
+}
+
+aq_measurements = {
+    'additional_lookup': {
+        'url': 'regex("[\w]+")', 
+        'field': '_id'},
+    'cache_control': 'max-age=10,must-revalidate',
+    'cache_expires': 10,
+    'resource_methods': ['GET'],
+    'schema': schema
+}
+
+#URL_PREFIX = 'api'
+#API_VERSION = 'v1'
+XML = False
+PAGINATION = True
+PAGINATION_DEFAULT = 25
+PAGINATION_LIMIT = 999999999
+DOMAIN = {
+    'aq_measurements': aq_measurements,
+    #'accounts': accounts,
+}
+```
 
 At CLI 1
 ```bash
@@ -2222,6 +2291,107 @@ curl -i http://127.0.0.1:5000?pretty
 - http://localhost:5000/measurements?where={"locationname":"Kilmeadan"}&max_results=1
 - http://localhost:5000/measurements?where={"measurementid":684}
 - http://localhost:5000/api-docs
+
+#### uWSGI
+Tutorial: <https://uwsgi-docs.readthedocs.io/en/latest/>  
+Github: <https://github.com/unbit/uwsgi>  
+
+<u>Note</u>: Debian only
+
+```bash
+pip install uwsgi
+```
+
+Create '.ini' file, e.g. `/var/www/air/api/eve/aq/aq_uwsgi.ini`:
+
+```ini
+[uwsgi]
+module = wsgi:app
+
+master = true
+processes = 5
+
+socket = aq_uwsgi.sock
+chmod-socket = 660
+vacuum = true
+
+die-on-term = true
+```
+
+Create '.service' file, e.g. `/etc/systemd/system/aq_uwsgi.service`:
+
+```service
+[Unit]
+Description=uWSGI server instance configured to serve run_aq_uwsgi (Air Quality Open Data API)
+After=network.target
+
+[Service]
+User=meaneym
+Group=www-data
+WorkingDirectory=/var/www/air/api/eve/aq
+Environment="PATH=/var/www/air/api/eve/aq"
+ExecStart=/var/www/air/api/eve/aq --ini aq_uwsgi.ini --uid meaneym --gid www-data --logto /var/www/air/api/eve/aq/error.log
+
+[Install]
+WantedBy = multi-user.target
+```
+
+
+To run
+```bash
+/var/www/air/api/eve/aq$ uwsgi --socket:0.0.0.0:8000 --protocol=http - wsgi:app
+```
+
+Edit the Eve run file. I have renamed 'run.py' to 'run_aq_uwsgi.py':
+```py
+import eve
+from eve import Eve
+
+
+#### Added for Swagger
+from eve_swagger import swagger, add_documentation
+
+
+#### End
+
+
+#### Disable meta fields, e.g. '_etag', '_created', '_updated'
+def on_fetched_resource(resource, response):
+    for document in response['_items']:
+        del(document['_etag'])
+        del(document['_created'])
+        del(document['_updated'])
+        del(document['_links'])
+
+app = eve.Eve()
+
+
+#### Disable meta fields, e.g. '_etag, '_created', '_updated'
+app.on_fetched_resource += on_fetched_resource
+
+
+#### Added for Swagger
+app.register_blueprint(swagger)
+
+# required. See http://swagger.io/specification/#infoObject for details.
+app.config['SWAGGER_INFO'] = {
+    'title': 'Air Quality Open Data API',
+    'version': '1.0',
+    'description': 'Air Quality Open Data API',
+    'termsOfService': "terms.html",
+    'contact': {
+      "url": 'http://www.epa.ie',
+      "name": 'EPA'
+    },
+    'license': {
+      'url': "https://creativecommons.org/licenses/by/4.0/",
+      'name': "Creative Commons Attribution 4.0 International License (CC BY 4.0)"
+    }
+}
+
+app.run(host='0.0.0.0', port=5015)
+```
+
 
 #### Eve-Swagger
 GitHub: <https://github.com/pyeve/eve-swagger>  
@@ -2619,7 +2789,7 @@ Install Ubuntu 14..04.5 on Virtualbox. Link: [[Ubuntu 14.04.5]](#ubuntu-14045)
 
 Tutorial: <http://docs.ckan.org/en/ckan-2.7.2/maintaining/installing/install-from-package.html>  
 
-Solr JSP Error Workaround: <https://stackoverflow.com/questions/30355839/>  
+Solr JSP Error Workaround: <https://stackoverflow.com/questions/30355839/>  
 (link to solution: <https://github.com/ckan/ckan/pull/2966>)  
 
 ```bash
@@ -2749,34 +2919,3 @@ Environment Variables:
 -	Add `;c:\dev\apache\hive-2.3.0\bin` to environment variable `PATH`
 -	Create new environment variable `HIVE_HOME`, set to `c:\dev\apache\hive-2.3.0`
 -	Create new environment variable `CLASSPATH` if requtred, set to (or append) `;c:\dev\apache\hive-2.3.0\lib` and `;c:\dev\hadoop\hadoop-2.7.1\share\hadoop\common\lib`
-
-
-
-## Sandbox
-
-If you're ever stuck on a Markdown question, there's a help button on the right side of the toolbar:
-
-![Screenshot of the toolbar](http://so.mrozekma.com/editor-bar-help-button.png)
-
-That [help page](http://stackoverflow.com/editing-help) explains how to do the simple case:
-
-> ### Advanced lists: Nesting
-> To put other Markdown blocks in a list; just indent four spaces for each nesting level
-
-For example (see the [markdown for this post](http://meta.stackoverflow.com/revisions/01c25c3a-3653-49f4-b6be-4323c50bff2d/view-source)):
-
-1. Dog
-    1. German Shepherd
-    2. Belgian Shepherd
-        1. Malinois
-        2. Groenendael
-        3. Tervuren
-2. Cat
-    1. Siberian
-    2. Siamese
-
-
-
-- [x] Finish my changes
-- [ ] Push my commits to GitHub
-- [ ] Open a pull request
