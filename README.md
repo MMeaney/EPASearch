@@ -2297,7 +2297,7 @@ curl -i http://127.0.0.1:5000?pretty
 Tutorial: <https://uwsgi-docs.readthedocs.io/en/latest/>  
 Github: <https://github.com/unbit/uwsgi>  
 
-<ul>Note</ul>: Debian only
+> Note: Debian only
 
 ```bash
 pip install uwsgi
@@ -2405,7 +2405,7 @@ To run:
 Tutorial: <https://uwsgi-docs.readthedocs.io/en/latest/>  
 Github: <https://github.com/unbit/uwsgi>  
 
-<ul>Note</ul>: Debian only
+> Note: Debian only
 
 Edit site config in 'sites-available', e.g. `etc/nginx/sites-available/air`:
 
