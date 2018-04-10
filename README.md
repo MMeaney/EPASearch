@@ -2320,7 +2320,7 @@ die-on-term = true
 
 Create '.service' file, e.g. `/etc/systemd/system/aq_uwsgi.service`:
 
-```service
+```ini
 [Unit]
 Description=uWSGI server instance configured to serve run_aq_uwsgi (Air Quality Open Data API)
 After=network.target
@@ -2337,12 +2337,7 @@ WantedBy = multi-user.target
 ```
 
 
-To run
-```bash
-/var/www/air/api/eve/aq$ uwsgi --socket:0.0.0.0:8000 --protocol=http - wsgi:app
-```
-
-Edit the Eve run file. I have renamed 'run.py' to 'run_aq_uwsgi.py':
+Edit the 'Eve' run file. I have renamed `run.py` to `run_aq_uwsgi.py`:
 ```py
 import eve
 from eve import Eve
@@ -2390,6 +2385,19 @@ app.config['SWAGGER_INFO'] = {
 }
 
 app.run(host='0.0.0.0', port=5015)
+```
+
+Create `wsgi.py` (this imports 'app' from `run_aq_uwsgi.py`:
+```py
+from run_aq_uwsgi import app
+if __name__ == "__main__":
+    app.run()
+```
+
+
+To run:
+```bash
+/var/www/air/api/eve/aq$ uwsgi --socket:0.0.0.0:8000 --protocol=http - wsgi:app
 ```
 
 
