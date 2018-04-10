@@ -2401,6 +2401,50 @@ To run:
 /var/www/air/api/eve/aq$ uwsgi --socket:0.0.0.0:8000 --protocol=http - wsgi:app
 ```
 
+#### Nginx Config
+Tutorial: <https://uwsgi-docs.readthedocs.io/en/latest/>  
+Github: <https://github.com/unbit/uwsgi>  
+
+<ul>Note</ul>: Debian only
+
+Edit site config in 'sites-available', e.g. `etc/nginx/sites-available/air`:
+
+```ini
+etc/nginx/sites-available/air
+
+server {
+listen 80;
+    	server_name air-tst.epa.ie;
+    	return 301 https://air-tst.epa.ie$request_uri;
+}
+
+server {
+
+	listen   443 ssl;
+	server_name air-tst.epa.ie;
+	root /var/www/air/api/eve/aq_elastic;
+
+	keepalive_timeout   70;	
+
+	include /etc/nginx/global/restrictions.conf;
+
+ 	ssl_certificate    	/etc/nginx/ssl/air-tst_epa_ie.pem;
+	ssl_certificate_key    /etc/nginx/ssl/sslair.key;
+
+ 	access_log /var/log/nginx/air-tst.access.log;
+ 	error_log /var/log/nginx/air-tst.error.log;
+
+	# Default location 
+	location /aq_measurements {
+                # Start: Add uWSGI settings
+                include uwsgi_params;
+                uwsgi_pass unix:///var/www/air/api/eve/aq/aq_uwsgi.sock;
+                # End: Add uWSGI settings
+		proxy_pass http://127.0.0.1:5015;
+	}
+
+}
+```
 
 #### Eve-Swagger
 GitHub: <https://github.com/pyeve/eve-swagger>  
@@ -2455,52 +2499,6 @@ if __name__ == '__main__':
 ```
 
 - <http://localhost:5000/api-docs>
-
-#### Nginx Config
-Tutorial: <https://uwsgi-docs.readthedocs.io/en/latest/>  
-Github: <https://github.com/unbit/uwsgi>  
-
-<ul>Note</ul>: Debian only
-
-Edit site config in 'sites-available', e.g. `etc/nginx/sites-available/air`:
-
-```ini
-etc/nginx/sites-available/air
-
-server {
-listen 80;
-    	server_name air-tst.epa.ie;
-    	return 301 https://air-tst.epa.ie$request_uri;
-}
-
-server {
-
-	listen   443 ssl;
-	server_name air-tst.epa.ie;
-	root /var/www/air/api/eve/aq_elastic;
-
-	keepalive_timeout   70;	
-
-	include /etc/nginx/global/restrictions.conf;
-
- 	ssl_certificate    	/etc/nginx/ssl/air-tst_epa_ie.pem;
-	ssl_certificate_key    /etc/nginx/ssl/sslair.key;
-
- 	access_log /var/log/nginx/air-tst.access.log;
- 	error_log /var/log/nginx/air-tst.error.log;
-
-	# Default location 
-	location /aq_measurements {
-                # Start: Add uWSGI settings
-                include uwsgi_params;
-                uwsgi_pass unix:///var/www/air/api/eve/aq/aq_uwsgi.sock;
-                # End: Add uWSGI settings
-		proxy_pass http://127.0.0.1:5015;
-	}
-
-}
-```
-
 
 #### Eve-Elastic 
 GitHub: <https://github.com/petrjasek/eve-elastic>  
