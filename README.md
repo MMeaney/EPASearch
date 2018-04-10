@@ -1,5 +1,5 @@
 # EPASearch
-EPA Data Catalogue Search - ElasticSearch  
+EPA Data Catalogue Search - Full details of all technologies utilised
 
 
 ## Contents:  
@@ -2402,8 +2402,6 @@ To run:
 ```
 
 #### Nginx Config
-Tutorial: <https://uwsgi-docs.readthedocs.io/en/latest/>  
-Github: <https://github.com/unbit/uwsgi>  
 
 > Note: Debian only
 
