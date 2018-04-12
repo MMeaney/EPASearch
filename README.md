@@ -14,6 +14,7 @@ EPA Data Catalogue Search - Full details of all technologies utilised
       - [Microsoft Visual Studio 2017 and .NET Core](#microsoft-visual-studio-2017-and-net-core)
         - [Microsoft Visual Studio 2017 Community](#microsoft-visual-studio-2017-community)
         - [MS VS2017 R Client Setup](#ms-vs2017-r-client-setup)
+      - [AlwaysUp](#alwaysup)
     - [Nginx](#nginx)
     - [Eclipse](#eclipse)
     - [Sublime Text](#sublime-text)
@@ -219,6 +220,90 @@ Download: <http://go.microsoft.com/fwlink/?LinkID=834568&clcid=1033>
 Copy `SRO\_3.3.2.0\_1033.cab` to `C:\ProgramData\Microsoft\VisualStudio\Packages\Microsoft.R.Open.Exe,version=3.3.2.1026,chip=x64`
 
 Re-run `RClientSetup.exe` in folder `Microsoft.R.Open.Exe,version=3.3.2.1026,chip=x64`  
+
+#### NSSM
+
+Install: <https://nssm.cc/release/nssm-2.24.zip>  
+Tutorial: <https://www.alibabacloud.com/help/doc-detail/49021.htm>   
+
+###### Set Logstash as a Windows service
+
+When logstash.bat is started in PowerShell, the Logstash process is working in the frontend. Logstash is generally used for testing configurations and debugging collections. Therefore, we recommend that you set Logstash as a Windows service after the debugging is passed so as to enable Logstash to work in the backend and start automatically when power-on.
+
+Besides setting Logstash as a Windows service, you can also start, stop, modify, and delete the service by using command lines. For more information about how to use NSSM, see NSSM official document.
+
+Add Logstash as a Windows service
+This operation is generally performed when Logstash is deployed for the first time. If Logstash has been added, skip this step.
+
+Run the following command to add Logstash as a Windows service.
+
+- 32-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win32\nssm.exe install logstash "C:\logstash-2.2.2-win\bin\logstash.bat" "agent -f C:\logstash-2.2.2-win\conf"
+```
+
+- 64-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win64\nssm.exe install logstash "C:\logstash-2.2.2-win\bin\logstash.bat" "agent -f C:\logstash-2.2.2-win\conf"
+```
+
+###### Start the service
+If the configuration file in the Logstash conf directory is updated, stop the Logstash service and then start it again.
+
+Run the following command to start the service.
+
+- 32-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win32\nssm.exe start logstash
+```
+
+-64-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win64\nssm.exe start logstash
+```
+
+###### Stop the service
+
+Run the following command to stop the service.
+
+- 32-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win32\nssm.exe stop logstash
+```
+
+- 64-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win64\nssm.exe stop logstash
+```
+
+###### Modify the service
+
+Run the following command to modify the service.
+
+- 32-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win32\nssm.exe edit logstash
+```
+
+- 64-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win64\nssm.exe edit logstash
+```
+
+###### Delete the service
+
+
+Run the following command to delete the service.
+
+- 32-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win32\nssm.exe remove logstash
+```
+
+- 64-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win64\nssm.exe remove logstash
+```
 
 ### Nginx
 
