@@ -1356,7 +1356,7 @@ If the data folder is included in the '.conf' file it can be omitted from the co
 ```bash
 mongod.exe -f "c:\dev\MongoDB\Server\3.4\etc\mongod_27017.conf"
 ```
-To run as a Windoes service add `--install` to the command:
+To run as a Windows service add `--install` to the command:
 ```bash
 mongod.exe -f "c:\dev\MongoDB\Server\3.4\etc\mongod_27017.conf" --install
 ```
