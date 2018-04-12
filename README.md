@@ -14,7 +14,7 @@ EPA Data Catalogue Search - Full details of all technologies utilised
       - [Microsoft Visual Studio 2017 and .NET Core](#microsoft-visual-studio-2017-and-net-core)
         - [Microsoft Visual Studio 2017 Community](#microsoft-visual-studio-2017-community)
         - [MS VS2017 R Client Setup](#ms-vs2017-r-client-setup)
-      - [AlwaysUp](#alwaysup)
+      - [NSSM](#nssm)
     - [Nginx](#nginx)
     - [Eclipse](#eclipse)
     - [Sublime Text](#sublime-text)
@@ -257,7 +257,7 @@ Run the following command to start the service.
 C:\logstash-2.2.2-win\nssm-2.24\win32\nssm.exe start logstash
 ```
 
--64-bit system
+- 64-bit system
 ```
 C:\logstash-2.2.2-win\nssm-2.24\win64\nssm.exe start logstash
 ```
