@@ -1362,7 +1362,7 @@ mongo
 If MongoDB is listening on a port other than the default (27017), spcify it using the `--port` switch.
 ```
 cd c:\dev\MongoDB\Server\3.4\bin
-mongo --port 9214
+mongo --port 9999
 ```
 
 #### RoboMongo UI
