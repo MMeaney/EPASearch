@@ -1282,6 +1282,7 @@ Install path `c:\dev\MongoDB`
 Filename: `mongodb-win32-x86_64-2008plus-ssl-3.4.2-signed.msi`  
 
 Tutorial: <https://www.tutorialspoint.com/mongodb/mongodb_environment.htm>  
+Tutorial (Windows service): <https://docs.mongodb.com/master/tutorial/install-mongodb-on-windows/#install-mongodb-community-edition>  
 
 If it doesn't exist, it is a good idead to create a configuration file, e.g. `c:\dev\MongoDB\Server\3.4\etc\mongod.conf`.
 
@@ -1359,6 +1360,7 @@ mongod -f "c:\dev\MongoDB\Server\3.4\etc\mongod_27017.conf"
 To run as a Windows service add `--install` to the command:
 ```bash
 mongod -f "c:\dev\MongoDB\Server\3.4\etc\mongod_27017.conf" --install
+net start MongoDB
 ```
 
 
