@@ -1350,15 +1350,15 @@ MONGO_HOST = '192.168.65.150'
 Open CLI 1:
 ```bash
 cd c:\dev\MongoDB\Server\3.4\bin
-mongod.exe --dbpath "c:\dev\MongoDB\Data" -f "c:\dev\MongoDB\Server\3.4\etc\mongod.conf"
+mongod --dbpath "c:\dev\MongoDB\Data" -f "c:\dev\MongoDB\Server\3.4\etc\mongod.conf"
 ```
 If the data folder is included in the '.conf' file it can be omitted from the command:
 ```bash
-mongod.exe -f "c:\dev\MongoDB\Server\3.4\etc\mongod_27017.conf"
+mongod -f "c:\dev\MongoDB\Server\3.4\etc\mongod_27017.conf"
 ```
 To run as a Windows service add `--install` to the command:
 ```bash
-mongod.exe -f "c:\dev\MongoDB\Server\3.4\etc\mongod_27017.conf" --install
+mongod -f "c:\dev\MongoDB\Server\3.4\etc\mongod_27017.conf" --install
 ```
 
 
