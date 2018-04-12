@@ -1277,7 +1277,7 @@ Install: <https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-comm
 
 
 ### MongoDB
-Install: <https://www.mongodb.com/download-center?jmp=nav#community>  
+Install: <https://www.mongodb.com/dr/fastdl.mongodb.org/win32/mongodb-win32-x86_64-2008plus-ssl-3.4.2-signed.msi/download>  
 Install path `c:\dev\MongoDB`  
 Filename: `mongodb-win32-x86_64-2008plus-ssl-3.4.2-signed.msi`  
 
