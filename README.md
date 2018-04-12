@@ -1342,18 +1342,26 @@ net:
 > Note: Set `bindIp` to include the IP address of the host machine. This can then be accessed from another machine. 
 > 
 > For example, if the 'Python-Eve' API framwework is running on a public facing server, the `settings.py` file could include the IP set in the example above:
-> ```python
-> MONGO_HOST = '192.168.65.150'
-> ```
+```python
+MONGO_HOST = '192.168.65.150'
+```
 
 
 Open CLI 1:
-```
+```bash
 cd c:\dev\MongoDB\Server\3.4\bin
 mongod.exe --dbpath "c:\dev\MongoDB\Data" -f "c:\dev\MongoDB\Server\3.4\etc\mongod.conf"
-or
+```
+If the data folder is included in the '.conf' file it can be omitted from the command:
+```bash
 mongod.exe -f "c:\dev\MongoDB\Server\3.4\etc\mongod_27017.conf"
 ```
+To run as a Windoes service add `--install` to the command:
+```bash
+mongod.exe -f "c:\dev\MongoDB\Server\3.4\etc\mongod_27017.conf" --install
+```
+
+
 Open CLI 2 
 ```
 cd c:\dev\MongoDB\Server\3.4\bin
