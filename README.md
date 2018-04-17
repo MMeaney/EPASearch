@@ -2484,16 +2484,17 @@ app.run(host='0.0.0.0', port=5015)
 ```
 
 ~~Create `wsgi.py` (this imports 'app' from `run_aq_uwsgi.py`:
+
 ```py
 from run_aq_uwsgi import app
 if __name__ == "__main__":
     app.run()
-```~~
+```
 
 
 To run:
 ```bash
-/var/www/air/api/eve/aq$ uwsgi --socket:0.0.0.0:8000 --protocol=http - run_aq_uwsgi:app
+/var/www/air/api/eve/aq$ uwsgi --socket:0.0.0.0=8000 --protocol=http -w run_aq_uwsgi:app
 ```
 
 #### Nginx Config
