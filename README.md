@@ -2540,6 +2540,21 @@ server {
 }
 ```
 
+Config `nginx.conf` to allow Swagger-UI to access the `api-docs` endpoint. (This endpoint is auto-generated using the 'Eve-Swagger' package:
+
+```sh
+    location /api-docs {
+            proxy_pass         http://localhost:8080; #change to your port
+            proxy_redirect     off;
+
+            proxy_set_header   Host              $host;
+            proxy_set_header   X-Real-IP         $remote_addr;
+            proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Proto $scheme;
+    }
+```
+
+
 #### Eve-Swagger
 GitHub: <https://github.com/pyeve/eve-swagger>  
 
