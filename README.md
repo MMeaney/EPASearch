@@ -2544,7 +2544,7 @@ Config `nginx.conf` to allow Swagger-UI to access the `api-docs` endpoint. (This
 
 ```sh
     location /api-docs {
-            proxy_pass         http://localhost:8080; #change to your port
+            proxy_pass         http://127.0.0.1:5015;
             proxy_redirect     off;
 
             proxy_set_header   Host              $host;
