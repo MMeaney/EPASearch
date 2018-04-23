@@ -2523,7 +2523,7 @@ server {
 	include /etc/nginx/global/restrictions.conf;
 
  	ssl_certificate    	/etc/nginx/ssl/air-tst_epa_ie.pem;
-	ssl_certificate_key    /etc/nginx/ssl/sslair.key;
+	ssl_certificate_key    	/etc/nginx/ssl/sslair.key;
 
  	access_log /var/log/nginx/air-tst.access.log;
  	error_log /var/log/nginx/air-tst.error.log;
@@ -2539,8 +2539,7 @@ server {
 
 }
 ```
-
-Config `nginx.conf` to allow Swagger-UI to access the `api-docs` endpoint. (This endpoint is auto-generated using the 'Eve-Swagger' package:
+Edit site config in 'sites-available', e.g. `etc/nginx/sites-available/air`, to allow Swagger-UI to access the `api-docs` endpoint. (This endpoint is auto-generated using the 'Eve-Swagger' package):
 
 ```sh
     location /api-docs {
@@ -2553,7 +2552,7 @@ Config `nginx.conf` to allow Swagger-UI to access the `api-docs` endpoint. (This
             proxy_set_header   X-Forwarded-Proto $scheme;
     }
 ```
-
+Source: <https://github.com/springfox/springfox/issues/1330#issuecomment-226967909>  
 
 #### Eve-Swagger
 GitHub: <https://github.com/pyeve/eve-swagger>  
