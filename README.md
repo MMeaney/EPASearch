@@ -105,6 +105,7 @@ EPA Data Catalogue Search - Full details of all technologies utilised
     - [Ramses, Elasticsearch, Postgres, MongoDB](#ramses-elasticsearch-postgres-mongodb)
     - [Swagger](#swagger)
     - [Swagger-UI](#swagger-ui)
+      - [Swagger-UI - Debian](#swagger-ui---debian)
     - [Pyramid-Swagger](#pyramid-swagger)
     - [Visual Studio WebAPI 2.0](#visual-studio-webapi-20)
     - [Open Data API Examples](#open-data-api-examples)
@@ -2838,6 +2839,18 @@ Set NPM (Node Package Manager `http_proxy` at CLI <sup>[[Proxy Settings]](#proxy
 ```bash
 npm install -g react (if not installed)
 npm install -g swagger-ui
+```
+
+#### Swagger-UI - Debian
+Install: <https://gist.github.com/diegopacheco/f310882e7f369df9691b01954ee816ca>  
+
+```bash
+git clone https://github.com/swagger-api/swagger-ui.git
+cd swagger-ui/
+sudo -E npm install -g
+sudo -E npm run build
+npm run serve
+GOTO: http://localhost:8080/
 ```
 
 ### Pyramid-Swagger
