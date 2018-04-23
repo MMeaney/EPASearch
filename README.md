@@ -2909,7 +2909,7 @@ server {
         }
 
         location /swagger-ui {
-        	alias /var/www/air/api/eve/swagger-ui/dist
+        	alias /var/www/air/api/eve/swagger-ui/dist/;
 
 		    if ($request_method = 'OPTIONS') {
 				add_header 'Access-Control-Allow-Origin' '*';
