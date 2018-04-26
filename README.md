@@ -2517,7 +2517,7 @@ server {
 
 	listen   443 ssl;
 	server_name air-tst.epa.ie;
-	root /var/www/air/api/eve/aq_elastic;
+	root /var/www/air/api/eve/aq;
 
 	keepalive_timeout   70;	
 
@@ -2526,8 +2526,8 @@ server {
  	ssl_certificate    	/etc/nginx/ssl/air-tst_epa_ie.pem;
 	ssl_certificate_key    	/etc/nginx/ssl/sslair.key;
 
- 	access_log /var/log/nginx/air-tst.access.log;
- 	error_log /var/log/nginx/air-tst.error.log;
+ 	access_log	/var/log/nginx/air-tst.access.log;
+ 	error_log 	/var/log/nginx/air-tst.error.log;
 
 	# Default location 
 	location /aq_measurements {
@@ -2875,8 +2875,9 @@ http {
 
 	server {
 	listen 80;
-		server_name air-tst.epa.ie;
+		server_name 	air-tst.epa.ie;
 		return 301 https://air-tst.epa.ie$request_uri;
+		index       	index.html index.htm;
 	}
 
 	server {
@@ -2892,8 +2893,8 @@ http {
 		ssl_certificate        /etc/nginx/ssl/air-tst_epa_ie.pem;
 		ssl_certificate_key    /etc/nginx/ssl/sslair.key;
 
-		access_log /var/log/nginx/air-tst.access.log;
-		error_log  /var/log/nginx/air-tst.error.log;
+		access_log 	/var/log/nginx/air-tst.access.log;
+		error_log  	/var/log/nginx/air-tst.error.log;
 
 		# Default location 
 		location /api/v1/aq_measurements {
