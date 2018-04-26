@@ -2864,54 +2864,63 @@ GOTO: http://localhost:8080/
 Edit `etc/nginx/sites-available/air`:
 
 ```bash
-server {
-listen 80;
-    	server_name air-tst.epa.ie;
-    	return 301 https://air-tst.epa.ie$request_uri;
-}
+http {
+  include             mime.types;
+  default_type        application/octet-stream;
 
-server {
+  sendfile on;
 
-	listen   443 ssl;
-	server_name air-tst.epa.ie;
-	root /var/www/air/api/eve/aq;
+  keepalive_timeout   65;
 
-	keepalive_timeout   70;	
 
-	include /etc/nginx/global/restrictions.conf;
+	server {
+	listen 80;
+		server_name air-tst.epa.ie;
+		return 301 https://air-tst.epa.ie$request_uri;
+	}
 
- 	ssl_certificate        /etc/nginx/ssl/air-tst_epa_ie.pem;
-	ssl_certificate_key    /etc/nginx/ssl/sslair.key;
+	server {
 
- 	access_log /var/log/nginx/air-tst.access.log;
- 	error_log  /var/log/nginx/air-tst.error.log;
+		listen   443 ssl;
+		server_name air-tst.epa.ie;
+		root /var/www/air/api/eve/aq;
 
-	# Default location 
-        location /api/v1/aq_measurements {
-                # Start: Add uWSGI settings
-                include uwsgi_params;
+		keepalive_timeout   70;	
 
-                uwsgi_pass unix:///var/www/air/api/eve/aq/aq_uwsgi.sock;
-                # End: Add uWSGI settings
+		include /etc/nginx/global/restrictions.conf;
 
-                # Original non-UWSGI
-		proxy_pass http://127.0.0.1:5015;
+		ssl_certificate        /etc/nginx/ssl/air-tst_epa_ie.pem;
+		ssl_certificate_key    /etc/nginx/ssl/sslair.key;
+
+		access_log /var/log/nginx/air-tst.access.log;
+		error_log  /var/log/nginx/air-tst.error.log;
+
+		# Default location 
+		location /api/v1/aq_measurements {
+			# Start: Add uWSGI settings
+			include uwsgi_params;
+
+			uwsgi_pass unix:///var/www/air/api/eve/aq/aq_uwsgi.sock;
+			# End: Add uWSGI settings
+
+			# Original non-UWSGI
+			proxy_pass http://127.0.0.1:5015;
+			}
+
+		location /api-docs {
+			proxy_pass        http://127.0.0.1:5015;
+			proxy_redirect    off;
+
+			proxy_set_header  Host               $host;
+			proxy_set_header  X-Real-IP          $remote_addr;
+			proxy_set_header  X-Forwarded-For    $proxy_add_x_forwarded_for;
+			proxy_set_header  X-Forwarded-Proto  $scheme;
 		}
 
-        location /api-docs {
-                proxy_pass        http://127.0.0.1:5015;
-                proxy_redirect    off;
+		location /swagger-ui {
+			alias /var/www/air/api/eve/swagger-ui/dist/;
 
-                proxy_set_header  Host               $host;
-                proxy_set_header  X-Real-IP          $remote_addr;
-                proxy_set_header  X-Forwarded-For    $proxy_add_x_forwarded_for;
-                proxy_set_header  X-Forwarded-Proto  $scheme;
-        }
-
-        location /swagger-ui {
-        	alias /var/www/air/api/eve/swagger-ui/dist/;
-
-		    if ($request_method = 'OPTIONS') {
+			    if ($request_method = 'OPTIONS') {
 				add_header 'Access-Control-Allow-Origin' '*';
 				add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
 				#
@@ -2925,20 +2934,20 @@ server {
 				add_header 'Content-Type' 'text/plain charset=UTF-8';
 				add_header 'Content-Length' 0;
 				return 204;
-			}
-		    if ($request_method = 'POST') {
+				}
+			    if ($request_method = 'POST') {
+				add_header 'Access-Control-Allow-Origin' '*';
+				add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+				add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+			    }
+			    if ($request_method = 'GET') {
 				add_header 'Access-Control-Allow-Origin' '*';
 				add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
 				add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
 		    }
-		    if ($request_method = 'GET') {
-				add_header 'Access-Control-Allow-Origin' '*';
-				add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
-				add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
-		    }
+		}
 	}
 }
-
 
 ```
 
