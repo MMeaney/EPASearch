@@ -2430,24 +2430,6 @@ die-on-term     = true
 #threads        = 3
 ```
 
-Create '.service' file, e.g. `/etc/systemd/system/aq_uwsgi.service`:
-
-```ini
-[Unit]
-Description=uWSGI server instance configured to serve run_aq_uwsgi (Air Quality Open Data API)
-After=network.target
-
-[Service]
-User=username
-Group=www-data
-WorkingDirectory=/var/www/air/api/eve/aq
-Environment="PATH=/var/www/air/api/eve/aq"
-ExecStart=/var/www/air/api/eve/aq/uwsgi --ini aq_uwsgi.ini
-
-[Install]
-WantedBy=multi-user.target
-```
-
 - Note the sock file, e.g. `/tmp/aq_uwsgi.sock`, may require rights to be specified, as well as `/etc/nginx/uwsgi_params` and the project folder, e.g. `/var/www/air/`:  
 ```sh
 sudo chmod 666 /tmp/aq_uwsgi.sock
@@ -2577,6 +2559,32 @@ To run (using ini file - recommended):
 /var/www/air/api/eve/aq$ uwsgi --ini=aq_uwsgi.ini
 ```
 
+- To run uWSGI as a service
+
+Create '.service' file, e.g. `/etc/systemd/system/aq_uwsgi.service`:
+
+```ini
+[Unit]
+Description=uWSGI server instance configured to serve run_aq_uwsgi (Air Quality Open Data API)
+After=network.target
+
+[Service]
+User=username
+Group=www-data
+WorkingDirectory=/var/www/air/api/eve/aq
+Environment="PATH=/var/www/air/api/eve/aq"
+ExecStart=/var/www/air/api/eve/aq/uwsgi --ini aq_uwsgi.ini
+
+[Install]
+WantedBy=multi-user.target
+```
+
+At the shell:
+```bash
+sudo systemctl enable aq_uswsgi
+sudo systemctl start aq_uwsgi
+```
+
 #### Nginx Config
 
 > Note: Debian only
@@ -2585,19 +2593,19 @@ Edit site config in 'sites-available', e.g. `etc/nginx/sites-available/air`:
 
 ```ini
 server {
-    listen            80;
-    server_name       air-tst.epa.ie;
-    return 301        https://air-tst.epa.ie$request_uri;
-    index             index.html index.htm;
+    listen              80;
+    server_name         air-tst.epa.ie;
+    return 301          https://air-tst.epa.ie$request_uri;
+    index               index.html index.htm;
 }
 
 server {
-listen                443 ssl;
-    server_name       air-tst.epa.ie;
-    root              /var/www/air/api/eve/aq;
-    index             index.html index.htm;
+    listen              443 ssl;
+    server_name         air-tst.epa.ie;
+    root                /var/www/air/api/eve/aq;
+    index               index.html index.htm;
 
-    keepalive_timeout 70;    
+    keepalive_timeout   70;    
 
     include             /etc/nginx/global/restrictions.conf;
 
