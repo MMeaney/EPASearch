@@ -2448,7 +2448,8 @@ ExecStart=/var/www/air/api/eve/aq/uwsgi --ini aq_uwsgi.ini
 WantedBy=multi-user.target
 ```
 
-- Note the sock file, e.g. `/tmp/aq_uwsgi.sock`, may require rights to be specified, as well as `/etc/nginx/uwsgi_params` and the project folder, e.g. `/var/www/air/`:
+- Note the sock file, e.g. `/tmp/aq_uwsgi.sock`, may require rights to be specified, as well as `/etc/nginx/uwsgi_params` and the project folder, e.g. `/var/www/air/`:  
+
 `sh
 sudo chmod 666 /tmp/aq_uwsgi.sock
 sudo chown username:www-data /etc/nginx/uwsgi_params/
@@ -2604,14 +2605,14 @@ listen                443 ssl;
     ssl_certificate     /etc/nginx/ssl/air-tst_epa_ie.pem;
     ssl_certificate_key /etc/nginx/ssl/sslair.key;
 
-     access_log         /var/log/nginx/air-tst.access.log;
-     error_log          /var/log/nginx/air-tst.error.log;
+    access_log          /var/log/nginx/air-tst.access.log;
+    error_log           /var/log/nginx/air-tst.error.log;
 
     # Location for API 
     location    /api/v1/aq_measurements {
-        proxy_set_header    Host                 $host;
-        proxy_set_header    X-Real-IP            $remote_addr;
-        proxy_set_header    X-Forwarded-For      $proxy_add_x_forwarded_for;
+        proxy_set_header    Host              $host;
+        proxy_set_header    X-Real-IP         $remote_addr;
+        proxy_set_header    X-Forwarded-For   $proxy_add_x_forwarded_for;
 
         uwsgi_read_timeout  18000;
         include             uwsgi_params;
@@ -2627,10 +2628,10 @@ listen                443 ssl;
         #proxy_pass        http://127.0.0.1:5015; # For when using withot uWSGI
         proxy_redirect     off;
 
-        proxy_set_header    Host              $host;
-        proxy_set_header    X-Real-IP         $remote_addr;
-        proxy_set_header    X-Forwarded-For   $proxy_add_x_forwarded_for;
-        proxy_set_header    X-Forwarded-Proto $scheme;
+        proxy_set_header    Host                $host;
+        proxy_set_header    X-Real-IP           $remote_addr;
+        proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
+        proxy_set_header    X-Forwarded-Proto   $scheme;
 
         # For when using with uWSGI
         uwsgi_read_timeout  18000;
@@ -2669,10 +2670,6 @@ listen                443 ssl;
         }
     }
 }
-
-
-
-
 ```
 Edit site config in 'sites-available', e.g. `etc/nginx/sites-available/air`, to allow Swagger-UI to access the `api-docs` endpoint. (This endpoint is auto-generated using the 'Eve-Swagger' package):
 
