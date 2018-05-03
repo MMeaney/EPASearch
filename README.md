@@ -2449,12 +2449,11 @@ WantedBy=multi-user.target
 ```
 
 - Note the sock file, e.g. `/tmp/aq_uwsgi.sock`, may require rights to be specified, as well as `/etc/nginx/uwsgi_params` and the project folder, e.g. `/var/www/air/`:  
-
-`sh
+```sh
 sudo chmod 666 /tmp/aq_uwsgi.sock
 sudo chown username:www-data /etc/nginx/uwsgi_params/
 sudo chown username:www-data /var/www/air/
-`
+```
 
 
 Edit the 'Eve' run file, e.g. `/var/www/air/api/eve/aq/run_aq_uwsgi.py`:
