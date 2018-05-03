@@ -2632,8 +2632,8 @@ server {
 
     # Location for Swagger JSON (for Swagger-UI API documentation) 
     location /api-docs {
-        #proxy_pass        http://127.0.0.1:5015; # For when using withot uWSGI
-        proxy_redirect     off;
+        #proxy_pass         http://127.0.0.1:5015; # For when using withot uWSGI
+        proxy_redirect      off;
 
         proxy_set_header    Host                $host;
         proxy_set_header    X-Real-IP           $remote_addr;
