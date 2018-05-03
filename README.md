@@ -2404,30 +2404,30 @@ Create '.ini' file, e.g. `/var/www/air/api/eve/aq/aq_uwsgi.ini`:
 
 ```ini
 [uwsgi]
-module             = run_aq_uwsgi:app
+module          = run_aq_uwsgi:app
 
-master             = true
-processes         = 5
+master          = true
+processes       = 5
 
-socket             = /tmp/aq_uwsgi.sock
-protocol         = uwsgi
-enable-threads     = true
-logto             = /var/www/air/api/eve/aq/log/uwsgi.log
-uid             = meaneym 
+socket          = /tmp/aq_uwsgi.sock
+protocol        = uwsgi
+enable-threads  = true
+logto           = /var/www/air/api/eve/aq/log/uwsgi.log
+uid             = username 
 gid             = www-data
-chmod-socket     = 666
-vacuum             = true
+chmod-socket    = 666
+vacuum          = true
 
 die-on-term     = true
 
 
-#thunder-lock     = true
+#thunder-lock   = true
 #socket         = 0.0.0.0:8000
 #socket         = 127.0.0.1:8000
 #socket         = 0.0.0.0:5015
 #socket         = 127.0.0.1:5015
-#protocol         = http
-#threads         = 3
+#protocol       = http
+#threads        = 3
 ```
 
 Create '.service' file, e.g. `/etc/systemd/system/aq_uwsgi.service`:
@@ -2584,37 +2584,37 @@ Edit site config in 'sites-available', e.g. `etc/nginx/sites-available/air`:
 
 ```ini
 server {
-    listen             80;
-    server_name        air-tst.epa.ie;
+    listen            80;
+    server_name       air-tst.epa.ie;
     return 301        https://air-tst.epa.ie$request_uri;
-    index            index.html index.htm;
+    index             index.html index.htm;
 }
 
 server {
 listen                443 ssl;
-    server_name         air-tst.epa.ie;
-    root                 /var/www/air/api/eve/aq;
-    index                index.html index.htm;
+    server_name       air-tst.epa.ie;
+    root              /var/www/air/api/eve/aq;
+    index             index.html index.htm;
 
-    keepalive_timeout   70;    
+    keepalive_timeout 70;    
 
     include             /etc/nginx/global/restrictions.conf;
 
-     ssl_certificate        /etc/nginx/ssl/air-tst_epa_ie.pem;
-    ssl_certificate_key    /etc/nginx/ssl/sslair.key;
+    ssl_certificate     /etc/nginx/ssl/air-tst_epa_ie.pem;
+    ssl_certificate_key /etc/nginx/ssl/sslair.key;
 
-     access_log            /var/log/nginx/air-tst.access.log;
-     error_log            /var/log/nginx/air-tst.error.log;
+     access_log         /var/log/nginx/air-tst.access.log;
+     error_log          /var/log/nginx/air-tst.error.log;
 
     # Location for API 
     location    /api/v1/aq_measurements {
         proxy_set_header    Host                 $host;
         proxy_set_header    X-Real-IP            $remote_addr;
-        proxy_set_header    X-Forwarded-For        $proxy_add_x_forwarded_for;
+        proxy_set_header    X-Forwarded-For      $proxy_add_x_forwarded_for;
 
-        uwsgi_read_timeout    18000;
-        include     uwsgi_params;
-        uwsgi_pass  unix:///tmp/aq_uwsgi.sock;
+        uwsgi_read_timeout  18000;
+        include             uwsgi_params;
+        uwsgi_pass          unix:///tmp/aq_uwsgi.sock;
 
 
         # Original non-UWSGI
@@ -2624,17 +2624,17 @@ listen                443 ssl;
     # Location for Swagger JSON (for Swagger-UI API documentation) 
     location /api-docs {
         #proxy_pass        http://127.0.0.1:5015; # For when using withot uWSGI
-        proxy_redirect        off;
+        proxy_redirect     off;
 
-        proxy_set_header    Host             $host;
-        proxy_set_header    X-Real-IP        $remote_addr;
-        proxy_set_header    X-Forwarded-For        $proxy_add_x_forwarded_for;
-        proxy_set_header    X-Forwarded-Proto    $scheme;
+        proxy_set_header    Host              $host;
+        proxy_set_header    X-Real-IP         $remote_addr;
+        proxy_set_header    X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header    X-Forwarded-Proto $scheme;
 
         # For when using with uWSGI
-        uwsgi_read_timeout    18000;
-        include     uwsgi_params;
-            uwsgi_pass  unix:///tmp/aq_uwsgi.sock;
+        uwsgi_read_timeout  18000;
+        include             uwsgi_params;
+        uwsgi_pass          unix:///tmp/aq_uwsgi.sock;
     }
 
     # Location for Swagger-UI page
