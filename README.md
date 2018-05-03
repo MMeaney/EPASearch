@@ -2390,8 +2390,8 @@ curl -i http://127.0.0.1:5000?pretty
 - http://localhost:5000/api-docs
 
 #### uWSGI
-Tutorial: <https://uwsgi-docs.readthedocs.io/en/latest/>  
-Tutorial: <https://www.digitalocean.com/community/tutorials/how-to-set-up-uwsgi-and-nginx-to-serve-python-apps-on-ubuntu14-04>  
+Tutorial: <https://uwsgi-docs.readthedocs.io/en/latest/>    
+Tutorial: <https://www.digitalocean.com/community/tutorials/how-to-set-up-uwsgi-and-nginx-to-serve-python-apps-on-ubuntu-14-04>  
 Github: <https://github.com/unbit/uwsgi>  
 
 > Note: Debian only
