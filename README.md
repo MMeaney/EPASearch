@@ -2148,7 +2148,7 @@ Tutorial: https://cwiki.apache.org/confluence/display/OFBIZ/Demo+and+Test+Setup+
 Set `http_proxy` at CLI <sup>[[Proxy Settings]](#proxysettingsbash)</sup> (Linux CLI (e.g. MinTTY, MINGW64 (Git Bash))  
 
 ```
-gradlew -Dhttp.proxyHost=proxy.epa.ie -Dhttp.proxyPort=8888 -Dhttp.proxyUser=meaneym -Dhttp.proxyPassword=xxx -Dhttps.proxyHost=proxy.epa.ie -Dhttps.proxyPort=8888 -Dhttps.proxyUser=meaneym -Dhttps.proxyPassword=xxx ofbiz
+gradlew -Dhttp.proxyHost=proxy.epa.ie -Dhttp.proxyPort=8888 -Dhttp.proxyUser=username -Dhttp.proxyPassword=xxx -Dhttps.proxyHost=proxy.epa.ie -Dhttps.proxyPort=8888 -Dhttps.proxyUser=username -Dhttps.proxyPassword=xxx ofbiz
 ```
 
 ### Apache Mesos 1.3.0
@@ -2438,16 +2438,17 @@ Description=uWSGI server instance configured to serve run_aq_uwsgi (Air Quality 
 After=network.target
 
 [Service]
-User=meaneym
+User=username
 Group=www-data
 WorkingDirectory=/var/www/air/api/eve/aq
 Environment="PATH=/var/www/air/api/eve/aq"
 ExecStart=/var/www/air/api/eve/aq/uwsgi --ini aq_uwsgi.ini
+
 [Install]
 WantedBy=multi-user.target
 ```
 
-> Note the sock file, e.g. `/tmp/aq_uwsgi.sock`, may require rights to be specified, as well as `/etc/nginx/uwsgi_params` and the project folder, e.g. `/var/www/air/`:
+- Note the sock file, e.g. `/tmp/aq_uwsgi.sock`, may require rights to be specified, as well as `/etc/nginx/uwsgi_params` and the project folder, e.g. `/var/www/air/`:
 `sh
 sudo chmod 666 /tmp/aq_uwsgi.sock
 sudo chown username:www-data /etc/nginx/uwsgi_params/
@@ -2455,9 +2456,9 @@ sudo chown username:www-data /var/www/air/
 `
 
 
-Edit the 'Eve' run file. I have renamed `run.py` to `run_aq_uwsgi.py`:
-- Note: It's very important to run the app from within the `if __name__ == '__main__':` condition
-- Otherwise 'uWSGI' will only run locally
+Edit the 'Eve' run file, e.g. `/var/www/air/api/eve/aq/run_aq_uwsgi.py`:
+> Note: It's very important to run the app from within the `if __name__ == '__main__':` condition
+> Otherwise 'uWSGI' will only run locally
 ```py
 import eve
 import bcrypt
@@ -3241,7 +3242,7 @@ pip install virtualenvwrapper-win
 
 ### <a name="proxysettings"></a>Proxy Settings
 
-Note: To set Atom IDE proxy edit the file .apmrc in folder  C:\Users\meaneym\.atom\.apm\ 
+Note: To set Atom IDE proxy edit the file .apmrc in folder  C:\Users\username\.atom\.apm\ 
 
 #### Windows <abbr title="Command Line Interface">CLI</abbr>
 
