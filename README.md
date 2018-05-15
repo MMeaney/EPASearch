@@ -2357,12 +2357,12 @@ aq_measurements = {
     'schema': schema
 }
 
-#URL_PREFIX = 'api'
-#API_VERSION = 'v1'
+URL_PREFIX = 'api'
+API_VERSION = 'v1'
 XML = False
 PAGINATION = True
 PAGINATION_DEFAULT = 25
-PAGINATION_LIMIT = 999999999
+PAGINATION_LIMIT = 50
 DOMAIN = {
     'aq_measurements': aq_measurements,
     #'accounts': accounts,
