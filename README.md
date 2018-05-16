@@ -2433,8 +2433,8 @@ die-on-term     = true
 - Note the sock file, e.g. `/tmp/aq_uwsgi.sock`, may require rights to be specified, as well as `/etc/nginx/uwsgi_params` and the project folder, e.g. `/var/www/air/`:  
 ```sh
 sudo chmod 666 /tmp/aq_uwsgi.sock
-sudo chown username:www-data /etc/nginx/uwsgi_params/
-sudo chown username:www-data /var/www/air/
+sudo chown usernameabc:www-data /etc/nginx/uwsgi_params
+sudo chown usernameabc:www-data /var/www/air/
 ```
 
 
