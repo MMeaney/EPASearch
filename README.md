@@ -2400,7 +2400,7 @@ Github: <https://github.com/unbit/uwsgi>
 pip install uwsgi
 ```
 
-Create '.ini' file, e.g. `/var/www/air/api/eve/aq/aq_uwsgi.ini`:
+Create '.ini' file, e.g. `/var/www/api/flask/aq/aq_uwsgi.ini`:
 
 ```ini
 [uwsgi]
@@ -2430,11 +2430,11 @@ die-on-term     = true
 #threads        = 3
 ```
 
-- Note the sock file, e.g. `/tmp/api_aq_uwsgi.sock`, may require rights to be specified, as well as `/etc/nginx/uwsgi_params` and the project folder, e.g. `/var/www/air/`:  
+- Note the sock file, e.g. `/tmp/api_aq_uwsgi.sock`, may require rights to be specified, as well as `/etc/nginx/uwsgi_params` and the project folder, e.g. `/var/www/api/`:  
 ```sh
 sudo chmod 666 /tmp/api_aq_uwsgi.sock
 sudo chown usernameabc:www-data /etc/nginx/uwsgi_params
-sudo chown usernameabc:www-data /var/www/air/
+sudo chown usernameabc:www-data /var/www/api/
 ```
 
 
@@ -2989,6 +2989,7 @@ npm install -g swagger-ui
 #### Swagger-UI - Debian
 Install: <https://gist.github.com/diegopacheco/f310882e7f369df9691b01954ee816ca>  
 
+- Deprecated: Don't run Node packages  
 Potential dependencies, these may need to be installed individually before Swagger-UI:
 ```bash
 npm install commonmark
@@ -3006,96 +3007,8 @@ npm run serve
 GOTO: http://localhost:8080/
 ```
 
-Edit `etc/nginx/sites-available/air`:
-
-```bash
-http {
-  include             mime.types;
-  default_type        application/octet-stream;
-
-  sendfile on;
-
-  keepalive_timeout   65;
-
-
-    server {
-    listen 80;
-        server_name     air-tst.epa.ie;
-        return 301 https://air-tst.epa.ie$request_uri;
-        index           index.html index.htm;
-    }
-
-    server {
-
-        listen   443 ssl;
-        server_name air-tst.epa.ie;
-        root /var/www/air/api/eve/aq;
-
-        keepalive_timeout   70;    
-
-        include /etc/nginx/global/restrictions.conf;
-
-        ssl_certificate        /etc/nginx/ssl/air-tst_epa_ie.pem;
-        ssl_certificate_key    /etc/nginx/ssl/sslair.key;
-
-        access_log     /var/log/nginx/air-tst.access.log;
-        error_log      /var/log/nginx/air-tst.error.log;
-
-        # Default location 
-        location /api/v1/aq_measurements {
-            # Start: Add uWSGI settings
-            include uwsgi_params;
-
-            uwsgi_pass unix:///tmp/api_aq_uwsgi.sock;
-            # End: Add uWSGI settings
-
-            # Original non-UWSGI
-            proxy_pass http://127.0.0.1:5015;
-            }
-
-        location /api-docs {
-            proxy_pass        http://127.0.0.1:5015;
-            proxy_redirect    off;
-
-            proxy_set_header  Host               $host;
-            proxy_set_header  X-Real-IP          $remote_addr;
-            proxy_set_header  X-Forwarded-For    $proxy_add_x_forwarded_for;
-            proxy_set_header  X-Forwarded-Proto  $scheme;
-        }
-
-        location /swagger-ui {
-            alias /var/www/api/flask/swagger-ui/dist/;
-
-                if ($request_method = 'OPTIONS') {
-                add_header 'Access-Control-Allow-Origin' '*';
-                add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
-                #
-                # Custom headers and headers various browsers *should* be OK with but aren't
-                #
-                add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
-                #
-                # Tell client that this pre-flight info is valid for 20 days
-                #
-                add_header 'Access-Control-Max-Age' 1728000;
-                add_header 'Content-Type' 'text/plain charset=UTF-8';
-                add_header 'Content-Length' 0;
-                return 204;
-                }
-                if ($request_method = 'POST') {
-                add_header 'Access-Control-Allow-Origin' '*';
-                add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
-                add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
-                }
-                if ($request_method = 'GET') {
-                add_header 'Access-Control-Allow-Origin' '*';
-                add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
-                add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
-            }
-        }
-    }
-}
-
-```
+Edit `etc/nginx/sites-available/air`:  
+- Note: see [Nginx Config](#nginx-config)
 
 ### Pyramid-Swagger
 ```bash
