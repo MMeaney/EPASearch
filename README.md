@@ -2409,10 +2409,10 @@ module          = run_aq_uwsgi:app
 master          = true
 processes       = 5
 
-socket          = /tmp/aq_uwsgi.sock
+socket          = /tmp/api_aq_uwsgi.sock
 protocol        = uwsgi
 enable-threads  = true
-logto           = /var/www/air/api/eve/aq/log/uwsgi.log
+logto           = /var/www/api/flask/aq/log/uwsgi.log
 uid             = username 
 gid             = www-data
 chmod-socket    = 666
@@ -2430,15 +2430,15 @@ die-on-term     = true
 #threads        = 3
 ```
 
-- Note the sock file, e.g. `/tmp/aq_uwsgi.sock`, may require rights to be specified, as well as `/etc/nginx/uwsgi_params` and the project folder, e.g. `/var/www/air/`:  
+- Note the sock file, e.g. `/tmp/api_aq_uwsgi.sock`, may require rights to be specified, as well as `/etc/nginx/uwsgi_params` and the project folder, e.g. `/var/www/air/`:  
 ```sh
-sudo chmod 666 /tmp/aq_uwsgi.sock
+sudo chmod 666 /tmp/api_aq_uwsgi.sock
 sudo chown usernameabc:www-data /etc/nginx/uwsgi_params
 sudo chown usernameabc:www-data /var/www/air/
 ```
 
 
-Edit the 'Eve' run file, e.g. `/var/www/air/api/eve/aq/run_aq_uwsgi.py`:
+Edit the 'Eve' run file, e.g. `/var/www/api/flask/aq/run_aq_uwsgi.py`:
 > Note: It's very important to run the app from within the `if __name__ == '__main__':` condition
 > Otherwise 'uWSGI' will only run locally
 ```py
@@ -2551,17 +2551,17 @@ if __name__ == '__main__':
 
 To run (with switches in command):
 ```bash
-/var/www/air/api/eve/aq$ uwsgi --socket:0.0.0.0=8000 --protocol=http -w run_aq_uwsgi:app
+/var/www/api/flask/aq$ uwsgi --socket:0.0.0.0=8000 --protocol=http -w run_aq_uwsgi:app
 ```
 
 To run (using ini file - recommended):
 ```bash
-/var/www/air/api/eve/aq$ uwsgi --ini=aq_uwsgi.ini
+/var/www/api/flask/aq$ uwsgi --ini=aq_uwsgi.ini
 ```
 
 - To run uWSGI as a service
 
-Create '.service' file, e.g. `/etc/systemd/system/aq_uwsgi.service`:
+Create '.service' file, e.g. `/lib/systemd/system/api_aq_uwsgi.service`:  
 
 ```ini
 [Unit]
@@ -2571,18 +2571,23 @@ After=network.target
 [Service]
 User=username
 Group=www-data
-WorkingDirectory=/var/www/air/api/eve/aq
-Environment="PATH=/var/www/air/api/eve/aq"
-ExecStart=/var/www/air/api/eve/aq/uwsgi --ini aq_uwsgi.ini
+WorkingDirectory=/var/www/api/flask/aq
+ExecStart=/bin/bash -c 'cd /var/www/api/flask/aq/; uwsgi --ini aq_uwsgi.ini'
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-At the shell:
+To create a symlink (syntax is `ln -s <source> <destination link name>`):
+
+```sh
+sudo ln -s /lib/systemd/system/api_aq_uwsgi.service /etc/systemd/system/api_aq_uwsgi.service
+```
+
+At the shell (`enable` should allow the service to restart at boot):
 ```bash
-sudo systemctl enable aq_uswsgi
-sudo systemctl start aq_uwsgi
+sudo systemctl enable api_aq_uswsgi
+sudo systemctl start api_aq_uwsgi
 ```
 
 #### Nginx Config
@@ -2602,7 +2607,7 @@ server {
 server {
     listen              443 ssl;
     server_name         air-tst.epa.ie;
-    root                /var/www/air/api/eve/aq;
+    root                /var/www/api/flask/aq;
     index               index.html index.htm;
 
     keepalive_timeout   70;    
@@ -2648,7 +2653,7 @@ server {
 
     # Location for Swagger-UI page
     location /api/swagger {
-        alias     /var/www/air/api/swagger-ui/dist;
+        alias     /var/www/api/swagger-ui/dist;
 
         if ($request_method = 'OPTIONS') {
             add_header 'Access-Control-Allow-Origin' '*';
@@ -3041,7 +3046,7 @@ http {
             # Start: Add uWSGI settings
             include uwsgi_params;
 
-            uwsgi_pass unix:///var/www/air/api/eve/aq/aq_uwsgi.sock;
+            uwsgi_pass unix:///tmp/api_aq_uwsgi.sock;
             # End: Add uWSGI settings
 
             # Original non-UWSGI
@@ -3059,7 +3064,7 @@ http {
         }
 
         location /swagger-ui {
-            alias /var/www/air/api/eve/swagger-ui/dist/;
+            alias /var/www/api/flask/swagger-ui/dist/;
 
                 if ($request_method = 'OPTIONS') {
                 add_header 'Access-Control-Allow-Origin' '*';
