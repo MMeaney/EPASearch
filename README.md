@@ -1,5 +1,5 @@
 # EPASearch
-EPA Data Catalogue Search - ElasticSearch  
+EPA Data Catalogue Search - Full details of all technologies utilised
 
 
 ## Contents:  
@@ -14,6 +14,7 @@ EPA Data Catalogue Search - ElasticSearch
       - [Microsoft Visual Studio 2017 and .NET Core](#microsoft-visual-studio-2017-and-net-core)
         - [Microsoft Visual Studio 2017 Community](#microsoft-visual-studio-2017-community)
         - [MS VS2017 R Client Setup](#ms-vs2017-r-client-setup)
+      - [NSSM](#nssm)
     - [Nginx](#nginx)
     - [Eclipse](#eclipse)
     - [Sublime Text](#sublime-text)
@@ -29,11 +30,11 @@ EPA Data Catalogue Search - ElasticSearch
       - [Alternative Pip Version](#alternative-pip-version)
       - [Virtualenv](#virtualenv)
       - [Python 2.7 (ElastAlert)](#python-27-elastalert)
-        - [Pip-review 2.7](#pip-review-27)	
+        - [Pip-review 2.7](#pip-review-27)    
     - [Ruby](#ruby)    
       - [Ruby 23-x64](#ruby-23-x64)
       - [RubyGems 2.6.11](#rubygems-2611)
-        - [Bundler](#bundler)	
+        - [Bundler](#bundler)    
       - [JRuby 9.1.12.0](#jruby-91120)      
     - [Perl](#perl)
       - [cpanm](#cpanm)
@@ -94,12 +95,17 @@ EPA Data Catalogue Search - ElasticSearch
     - [Apache ManifoldCF](#apache-manifoldcf)
   - [REST API](#rest-api)
     - [Python-EVE](#python-eve)
+      - [uWSGI](#uwsgi)
+      - [Nginx Config](#nginx-config)
       - [Eve-Swagger](#eve-swagger)
       - [Eve-Elastic](#eve-elastic)
+      - [SQLAlchemy](#sqlalchemy)
+      - [EVE-SQLAlchemy](#eve-sqlalchemy)
     - [Zend_Rest_Server()](#zend_rest_server)
     - [Ramses, Elasticsearch, Postgres, MongoDB](#ramses-elasticsearch-postgres-mongodb)
     - [Swagger](#swagger)
     - [Swagger-UI](#swagger-ui)
+      - [Swagger-UI - Debian](#swagger-ui---debian)
     - [Pyramid-Swagger](#pyramid-swagger)
     - [Visual Studio WebAPI 2.0](#visual-studio-webapi-20)
     - [Open Data API Examples](#open-data-api-examples)
@@ -138,7 +144,7 @@ Resource Monitor can be used to investigate port binding issues (this crops up w
 
 #### VCRUNTIME140.dll C++ Redistributable for Visual Studio 2015 RC 
 
-Required for Apache HTTPD Server 2.4   
+Required for Apache HTTPD Server 2.4   
 
 Install: <https://www.microsoft.com/en-us/download/details.aspx?id=48145>
 
@@ -176,7 +182,7 @@ Visual C++ 2010 SP1 Redistributable MFC Security Update: <https://www.microsoft.
 
 Deprecated?
 
-Required for Python 3.6  
+Required for Python 3.6  
 
 Install: <https://www.microsoft.com/en-ie/download/details.aspx?id=5555>
 
@@ -216,6 +222,90 @@ Copy `SRO\_3.3.2.0\_1033.cab` to `C:\ProgramData\Microsoft\VisualStudio\Packages
 
 Re-run `RClientSetup.exe` in folder `Microsoft.R.Open.Exe,version=3.3.2.1026,chip=x64`  
 
+#### NSSM
+
+Install: <https://nssm.cc/release/nssm-2.24.zip>  
+Tutorial: <https://www.alibabacloud.com/help/doc-detail/49021.htm>   
+
+###### Set Logstash as a Windows service
+
+When logstash.bat is started in PowerShell, the Logstash process is working in the frontend. Logstash is generally used for testing configurations and debugging collections. Therefore, we recommend that you set Logstash as a Windows service after the debugging is passed so as to enable Logstash to work in the backend and start automatically when power-on.
+
+Besides setting Logstash as a Windows service, you can also start, stop, modify, and delete the service by using command lines. For more information about how to use NSSM, see NSSM official document.
+
+Add Logstash as a Windows service
+This operation is generally performed when Logstash is deployed for the first time. If Logstash has been added, skip this step.
+
+Run the following command to add Logstash as a Windows service.
+
+- 32-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win32\nssm.exe install logstash "C:\logstash-2.2.2-win\bin\logstash.bat" "agent -f C:\logstash-2.2.2-win\conf"
+```
+
+- 64-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win64\nssm.exe install logstash "C:\logstash-2.2.2-win\bin\logstash.bat" "agent -f C:\logstash-2.2.2-win\conf"
+```
+
+###### Start the service
+If the configuration file in the Logstash conf directory is updated, stop the Logstash service and then start it again.
+
+Run the following command to start the service.
+
+- 32-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win32\nssm.exe start logstash
+```
+
+- 64-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win64\nssm.exe start logstash
+```
+
+###### Stop the service
+
+Run the following command to stop the service.
+
+- 32-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win32\nssm.exe stop logstash
+```
+
+- 64-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win64\nssm.exe stop logstash
+```
+
+###### Modify the service
+
+Run the following command to modify the service.
+
+- 32-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win32\nssm.exe edit logstash
+```
+
+- 64-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win64\nssm.exe edit logstash
+```
+
+###### Delete the service
+
+
+Run the following command to delete the service.
+
+- 32-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win32\nssm.exe remove logstash
+```
+
+- 64-bit system
+```
+C:\logstash-2.2.2-win\nssm-2.24\win64\nssm.exe remove logstash
+```
+
 ### Nginx
 
 Download: <http://nginx.org/download/nginx-1.13.4.zip> (Windows)  
@@ -226,10 +316,10 @@ Discussion: <https://arstechnica.com/information-technology/2011/11/a-faster-web
 ```bash
 start nginx
 
-nginx -s stop	fast shutdown
-nginx -s quit	graceful shutdown
-nginx -s reload	changing config, starting new worker processes with a new config, graceful shutdown of old worker procs
-nginx -s reopen	re-opening log files
+nginx -s stop    fast shutdown
+nginx -s quit    graceful shutdown
+nginx -s reload    changing config, starting new worker processes with a new config, graceful shutdown of old worker procs
+nginx -s reopen    re-opening log files
 ```
 
 #### Nginx With PHP FastCGI
@@ -362,7 +452,7 @@ http {
     server {
         listen       88;
         server_name  wiki.epa.ie;
-	root   html;
+    root   html;
 
         location / {
             index  index.html index.htm;
@@ -430,12 +520,12 @@ Compatibility/Dependencies: Microsoft Visual C++ 2012 Redistributable (x64)
 Installation:
 
 Extract zip file
--	Add `;c:\dev\php` to environment variable `PATH`
--	Configure `php.ini`
--	Under `[Session]` set `session.save_path = "c:\dev\php\sessionfolder"`
--	`$HTTP_RAW_POST_DATA` is deprecated. Set:
+-    Add `;c:\dev\php` to environment variable `PATH`
+-    Configure `php.ini`
+-    Under `[Session]` set `session.save_path = "c:\dev\php\sessionfolder"`
+-    `$HTTP_RAW_POST_DATA` is deprecated. Set:
    `always_populate_raw_post_data = -1`
--	Ensure `Apache httpd.conf` is configured for PHP:
+-    Ensure `Apache httpd.conf` is configured for PHP:
  ```ini
 AddHandler application/x-httpd-php .php
  AddType application/x-httpd-php .php .html
@@ -455,7 +545,7 @@ AddHandler application/x-httpd-php .php
 
 <https://getcomposer.org/download/> Tested: Composer-1.0.0
 
--	1.4.2 (2017-05-17)
+-    1.4.2 (2017-05-17)
 
 
 Add `composer.phar` to project folder (folder where report is to be run from), 
@@ -482,7 +572,7 @@ Run:
 Install: <https://framework.zend.com/downloads>
 
 Tutorial: <https://framework.zend.com/learn>
--	(Can’t be installed behind proxy)
+-    (Can’t be installed behind proxy)
 
 Set `http_proxy` at CLI <sup>[[Proxy Settings]](#proxysettingsbash)</sup>
 
@@ -539,7 +629,7 @@ Bundled?
 
 
 Install: https://www.python.org/ftp/python/3.5.4/python-3.5.4rc1-amd64.exe
--	c:\dev\python\python35
+-    c:\dev\python\python35
 
 
 ### Python 3.4 
@@ -548,7 +638,7 @@ Deprecated - use Python 3.5 (Microsoft compiler dependencies not worth the aggra
 
 
 Install: https://www.python.org/ftp/python/3.4.3/python-3.4.3rc1.amd64.msi
--	c:\dev\python\python34
+-    c:\dev\python\python34
 
 
 #### Alternative Pip Version
@@ -594,7 +684,7 @@ Set `http_proxy` at CLI <sup>[[Proxy Settings]](#proxysettings)</sup>
 #### Python 2.7 (ElastAlert)
 
 Install: https://www.python.org/ftp/python/2.7.9/python-2.7.9.msi
--	c:\dev\python\python27 
+-    c:\dev\python\python27 
 
 ##### Pip-review 2.7 
 
@@ -622,7 +712,7 @@ Install path suggestion: `c:\dev\ruby\ruby23-x64`
 Install: <https://rubygems.org/rubygems/rubygems-2.6.11.zip>  
 Install path suggestion: `c:\dev\ruby\rubygems-2.6.11`  
 
-##### Bundler  
+##### Bundler  
 Environment Variables  
 Add `;c:\dev\ruby\rubygems-2.6.11\bundler\lib` to System `PATH`  
 
@@ -715,7 +805,7 @@ git push origin master:master
 ```bash
 git reset HEAD~1
 git add .
-git commit -M "Update"
+git commit -m "Update"
 git push
 ```
 
@@ -728,7 +818,7 @@ git config --system http.sslcainfo "C:\dev\git\mingw64\ssl\certs\ca-bundle.crt"
 
 #### EGit (Git For Eclipse)
 Install: <http://www.eclipse.org/egit/download/>  
-Install (Eclipse 4.5 (Mars)): <http://download.eclipse.org/egit/updates-4.5>   
+Install (Eclipse 4.5 (Mars)): <http://download.eclipse.org/egit/updates-4.5>  
 
 
 ### Docker
@@ -899,15 +989,15 @@ Once installed, run again to include SSH:
 HBase (and Hadoop) rely on <b>SSH</b> for interprocess/-node communication and launching remote commands. SSH will be provisioned on the target system via Cygwin, which supports running Cygwin programs as Windows services.
 
 
-1.	Rerun the `setup.exe` utility.
-2.	Leave all parameters as is, skipping through the wizard using the `Next` button until the `Select Packages` panel is shown.
-3.	Maximize the window and click the `View` button to toggle to the list view, which is ordered alphabetically on `Package`, making it easier to find the packages needed.
-4.	Select the following packages by clicking the status word (normally `Skip`) so it's marked for installation. Use the `Next` button to download and install the packages. 
+1.    Rerun the `setup.exe` utility.
+2.    Leave all parameters as is, skipping through the wizard using the `Next` button until the `Select Packages` panel is shown.
+3.    Maximize the window and click the `View` button to toggle to the list view, which is ordered alphabetically on `Package`, making it easier to find the packages needed.
+4.    Select the following packages by clicking the status word (normally `Skip`) so it's marked for installation. Use the `Next` button to download and install the packages. 
     1. OpenSSH
     2. tcp_wrappers
     3. diffutils
     4. zlib
-5.	Wait for the install to complete and finish the installation.
+5.    Wait for the install to complete and finish the installation.
 
 ```bash
 mkpasswd -l > /etc/passwd (mkpasswd -l -c > /etc/passwd?)
@@ -918,7 +1008,7 @@ mkgroup -l -c > /etc/group
 
 ### NodeJS
 Install: <https://nodejs.org/dist/v6.9.5/node-v6.9.5-x64.msi>  
--	C:\dev\nodejs
+-    C:\dev\nodejs
 
 
 ### React
@@ -936,8 +1026,8 @@ npm install -g react
 
 https://sourceforge.net/projects/gnuwin32/files/wget/1.11.4-1/wget-1.11.4-1-bin.zip/download?use_mirror=netassist
 
--	Install folder `c:\dev\wget-1.11.4\`
--	Add `;c:\dev\wget-1.11.4\bin` to environment variable `PATH`
+-    Install folder `c:\dev\wget-1.11.4\`
+-    Add `;c:\dev\wget-1.11.4\bin` to environment variable `PATH`
 
 
 
@@ -982,10 +1072,10 @@ pip install httpie
 Install: <http://archive.apache.org/dist/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz>  
 
 Environment Variables:
--	Add `;c:\dev\hadoop\hadoop-2.7.1\bin` to environment variable `PATH`
--	Add `;c:\dev\hadoop\hadoop-2.7.1\sbin` to environment variable `PATH`
--	Create new environment variable `HADOOP_HOME`, set to `c:\dev\hadoop\hadoop-2.7.1`
--	Create new environment variable `HADOOP_BIN_PATH`, set to `c:\dev\hadoop\hadoop-2.7.1\bin`
+-    Add `;c:\dev\hadoop\hadoop-2.7.1\bin` to environment variable `PATH`
+-    Add `;c:\dev\hadoop\hadoop-2.7.1\sbin` to environment variable `PATH`
+-    Create new environment variable `HADOOP_HOME`, set to `c:\dev\hadoop\hadoop-2.7.1`
+-    Create new environment variable `HADOOP_BIN_PATH`, set to `c:\dev\hadoop\hadoop-2.7.1\bin`
 
 Create the folders `c:\dev\hadoop\hadoop-2.7.1\data\namenode` and `c:\dev\hadoop\hadoop-2.7.1\data\datanode` if they don't exist:
 
@@ -1007,38 +1097,38 @@ Edit `c:\dev\hadoop\hadoop-2.7.1\etc\hadoop\hdfs-site.xml`
 ```xml
 <configuration>
 
-	<property>
-		<name>dfs.replication</name>
-		<value>1</value>
-	</property>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
 
-	<property>
-		<name>dfs.namenode.name.dir</name>
-		<value>file:/dev/hadoop/hadoop-2.7.1/data/namenode</value>
-	</property>
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>file:/dev/hadoop/hadoop-2.7.1/data/namenode</value>
+    </property>
 
-	<property>
-		<name>dfs.datanode.data.dir</name>
-		<value>file:/dev/hadoop/hadoop-2.7.1/data/datanode</value>
-	</property>
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>file:/dev/hadoop/hadoop-2.7.1/data/datanode</value>
+    </property>
 
-	<property>
-		<name>dfs.data.dir</name>
-		<value>file:/dev/hadoop/hadoop-2.7.1/tmp/dfs/name/data</value> 
-		<final>true</final> 
-		</property> 
-		<property> 
-		<name>dfs.name.dir</name>
-		<value>file:/dev/hadoop/hadoop-2.7.1/tmp/dfs/name</value> 
-		<final>true</final> 
-	</property>
+    <property>
+        <name>dfs.data.dir</name>
+        <value>file:/dev/hadoop/hadoop-2.7.1/tmp/dfs/name/data</value> 
+        <final>true</final> 
+        </property> 
+        <property> 
+        <name>dfs.name.dir</name>
+        <value>file:/dev/hadoop/hadoop-2.7.1/tmp/dfs/name</value> 
+        <final>true</final> 
+    </property>
 
 </configuration>
 ```
 
 
 Edit `c:\dev\hadoop\hadoop-2.7.1\etc\hadoop\hadoop-env.cmd`:
--	Ensure `JAVA_HOME` matches current `JAVA_HOME` environment variable, e.g.
+-    Ensure `JAVA_HOME` matches current `JAVA_HOME` environment variable, e.g.
 
 ```
 set JAVA_HOME=c:\java\jdk1.8.0_131
@@ -1101,8 +1191,8 @@ Install: <http://archive.apache.org/dist/hbase/1.3.0/hbase-1.3.0-bin.tar.gz>
 Tutorial: 
 
 Environment Variables:
--	Add `;c:\dev\apache\hbase-1.3.0\bin` to environment variable `PATH`
--	Create new environment variable `HBASE_HOME`, set to `c:\dev\apache\hbase-1.3.0`
+-    Add `;c:\dev\apache\hbase-1.3.0\bin` to environment variable `PATH`
+-    Create new environment variable `HBASE_HOME`, set to `c:\dev\apache\hbase-1.3.0`
 
 
 Edit config `c:\dev\apache\hbase-1.3.0\conf\hbase-site.xml`  
@@ -1134,9 +1224,9 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Apache_Hive):
 
 
 Environment Variables:
--	Add `;c:\dev\apache\hive-2.0.1\bin` to environment variable `PATH`
--	Create new environment variable `HIVE_HOME`, set to `c:\dev\apache\hive-2.0.1`
--	Create new environment variable `CLASSPATH` if requtred, set to (or append) `;c:\dev\apache\hive-2.0.1\lib` and `;c:\dev\hadoop\hadoop-2.7.1\share\hadoop\common\lib`
+-    Add `;c:\dev\apache\hive-2.0.1\bin` to environment variable `PATH`
+-    Create new environment variable `HIVE_HOME`, set to `c:\dev\apache\hive-2.0.1`
+-    Create new environment variable `CLASSPATH` if requtred, set to (or append) `;c:\dev\apache\hive-2.0.1\lib` and `;c:\dev\hadoop\hadoop-2.7.1\share\hadoop\common\lib`
 
 Install [MySQL](#mysql)
  
@@ -1226,9 +1316,9 @@ Install: <https://github.com/apache/drill.git>
 
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Apache_Drill):
-> Apache Drill is an open-source software framework that supports data-intensive distributed applications for interactive analysis of large-scale datasets. Drill is the open source version of Google's Dremel system which is available as an infrastructure service called Google BigQuery. One explicitly stated design goal is that Drill is able to scale to 10,000 servers or more and to be able to process petabytes of data and trillions of records in seconds. Drill is an Apache top-level project.
+> Apache Drill is an open-source software framework that supports data-intensive distributed applications for interactive analysis of large-scale datasets. Drill is the open source version of Google's Dremel system which is available as an infrastructure service called Google BigQuery. One explicitly stated design goal is that Drill is able to scale to 10,000 servers or more and to be able to process petabytes of data and trillions of records in seconds. Drill is an Apache top-level project.
 
-> Drill supports a variety of NoSQL databases and file systems, including HBase, MongoDB, MapR-DB, HDFS, MapR-FS, Amazon S3, Azure Blob Storage, Google Cloud Storage, Swift, NAS and local files. A single query can join data from multiple datastores. For example, you can join a user profile collection in MongoDB with a directory of event logs in Hadoop.
+> Drill supports a variety of NoSQL databases and file systems, including HBase, MongoDB, MapR-DB, HDFS, MapR-FS, Amazon S3, Azure Blob Storage, Google Cloud Storage, Swift, NAS and local files. A single query can join data from multiple datastores. For example, you can join a user profile collection in MongoDB with a directory of event logs in Hadoop.
 
 
 
@@ -1248,8 +1338,8 @@ Copy the contents of the folder `c:\dev\apache\drill\distribution\target\apache-
 
 
 Environment Variables:
--	Add `;c:\dev\apache\drill\opt\drill\bin` to environment variable `PATH`
--	Create new environment variable `DRILL_HOME`, set to `c:\dev\apache\drill\opt\drill\`
+-    Add `;c:\dev\apache\drill\opt\drill\bin` to environment variable `PATH`
+-    Create new environment variable `DRILL_HOME`, set to `c:\dev\apache\drill\opt\drill\`
 
 
 ```
@@ -1273,21 +1363,102 @@ Install: <https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-comm
 
 
 ### MongoDB
-Install: <https://www.mongodb.com/download-center?jmp=nav#community>  
+Install: <https://www.mongodb.com/dr/fastdl.mongodb.org/win32/mongodb-win32-x86_64-2008plus-ssl-3.4.2-signed.msi/download>  
 Install path `c:\dev\MongoDB`  
 Filename: `mongodb-win32-x86_64-2008plus-ssl-3.4.2-signed.msi`  
 
 Tutorial: <https://www.tutorialspoint.com/mongodb/mongodb_environment.htm>  
+Tutorial (Windows service): <https://docs.mongodb.com/master/tutorial/install-mongodb-on-windows/#install-mongodb-community-edition>  
+
+If it doesn't exist, it is a good idead to create a configuration file, e.g. `c:\dev\MongoDB\Server\3.4\etc\mongod.conf`.
+
+```sh
+# mongod.conf
+
+# for documentation of all options, see:
+#   http://docs.mongodb.org/manual/reference/configuration-options/
+
+# where to write logging data.
+systemLog:
+  destination: file
+  logAppend: true
+  path: c:\dev\MongoDB\Server\3.4\logmongod_27017.log
+
+# Where and how to store data.
+storage:
+  dbPath: c:\dev\MongoDB\Data_27017
+  journal:
+    enabled: true
+#  engine:
+#  mmapv1:
+#  wiredTiger:
+
+# how the process runs
+#processManagement:
+  #fork: true  # fork and run in background
+  #pidFilePath: /var/run/mongodb/mongod.pid  # location of pidfile
+  #timeZoneInfo: /usr/share/zoneinfo
+
+  
+# network interfaces
+net:
+  port: 27017
+  # Enter 0.0.0.0,:: to bind to all IPv4 and IPv6 addresses or, alternatively, use the net.bindIpAll setting.
+  bindIp: 127.0.0.1,192.168.65.150 # Localhost, Private IP
+  #bindIp: 192.168.194.130 # Debian server
+  #bindIp: 0.0.0.0
+  #bindIp: 192.168.65.150
+
+#security:
+
+#operationProfiling:
+
+#replication:
+
+#sharding:
+
+## Enterprise-Only Options
+
+#auditLog:
+
+#snmp:
+
+```
+
+
+> Note: Set `bindIp` to include the IP address of the host machine. This can then be accessed from another machine. 
+> 
+> For example, if the 'Python-Eve' API framwework is running on a public facing server, the `settings.py` file could include the IP set in the example above:
+```python
+MONGO_HOST = '192.168.65.150'
+```
+
 
 Open CLI 1:
-```
+```bash
 cd c:\dev\MongoDB\Server\3.4\bin
-mongod.exe --dbpath "c:\dev\MongoDB\Data"
+mongod --dbpath "c:\dev\MongoDB\Data" -f "c:\dev\MongoDB\Server\3.4\etc\mongod.conf"
 ```
+If the data folder is included in the '.conf' file it can be omitted from the command:
+```bash
+mongod -f "c:\dev\MongoDB\Server\3.4\etc\mongod_27017.conf"
+```
+To run as a Windows service add `--install` to the command:
+```bash
+mongod -f "c:\dev\MongoDB\Server\3.4\etc\mongod_27017.conf" --install
+net start MongoDB
+```
+
+
 Open CLI 2 
 ```
 cd c:\dev\MongoDB\Server\3.4\bin
 mongo
+```
+If MongoDB is listening on a port other than the default (27017), spcify it using the `--port` switch.
+```
+cd c:\dev\MongoDB\Server\3.4\bin
+mongo --port 9999
 ```
 
 #### RoboMongo UI
@@ -1337,8 +1508,8 @@ Tutorial: <http://www.petrikainulainen.net/programming/tips-and-tricks/installin
 Extract to `c:\dev\pgsql`
 
 Create folders:
--	c:\dev\pgsql\data
--	c:\dev\pgsql\log
+-    c:\dev\pgsql\data
+-    c:\dev\pgsql\log
 
 Command prompt:
 ```bash
@@ -1541,15 +1712,15 @@ Tutorial: <http://www.kdnuggets.com/2015/11/petrov-apache-spark-machine-learning
 Tutorial: <https://blogs.msdn.microsoft.com/bigdatasupport/2015/10/22/how-to-allow-spark-to-access-microsoft-sql-server/>
 
 Environment Variables:
--	Add `;c:\dev\apache\spark-1.6.3\bin` to environment variable `PATH`
--	Create new environment variable `SPARK_HOME`, set to `c:\dev\apache\spark-1.6.3` to 
+-    Add `;c:\dev\apache\spark-1.6.3\bin` to environment variable `PATH`
+-    Create new environment variable `SPARK_HOME`, set to `c:\dev\apache\spark-1.6.3` to 
 
 Configuration:
 - Edit `c:\dev\apache\spark-1.6.3\conf\spark-defaults.conf`
 - Add or edit the following lines:
 ```
-spark.driver.extraClasspath	 c:\\dev\\jdbc_driver_library\\sqljdbc_4.2\\enu\\sqljdbc42.jar
-spark.executor.extraClasspath	 c:\\dev\\jdbc_driver_library\\sqljdbc_4.2\\enu\\sqljdbc42.jar
+spark.driver.extraClasspath     c:\\dev\\jdbc_driver_library\\sqljdbc_4.2\\enu\\sqljdbc42.jar
+spark.executor.extraClasspath     c:\\dev\\jdbc_driver_library\\sqljdbc_4.2\\enu\\sqljdbc42.jar
 ```
 
 To run at <abbr title="Command Line Interface">CLI</abbr>:
@@ -1578,8 +1749,8 @@ Tutorial: <http://solaimurugan.blogspot.ie/2015/08/installing-mahout-with-apache
 
 
 Environment Variables:
--	Add `;c:\dev\apache\mahout-0.12.2\bin` to environment variable `PATH`
--	Create new environment variable `MAHOUT_HOME`, set to `c:\dev\apache\mahout-0.12.2\`
+-    Add `;c:\dev\apache\mahout-0.12.2\bin` to environment variable `PATH`
+-    Create new environment variable `MAHOUT_HOME`, set to `c:\dev\apache\mahout-0.12.2\`
 
 Launch Cygwin
 ```
@@ -1621,9 +1792,9 @@ Place extracted folder in `%Cygwin_Home%`:
 
 
 Environment Variables:
--	Add `;c:\dev\cygwin\usr\local\bin\nutch-1.11\bin` to environment variable `PATH`
--	Create new environment variable `NUTCH_HOME`, set to `c:\dev\cygwin\usr\local\bin\nutch-1.11`
--	Create new environment variable `NUTCH_JAVA_HOME`, set to `C:\Java\jdk1.8.0_131`
+-    Add `;c:\dev\cygwin\usr\local\bin\nutch-1.11\bin` to environment variable `PATH`
+-    Create new environment variable `NUTCH_HOME`, set to `c:\dev\cygwin\usr\local\bin\nutch-1.11`
+-    Create new environment variable `NUTCH_JAVA_HOME`, set to `C:\Java\jdk1.8.0_131`
 
 <img src="https://user-images.githubusercontent.com/11856005/28163800-81556932-67c4-11e7-8f84-7d67ccc88af4.png"/>
 
@@ -1722,9 +1893,9 @@ Place extracted folder in `%Cygwin_Home%`:
 
 
 Environment Variables:
--	Add `;c:\dev\cygwin\usr\local\bin\nutch-1.13\bin` to environment variable `PATH`
--	Create new environment variable `NUTCH_HOME`, set to `c:\dev\cygwin\usr\local\bin\nutch-1.13`
--	Create new environment variable `NUTCH_JAVA_HOME`, set to `C:\Java\jdk1.8.0_131`
+-    Add `;c:\dev\cygwin\usr\local\bin\nutch-1.13\bin` to environment variable `PATH`
+-    Create new environment variable `NUTCH_HOME`, set to `c:\dev\cygwin\usr\local\bin\nutch-1.13`
+-    Create new environment variable `NUTCH_JAVA_HOME`, set to `C:\Java\jdk1.8.0_131`
 
 Tutorials:
 - <a target="_blank" href="https://wiki.apache.org/nutch/NutchTutorial">https://wiki.apache.org/nutch/NutchTutorial</a>
@@ -1868,88 +2039,88 @@ Edit `c:\dev\apache\nutch-2.3.1\ivy\ivy.xml`
 
 ```xml
 <ivy-module version="1.0">
-	<info organisation="org.apache.nutch" module="nutch">
-		<license name="Apache 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt/"/>
-		<ivyauthor name="Apache Nutch Team" url="http://nutch.apache.org" />
-		<description homepage="http://nutch.apache.org">Nutch is an open source web-search software. It builds on 
-		Hadoop, Tika and Solr, adding web-specifics, such as a crawler, a link-graph database etc.
-		</description>
-	</info>
+    <info organisation="org.apache.nutch" module="nutch">
+        <license name="Apache 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt/"/>
+        <ivyauthor name="Apache Nutch Team" url="http://nutch.apache.org" />
+        <description homepage="http://nutch.apache.org">Nutch is an open source web-search software. It builds on 
+        Hadoop, Tika and Solr, adding web-specifics, such as a crawler, a link-graph database etc.
+        </description>
+    </info>
 
-	<configurations>
-		<include file="${basedir}/ivy/ivy-configurations.xml" />
-	</configurations>
+    <configurations>
+        <include file="${basedir}/ivy/ivy-configurations.xml" />
+    </configurations>
 
-	<publications>
-		<!--get the artifact from our module name -->
-		<artifact conf="master" />
-	</publications>
+    <publications>
+        <!--get the artifact from our module name -->
+        <artifact conf="master" />
+    </publications>
 
-	<dependencies>
-	    <!-- **** Required dependency for elastic search client and api 
-	    (additional repo added in ivysettings) (can be removed if elasticsearch is not needed **** -->
-	    <dependency org="org.elasticsearch" name="elasticsearch" rev="0.18.3" 
-	    	conf="*->default"/>
-		
-		<!-- **** Required dependency for mongodb java driver (can be removed if mongodb is not needed) -->
-	    <dependency org="org.mongodb" name="mongo-java-driver" rev="2.7.1"
-			conf="*->default"/>
-			
-		<dependency org="org.apache.solr" name="solr-solrj" rev="3.1.0"
-			conf="*->default"/>
-		<dependency org="org.slf4j" name="slf4j-log4j12" rev="1.5.5" conf="*->master" />
+    <dependencies>
+        <!-- **** Required dependency for elastic search client and api 
+        (additional repo added in ivysettings) (can be removed if elasticsearch is not needed **** -->
+        <dependency org="org.elasticsearch" name="elasticsearch" rev="0.18.3" 
+            conf="*->default"/>
+        
+        <!-- **** Required dependency for mongodb java driver (can be removed if mongodb is not needed) -->
+        <dependency org="org.mongodb" name="mongo-java-driver" rev="2.7.1"
+            conf="*->default"/>
+            
+        <dependency org="org.apache.solr" name="solr-solrj" rev="3.1.0"
+            conf="*->default"/>
+        <dependency org="org.slf4j" name="slf4j-log4j12" rev="1.5.5" conf="*->master" />
 
-		<dependency org="commons-logging" name="commons-logging"
-			rev="1.0.4" conf="*->master" />
-		<dependency org="commons-logging" name="commons-logging-api"
-			rev="1.0.4" conf="*->master" />
+        <dependency org="commons-logging" name="commons-logging"
+            rev="1.0.4" conf="*->master" />
+        <dependency org="commons-logging" name="commons-logging-api"
+            rev="1.0.4" conf="*->master" />
 
-		<dependency org="commons-lang" name="commons-lang" rev="2.4"
-			conf="*->default" />
-		<dependency org="commons-collections" name="commons-collections"
-			rev="3.1" conf="*->default" />
-		<dependency org="commons-httpclient" name="commons-httpclient"
-			rev="3.1" conf="*->master" />
-		<dependency org="commons-codec" name="commons-codec" rev="1.3"
-			conf="*->default" />
+        <dependency org="commons-lang" name="commons-lang" rev="2.4"
+            conf="*->default" />
+        <dependency org="commons-collections" name="commons-collections"
+            rev="3.1" conf="*->default" />
+        <dependency org="commons-httpclient" name="commons-httpclient"
+            rev="3.1" conf="*->master" />
+        <dependency org="commons-codec" name="commons-codec" rev="1.3"
+            conf="*->default" />
 
-		<dependency org="org.apache.hadoop" name="hadoop-core" rev="0.20.2"
-			conf="*->default">
-			<exclude org="hsqldb" name="hsqldb" />
-			<exclude org="net.sf.kosmosfs" name="kfs" />
-			<exclude org="net.java.dev.jets3t" name="jets3t" />
-			<exclude org="org.eclipse.jdt" name="core" />
-			<exclude org="org.mortbay.jetty" name="jsp-*" />
-			<exclude org="ant" name="ant" />
-		</dependency>
+        <dependency org="org.apache.hadoop" name="hadoop-core" rev="0.20.2"
+            conf="*->default">
+            <exclude org="hsqldb" name="hsqldb" />
+            <exclude org="net.sf.kosmosfs" name="kfs" />
+            <exclude org="net.java.dev.jets3t" name="jets3t" />
+            <exclude org="org.eclipse.jdt" name="core" />
+            <exclude org="org.mortbay.jetty" name="jsp-*" />
+            <exclude org="ant" name="ant" />
+        </dependency>
 
-		<dependency org="com.ibm.icu" name="icu4j" rev="4.0.1" />
-		<dependency org="org.apache.tika" name="tika-core" rev="0.9" />
-		<dependency org="org.mortbay.jetty" name="jetty-client" rev="6.1.22" />
+        <dependency org="com.ibm.icu" name="icu4j" rev="4.0.1" />
+        <dependency org="org.apache.tika" name="tika-core" rev="0.9" />
+        <dependency org="org.mortbay.jetty" name="jetty-client" rev="6.1.22" />
 
-		<dependency org="log4j" name="log4j" rev="1.2.15" conf="*->master" />
+        <dependency org="log4j" name="log4j" rev="1.2.15" conf="*->master" />
 
-		<dependency org="xerces" name="xercesImpl" rev="2.9.1" />
-		<dependency org="xerces" name="xmlParserAPIs" rev="2.6.2" />
-		<dependency org="oro" name="oro" rev="2.0.8" />
+        <dependency org="xerces" name="xercesImpl" rev="2.9.1" />
+        <dependency org="xerces" name="xmlParserAPIs" rev="2.6.2" />
+        <dependency org="oro" name="oro" rev="2.0.8" />
 
-		<!--Configuration: test -->
+        <!--Configuration: test -->
 
-		<!--artifacts needed for testing -->
-		<dependency org="junit" name="junit" rev="3.8.1" conf="test->default" />
-		<dependency org="org.apache.hadoop" name="hadoop-test" rev="0.20.2"
-			conf="test->default" />
+        <!--artifacts needed for testing -->
+        <dependency org="junit" name="junit" rev="3.8.1" conf="test->default" />
+        <dependency org="org.apache.hadoop" name="hadoop-test" rev="0.20.2"
+            conf="test->default" />
 
-		<dependency org="org.mortbay.jetty" name="jetty" rev="6.1.22"
-			conf="test->default" />
-		<dependency org="org.mortbay.jetty" name="jetty-util" rev="6.1.22"
-			conf="test->default" />
+        <dependency org="org.mortbay.jetty" name="jetty" rev="6.1.22"
+            conf="test->default" />
+        <dependency org="org.mortbay.jetty" name="jetty-util" rev="6.1.22"
+            conf="test->default" />
 
                 <!--global exclusion-->
-             	<exclude module="jmxtools" />
-             	<exclude module="jms" />
-             	<exclude module="jmxri" />
-	</dependencies>
+                 <exclude module="jmxtools" />
+                 <exclude module="jms" />
+                 <exclude module="jmxri" />
+    </dependencies>
 </ivy-module>
 ```
 
@@ -1966,10 +2137,10 @@ ant runtime
 About: <a href target="_blank" href="https://ofbiz.apache.org/">https://ofbiz.apache.org/</a>  
 
 Open-source:
--	ERP (Enterprise Resource Planning)
--	CRM (Customer Relationship Management)
--	CMS (Content Management System)
--	E-Business / E-Commerce, SCM (Supply Chain Management), MRP (Manufacturing Resource Planning), MMS/EAM (Maintenance Management System/Enterprise Asset Management).
+-    ERP (Enterprise Resource Planning)
+-    CRM (Customer Relationship Management)
+-    CMS (Content Management System)
+-    E-Business / E-Commerce, SCM (Supply Chain Management), MRP (Manufacturing Resource Planning), MMS/EAM (Maintenance Management System/Enterprise Asset Management).
 
 Install: http://archive.apache.org/dist/ofbiz/apache-ofbiz-16.11.01.zip  
 Tutorial: https://cwiki.apache.org/confluence/display/OFBIZ/Demo+and+Test+Setup+Guide  
@@ -1977,7 +2148,7 @@ Tutorial: https://cwiki.apache.org/confluence/display/OFBIZ/Demo+and+Test+Setup+
 Set `http_proxy` at CLI <sup>[[Proxy Settings]](#proxysettingsbash)</sup> (Linux CLI (e.g. MinTTY, MINGW64 (Git Bash))  
 
 ```
-gradlew -Dhttp.proxyHost=proxy.epa.ie -Dhttp.proxyPort=8888 -Dhttp.proxyUser=meaneym -Dhttp.proxyPassword=xxx -Dhttps.proxyHost=proxy.epa.ie -Dhttps.proxyPort=8888 -Dhttps.proxyUser=meaneym -Dhttps.proxyPassword=xxx ofbiz
+gradlew -Dhttp.proxyHost=proxy.epa.ie -Dhttp.proxyPort=8888 -Dhttp.proxyUser=username -Dhttp.proxyPassword=xxx -Dhttps.proxyHost=proxy.epa.ie -Dhttps.proxyPort=8888 -Dhttps.proxyUser=username -Dhttps.proxyPassword=xxx ofbiz
 ```
 
 ### Apache Mesos 1.3.0
@@ -2011,19 +2182,19 @@ Install:
 
 In `C:\Dev\apache\tomcat-8.0.33\conf\Catalina\localhost\`
 Create three XML files:
--	mcf-api-service.xml
+-    mcf-api-service.xml
 ```xml
 <xmlversion="1.0" encoding="utf-8"?>
 <Context docBase="c:\dev\apache\manifoldcf-2.4\web\war\mcf-api-service.war" crossContext="true">
 </Context>
 ```
--	mcf-authority-service.xml
+-    mcf-authority-service.xml
 ```xml
 <xmlversion="1.0" encoding="utf-8"?>
 <Context docBase="c:\dev\apache\manifoldcf-2.4\web\war\mcf-authority-service.war" crossContext="true">
 </Context>
 ```
--	mcf-crawler-ui.xml
+-    mcf-crawler-ui.xml
 ```xml
 <xmlversion="1.0" encoding="utf-8"?>
 <Context docBase="c:\dev\apache\manifoldcf-2.4\web\war\mcf-crawlerui.war" crossContext="true">
@@ -2128,7 +2299,75 @@ pip install flask
 pip install bcrypt
 ```
 
-Edit `settings.py`
+Edit `settings.py`:
+
+```py
+MONGO_HOST = '192.168.65.150'
+MONGO_PORT = 9214
+
+MONGO_DBNAME = 'aq'
+
+RESOURCE_METHODS = ['GET']
+ITEM_METHODS = ['GET']
+
+#ITEMS = 'results'
+#ITEMS = 'records'
+
+schema = {
+    # Schema definition, based on Cerberus grammar. Check the Cerberus project
+    # (https://github.com/pyeve/cerberus) for details.
+
+    # User accounts for Authorisation
+    'username': {
+        'type': 'string',
+        'required': True,
+        'unique': True,
+        },
+    'password': {
+        'type': 'string',
+        'required': True,
+    },
+
+    'rawreadingid': {'type': 'int64'},
+    'raw_reading_measurement_time': {'type': 'datetime'},
+    'rawdatavalue': {'type': 'double'},
+    'pollutantname': {'type': 'string'},
+    'samplingpoint': {'type': 'string'},
+    'measurementtype': {'type': 'string'},
+    'measurementunit': {'type': 'string'}
+}
+
+accounts = {
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'username',
+    },
+    'cache_control': '',
+    'cache_expires': 0,
+    'schema': schema,
+}
+
+aq_measurements = {
+    'additional_lookup': {
+        'url': 'regex("[\w]+")', 
+        'field': '_id'},
+    'cache_control': 'max-age=10,must-revalidate',
+    'cache_expires': 10,
+    'resource_methods': ['GET'],
+    'schema': schema
+}
+
+URL_PREFIX = 'api'
+API_VERSION = 'v1'
+XML = False
+PAGINATION = True
+PAGINATION_DEFAULT = 25
+PAGINATION_LIMIT = 50
+DOMAIN = {
+    'aq_measurements': aq_measurements,
+    #'accounts': accounts,
+}
+```
 
 At CLI 1
 ```bash
@@ -2149,6 +2388,317 @@ curl -i http://127.0.0.1:5000?pretty
 - http://localhost:5000/measurements?where={"locationname":"Kilmeadan"}&max_results=1
 - http://localhost:5000/measurements?where={"measurementid":684}
 - http://localhost:5000/api-docs
+
+#### uWSGI
+Tutorial: <https://uwsgi-docs.readthedocs.io/en/latest/>    
+Tutorial: <https://www.digitalocean.com/community/tutorials/how-to-set-up-uwsgi-and-nginx-to-serve-python-apps-on-ubuntu-14-04>  
+Github: <https://github.com/unbit/uwsgi>  
+
+> Note: Debian only
+
+```bash
+pip install uwsgi
+```
+
+Create '.ini' file, e.g. `/var/www/api/flask/aq/aq_uwsgi.ini`:
+
+```ini
+[uwsgi]
+module          = run_aq_uwsgi:app
+
+master          = true
+processes       = 5
+
+socket          = /tmp/api_aq_uwsgi.sock
+protocol        = uwsgi
+enable-threads  = true
+logto           = /var/www/api/flask/aq/log/uwsgi.log
+uid             = username 
+gid             = www-data
+chmod-socket    = 666
+vacuum          = true
+
+die-on-term     = true
+
+
+#thunder-lock   = true
+#socket         = 0.0.0.0:8000
+#socket         = 127.0.0.1:8000
+#socket         = 0.0.0.0:5015
+#socket         = 127.0.0.1:5015
+#protocol       = http
+#threads        = 3
+```
+
+- Note the sock file, e.g. `/tmp/api_aq_uwsgi.sock`, may require rights to be specified, as well as `/etc/nginx/uwsgi_params` and the project folder, e.g. `/var/www/api/`:  
+```sh
+sudo chmod 666 /tmp/api_aq_uwsgi.sock
+sudo chown usernameabc:www-data /etc/nginx/uwsgi_params
+sudo chown usernameabc:www-data /var/www/api/
+```
+
+
+Edit the 'Eve' run file, e.g. `/var/www/api/flask/aq/run_aq_uwsgi.py`:
+> Note: It's very important to run the app from within the `if __name__ == '__main__':` condition
+> Otherwise 'uWSGI' will only run locally
+```py
+import eve
+import bcrypt
+from eve import Eve
+#from eve_elastic import Elastic
+
+#### Added for Swagger
+from eve_swagger import swagger, add_documentation
+
+#### Added for Basic Autorisation (Username/password)
+from eve.auth import BasicAuth
+
+#### Added for Token Autorisation
+#from eve.auth import TokenAuth
+#from flask import current_app as app
+
+
+#### End
+
+
+#### Disable meta fields, e.g. '_etag', '_created', '_updated'
+def on_fetched_resource(resource, response):
+    for document in response['_items']:
+        del(document['_etag'])
+        del(document['_created'])
+        del(document['_updated'])
+        del(document['_links'])
+
+
+#### Restrict API access - require username and password
+class MyBasicAuth(BasicAuth):
+    def check_auth(self, username, password, allowed_roles, resource, method):
+        return username == 'User' and password == 'Pass'
+
+app = eve.Eve(auth=MyBasicAuth)
+##app = eve.Eve(data=Elastic)
+
+#### Disable meta fields, e.g. '_etag, '_created', '_updated'
+app.on_fetched_resource += on_fetched_resource
+
+
+#### Added for Swagger
+app.register_blueprint(swagger)
+
+# required. See http://swagger.io/specification/#infoObject for details.
+app.config['SWAGGER_INFO'] = {
+    'title': 'Air Quality Open Data API',
+    'version': '1.0',
+    'description': 'Air Quality Open Data API',
+    'termsOfService': 'terms.html',
+    'contact': {
+      "url": 'http://www.epa.ie',
+      "name": 'EPA'
+    },
+    'license': {
+      'url': 'https://creativecommons.org/licenses/by/4.0/',
+      'name': 'Creative Commons Attribution 4.0 International License (CC BY 4.0)'
+    },
+    'schemes': ['https'],
+    #'BasicAuth': {'type': 'http', 'scheme': 'basic', },
+    #'servers': {'url': 'https://air-tst.epa.ie/'},
+    #'servers': {'name': 'Development Server'},
+}
+
+
+add_documentation
+(
+  {
+    'paths': {
+      '/aq_measurements': {
+        'get': {
+          'parameters': 
+          [
+            {
+              'in': 'path',
+              'name': 'measurementtype',
+              'required': False,
+              'description': 'Filter by measurement',
+              'type': 'string'
+            }
+          ]
+        }
+      }
+    }
+  }
+)
+
+app.config['SWAGGER_HOST'] = 'air-tst.epa.ie'
+
+if __name__ == '__main__':
+    app.run(
+        host='0.0.0.0', 
+        port=5015
+)
+```
+
+Optional: Create `wsgi.py` (this imports 'app' from `run_aq_uwsgi.py`, some recommend but not mandatory):
+
+```py
+from run_aq_uwsgi import app
+if __name__ == '__main__':
+    app.run(
+        host='0.0.0.0', 
+        port=5015
+)
+```
+
+
+To run (with switches in command):
+```bash
+/var/www/api/flask/aq$ uwsgi --socket:0.0.0.0=8000 --protocol=http -w run_aq_uwsgi:app
+```
+
+To run (using ini file - recommended):
+```bash
+/var/www/api/flask/aq$ uwsgi --ini=aq_uwsgi.ini
+```
+
+- To run uWSGI as a service
+
+Create '.service' file, e.g. `/lib/systemd/system/api_aq_uwsgi.service`:  
+
+```ini
+[Unit]
+Description=uWSGI server instance configured to serve run_aq_uwsgi (Air Quality Open Data API)
+After=network.target
+
+[Service]
+User=username
+Group=www-data
+WorkingDirectory=/var/www/api/flask/aq
+ExecStart=/bin/bash -c 'cd /var/www/api/flask/aq/; uwsgi --ini aq_uwsgi.ini'
+
+[Install]
+WantedBy=multi-user.target
+```
+
+To create a symlink (syntax is `ln -s <source> <destination link name>`):
+
+```sh
+sudo ln -s /lib/systemd/system/api_aq_uwsgi.service /etc/systemd/system/api_aq_uwsgi.service
+```
+
+At the shell (`enable` should allow the service to restart at boot):
+```bash
+sudo systemctl enable api_aq_uswsgi
+sudo systemctl start api_aq_uwsgi
+```
+
+#### Nginx Config
+
+> Note: Debian only
+
+Edit site config in 'sites-available', e.g. `etc/nginx/sites-available/air`:
+
+```ini
+server {
+    listen              80;
+    server_name         air-tst.epa.ie;
+    return 301          https://air-tst.epa.ie$request_uri;
+    index               index.html index.htm;
+}
+
+server {
+    listen              443 ssl;
+    server_name         air-tst.epa.ie;
+    root                /var/www/api/flask/aq;
+    index               index.html index.htm;
+
+    keepalive_timeout   70;    
+
+    include             /etc/nginx/global/restrictions.conf;
+
+    ssl_certificate     /etc/nginx/ssl/air-tst_epa_ie.pem;
+    ssl_certificate_key /etc/nginx/ssl/sslair.key;
+
+    access_log          /var/log/nginx/air-tst.access.log;
+    error_log           /var/log/nginx/air-tst.error.log;
+
+    # Location for API 
+    location    /api/v1/aq_measurements {
+        proxy_set_header    Host              $host;
+        proxy_set_header    X-Real-IP         $remote_addr;
+        proxy_set_header    X-Forwarded-For   $proxy_add_x_forwarded_for;
+
+        uwsgi_read_timeout  18000;
+        include             uwsgi_params;
+        uwsgi_pass          unix:///tmp/aq_uwsgi.sock;
+
+
+        # Original non-UWSGI
+        #proxy_pass http://127.0.0.1:5015;
+    }
+
+    # Location for Swagger JSON (for Swagger-UI API documentation) 
+    location /api-docs {
+        #proxy_pass         http://127.0.0.1:5015; # For when using withot uWSGI
+        proxy_redirect      off;
+
+        proxy_set_header    Host                $host;
+        proxy_set_header    X-Real-IP           $remote_addr;
+        proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
+        proxy_set_header    X-Forwarded-Proto   $scheme;
+
+        # For when using with uWSGI
+        uwsgi_read_timeout  18000;
+        include             uwsgi_params;
+        uwsgi_pass          unix:///tmp/aq_uwsgi.sock;
+    }
+
+    # Location for Swagger-UI page
+    location /api/swagger {
+        alias     /var/www/api/swagger-ui/dist;
+
+        if ($request_method = 'OPTIONS') {
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+            #
+            # Custom headers and headers various browsers *should* be OK with but aren't
+            #
+            add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+            #
+            # Tell client that this pre-flight info is valid for 20 days
+            #
+            add_header 'Access-Control-Max-Age' 1728000;
+            add_header 'Content-Type' 'text/plain charset=UTF-8';
+            add_header 'Content-Length' 0;
+            return 204;
+        }
+        if ($request_method = 'POST') {
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+            add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+        }
+        if ($request_method = 'GET') {
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+            add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+        }
+    }
+}
+```
+Edit site config in 'sites-available', e.g. `etc/nginx/sites-available/air`, to allow Swagger-UI to access the `api-docs` endpoint. (This endpoint is auto-generated using the 'Eve-Swagger' package):
+
+Note: The full `etc/nginx/sites-available/air` conf above includes this section, and illustrates how to configure for uWSGI.
+
+```sh
+    location /api-docs {
+            proxy_pass         http://127.0.0.1:5015;
+            proxy_redirect     off;
+
+            proxy_set_header   Host              $host;
+            proxy_set_header   X-Real-IP         $remote_addr;
+            proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Proto $scheme;
+    }
+```
+Source: <https://github.com/springfox/springfox/issues/1330#issuecomment-226967909>  
 
 #### Eve-Swagger
 GitHub: <https://github.com/pyeve/eve-swagger>  
@@ -2214,6 +2764,27 @@ Set `http_proxy` at CLI <sup>[[Proxy Settings]](#proxysettings)</sup>
 pip install Eve-Elastic
 ```
 
+#### SQLAlchemy
+Home: <https://www.sqlalchemy.org/>  
+
+
+Set `http_proxy` at CLI <sup>[[Proxy Settings]](#proxysettings)</sup>
+
+```bash
+pip install sqlalchemy
+```
+
+#### EVE-SQLAlchemy
+Github: <https://github.com/pyeve/eve-sqlalchemy>  
+Tutorial: <http://eve-sqlalchemy.readthedocs.io/en/latest/tutorial.html>  
+
+Set `http_proxy` at CLI <sup>[[Proxy Settings]](#proxysettings)</sup>
+
+```bash
+pip install eve-sqlalchemy
+```
+
+
 ### Zend_Rest_Server() 
 Tutorial: <https://www.packtpub.com/mapt/book/web-development/9781847195524/6/ch06lvl1sec32/Services+with+Zend_Rest_Server>  
 Tutorial: <http://www.lampdev.org/programming/zend-framework/zend_rest_server-tutorial.html>  
@@ -2229,54 +2800,54 @@ require_once('Zend/Loader/Autoloader.php');
 $loader = Zend_Loader_Autoloader::getInstance();
 
 class Simple_Rest_Server {
-	protected $_request;
-	public function __construct() { 
-		$this->_request = new Zend_Controller_Request_Http();
-	}
-	public function get()
-	{
-		// we will dump the query_string
-		// with a message from GET METHOD
-		// if we get a get call
-		// $this->_request->getQuery()
-		// will return the $_SERVER['QUERY_STRING'] value
-		$data = $this->_request->getQuery();
-		return "FROM GET METHOD.\n" . 
-		var_export($data, true);
-	}
+    protected $_request;
+    public function __construct() { 
+        $this->_request = new Zend_Controller_Request_Http();
+    }
+    public function get()
+    {
+        // we will dump the query_string
+        // with a message from GET METHOD
+        // if we get a get call
+        // $this->_request->getQuery()
+        // will return the $_SERVER['QUERY_STRING'] value
+        $data = $this->_request->getQuery();
+        return "FROM GET METHOD.\n" . 
+        var_export($data, true);
+    }
         public function HelloWorld()
-	{
-		// we will dump the query_string
-		// with a message from HelloWorld METHOD
-		// if we get a get call
-		// $this->_request->getQuery()
-		// will return the $_SERVER['QUERY_STRING'] value
-		$data = $this->_request->getQuery();
-		return "FROM HelloWorld.\n" . 
-		var_export($data, true);
-	}
-	public function post()
-	{
-		// we will dump the POST DATA
-		// with a message from POST METHOD
-		// if we get a POST call
-		// $this->_request->getRawBody()
-		// will return the $_POST DATA
-		$data = $this->_request->getRawBody();
-		return "FROM POST METHOD.\n" . 
-		"===== DATA: =====\n" .
-		var_export($data, true);
-	}
-	public  function delete($data)
-	{
-		return "FROM DELETE METHOD.\n" . 
-			var_export($data, true);
-	}
-	public  function index($data)
-	{
-		return "FROM INDEX METHOD.\n" . 
-			var_export($data, true);
-	}
+    {
+        // we will dump the query_string
+        // with a message from HelloWorld METHOD
+        // if we get a get call
+        // $this->_request->getQuery()
+        // will return the $_SERVER['QUERY_STRING'] value
+        $data = $this->_request->getQuery();
+        return "FROM HelloWorld.\n" . 
+        var_export($data, true);
+    }
+    public function post()
+    {
+        // we will dump the POST DATA
+        // with a message from POST METHOD
+        // if we get a POST call
+        // $this->_request->getRawBody()
+        // will return the $_POST DATA
+        $data = $this->_request->getRawBody();
+        return "FROM POST METHOD.\n" . 
+        "===== DATA: =====\n" .
+        var_export($data, true);
+    }
+    public  function delete($data)
+    {
+        return "FROM DELETE METHOD.\n" . 
+            var_export($data, true);
+    }
+    public  function index($data)
+    {
+        return "FROM INDEX METHOD.\n" . 
+            var_export($data, true);
+    }
 }
 
 // Initiate the Zend_Rest_Server class object
@@ -2415,6 +2986,30 @@ npm install -g react (if not installed)
 npm install -g swagger-ui
 ```
 
+#### Swagger-UI - Debian
+Install: <https://gist.github.com/diegopacheco/f310882e7f369df9691b01954ee816ca>  
+
+- Deprecated: Don't run Node packages  
+Potential dependencies, these may need to be installed individually before Swagger-UI:
+```bash
+npm install commonmark
+npm install react
+npm install webpack
+```
+
+To install Swagger-UI:
+```bash
+git clone https://github.com/swagger-api/swagger-ui.git
+cd swagger-ui/
+sudo -E npm install -g
+sudo -E npm run build
+npm run serve
+GOTO: http://localhost:8080/
+```
+
+Edit `etc/nginx/sites-available/air`:  
+- Note: see [Nginx Config](#nginx-config)
+
 ### Pyramid-Swagger
 ```bash
 git clone https://github.com/striglia/pyramid_swagger.git 
@@ -2458,9 +3053,9 @@ To use ‘WikiEditor’, add to `...\mediawiki-1.28\includes\DefaultSettings.php
 
 ```xml
 $wgDefaultUserOptions = [
-	…
-	'usebetatoolbar' => 1,
-	'usebetatoolbar-cgd' => 1,
+    …
+    'usebetatoolbar' => 1,
+    'usebetatoolbar-cgd' => 1,
 ```
 
 
@@ -2525,7 +3120,7 @@ Install Ubuntu 14..04.5 on Virtualbox. Link: [[Ubuntu 14.04.5]](#ubuntu-14045)
 
 Tutorial: <http://docs.ckan.org/en/ckan-2.7.2/maintaining/installing/install-from-package.html>  
 
-Solr JSP Error Workaround: <https://stackoverflow.com/questions/30355839/>  
+Solr JSP Error Workaround: <https://stackoverflow.com/questions/30355839/>  
 (link to solution: <https://github.com/ckan/ckan/pull/2966>)  
 
 ```bash
@@ -2569,7 +3164,7 @@ pip install virtualenvwrapper-win
 
 ### <a name="proxysettings"></a>Proxy Settings
 
-Note: To set Atom IDE proxy edit the file .apmrc in folder  C:\Users\meaneym\.atom\.apm\ 
+Note: To set Atom IDE proxy edit the file .apmrc in folder  C:\Users\username\.atom\.apm\ 
 
 #### Windows <abbr title="Command Line Interface">CLI</abbr>
 
@@ -2652,37 +3247,7 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Apache_Hive):
 
 
 Environment Variables:
--	Add `;c:\dev\apache\hive-2.3.0\bin` to environment variable `PATH`
--	Create new environment variable `HIVE_HOME`, set to `c:\dev\apache\hive-2.3.0`
--	Create new environment variable `CLASSPATH` if requtred, set to (or append) `;c:\dev\apache\hive-2.3.0\lib` and `;c:\dev\hadoop\hadoop-2.7.1\share\hadoop\common\lib`
+-    Add `;c:\dev\apache\hive-2.3.0\bin` to environment variable `PATH`
+-    Create new environment variable `HIVE_HOME`, set to `c:\dev\apache\hive-2.3.0`
+-    Create new environment variable `CLASSPATH` if requtred, set to (or append) `;c:\dev\apache\hive-2.3.0\lib` and `;c:\dev\hadoop\hadoop-2.7.1\share\hadoop\common\lib`
 
-
-
-## Sandbox
-
-If you're ever stuck on a Markdown question, there's a help button on the right side of the toolbar:
-
-![Screenshot of the toolbar](http://so.mrozekma.com/editor-bar-help-button.png)
-
-That [help page](http://stackoverflow.com/editing-help) explains how to do the simple case:
-
-> ### Advanced lists: Nesting
-> To put other Markdown blocks in a list; just indent four spaces for each nesting level
-
-For example (see the [markdown for this post](http://meta.stackoverflow.com/revisions/01c25c3a-3653-49f4-b6be-4323c50bff2d/view-source)):
-
-1. Dog
-    1. German Shepherd
-    2. Belgian Shepherd
-        1. Malinois
-        2. Groenendael
-        3. Tervuren
-2. Cat
-    1. Siberian
-    2. Siamese
-
-
-
-- [x] Finish my changes
-- [ ] Push my commits to GitHub
-- [ ] Open a pull request
