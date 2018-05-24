@@ -3,7 +3,7 @@
 # Please note that MONGO_HOST and MONGO_PORT could very well be left
 # out as they already default to a bare bones local 'mongod' instance.
 MONGO_HOST = 'localhost'
-MONGO_PORT = 27017
+MONGO_PORT = 9214 #27017
 
 # Skip these if your db has no auth. But it really should.
 #MONGO_USERNAME = 'developeruser'
@@ -79,20 +79,20 @@ schema = {
 
     ### Bathing Water (BW) Locations ###
 
-    'locationid': {'type': 'int64'},
-    'code': {'type': 'string'},
-    #'name': {'type': ''},
-    #'hashtag': {'type': ''},
-    #'countyname': {'type': ''},
-    #'organisationname': {'type': ''},
-    #'organisationcode': {'type': ''},
-    #'edenmonitoredstationcode': {'type': ''},
-    #'easting': {'type': ''},
-    #'northing': {'type': ''},
-    #'etrsx': {'type': ''},
-    #'etrsy': {'type': ''},
-    #'information': {'type': ''},
-    #'assessment': {'type': ''},
+    #'locationid': {'type': 'int64'},
+    'location_code': {'type': 'string'},
+    'location_name': {'type': 'string'},
+    'hashtag': {'type': 'string'},
+    'county_name': {'type': 'string'},
+    'organisation_name': {'type': 'string'},
+    'organisation_code': {'type': 'string'},
+    'edenmonitoredstationcode': {'type': 'int64'},
+    'easting': {'type': 'double'},
+    'northing': {'type': 'double'},
+    'etrsx': {'type': 'double'},
+    'etrsy': {'type': 'double'},
+    'information': {'type': 'string'},
+    #'assessment': {'type': 'string'},
     #'nextmonitoringdate': {'type': ''},
     #'mainphotourl': {'type': ''},
     #'mainphotodescription': {'type': ''},
@@ -117,7 +117,7 @@ schema = {
     #'closedreason': {'type': ''},
     #'stprisk': {'type': ''},
     #'stpcloseddays': {'type': ''},
-    #'isblueflag': {'type': ''},
+    'isblueflag': {'type': 'boolean'},
     #'isgreencoast': {'type': ''},
     #'istoiletsavailable': {'type': ''},
     #'toiletsavailabledetails': {'type': ''},
@@ -213,7 +213,7 @@ bw_locations = {
     # GET requests at '/people/<lastname>'.
 
     #'additional_lookup': {'url': 'regex("[\w]+")','field': 'samplingpoint'},
-    'additional_lookup': {'url': 'regex("[\w]+")','field': 'locationid'},
+    'additional_lookup': {'url': 'regex("[\w]+")','field': 'location_code'},
     #'additional_lookup': {'url': 'regex("[\w]+")', 'field': '_id'},
     #'additional_lookup': {'url': 'regex("[\w]+")', 'field': 'raw_reading_measurement_time'},
 
@@ -255,9 +255,12 @@ bw_locations = {
 #RESOURCE_TITLE = 'http://maurice-vm.epa.ie:5016/api/aq_measurements'
 #ID_FIELD = 'rawreadingid'
 #VERSIONING = True
+#SERVER_NAME = 'http://maurice-vm.epa.ie:5017/api'
 #HATEOAS = False
+FLASK_DEBUG = False
 STATUS_OK = 'OK'
 URL_PREFIX = 'api'
+API_VERSION = 'v1'
 XML = False
 PAGINATION = True
 PAGINATION_LIMIT = 999999999
@@ -268,6 +271,7 @@ DOMAIN = {
         'item_title': 'bw_measurements',
         'additional_lookup': {'url': 'regex("[\w]+")','field': 'monitoringresultid'},
         'resource_methods': ['GET'],
+        'id_field': 'monitoringresultid',
         'schema': {
             'monitoringresultid': {'type': 'int64'},
             'locationid': {

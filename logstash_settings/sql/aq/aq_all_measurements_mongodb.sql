@@ -1,3 +1,4 @@
+
 SELECT
 	[Air_Quality].[data].[RawReading].rawreadingid
 	, [Air_Quality].config.[Site].Name					AS samplingpoint
@@ -7,15 +8,20 @@ SELECT
 	, [Air_Quality].config.Unit.Name						AS measurementunit
 	, [Air_Quality].config.MeasureType.Name			AS measurementtype
 
-FROM		[Air_Quality].[data].[RawReading]
-INNER JOIN	[Air_Quality].config.SiteMeasure	ON	[Air_Quality].data.RawReading.SiteMeasureID 	= [Air_Quality].config.SiteMeasure.SiteMeasureID
-							AND	[Air_Quality].data.RawReading.SiteMeasureID	= [Air_Quality].config.SiteMeasure.SiteMeasureID
-INNER JOIN	[Air_Quality].config.Site		ON	[Air_Quality].config.SiteMeasure.SiteID		= [Air_Quality].config.Site.SiteID
-							AND	[Air_Quality].config.SiteMeasure.SiteID		= [Air_Quality].config.Site.SiteID
-INNER JOIN	[Air_Quality].config.Measure		ON	[Air_Quality].config.SiteMeasure.MeasureID	= [Air_Quality].config.Measure.MeasureID
-							AND	[Air_Quality].config.SiteMeasure.MeasureID	= [Air_Quality].config.Measure.MeasureID
-LEFT OUTER JOIN	[Air_Quality].config.MeasureType 	ON 	[Air_Quality].config.Measure.MeasureTypeID	= [Air_Quality].config.MeasureType.MeasureTypeID
-LEFT OUTER JOIN [Air_Quality].config.Unit		ON 	[Air_Quality].config.Measure.UnitID		= [Air_Quality].config.Unit.UnitID
+FROM					[Air_Quality].data.RawReading
+INNER JOIN		[Air_Quality].config.SiteMeasure
+	ON	[Air_Quality].data.RawReading.SiteMeasureID 	= [Air_Quality].config.SiteMeasure.SiteMeasureID
+	AND	[Air_Quality].data.RawReading.SiteMeasureID		= [Air_Quality].config.SiteMeasure.SiteMeasureID
+INNER JOIN		[Air_Quality].config.Site
+	ON	[Air_Quality].config.SiteMeasure.SiteID				= [Air_Quality].config.Site.SiteID
+	AND	[Air_Quality].config.SiteMeasure.SiteID				= [Air_Quality].config.Site.SiteID
+INNER JOIN		[Air_Quality].config.Measure
+	ON	[Air_Quality].config.SiteMeasure.MeasureID		= [Air_Quality].config.Measure.MeasureID
+	AND	[Air_Quality].config.SiteMeasure.MeasureID		= [Air_Quality].config.Measure.MeasureID
+LEFT OUTER JOIN	[Air_Quality].config.MeasureType
+	ON 	[Air_Quality].config.Measure.MeasureTypeID		= [Air_Quality].config.MeasureType.MeasureTypeID
+LEFT OUTER JOIN [Air_Quality].config.Unit
+	ON 	[Air_Quality].config.Measure.UnitID						= [Air_Quality].config.Unit.UnitID
 
 WHERE	[Air_Quality].data.RawReading.MeasuredAt <=	GETDATE()
 AND		[Air_Quality].data.RawReading.MeasuredAt >= :sql_last_value

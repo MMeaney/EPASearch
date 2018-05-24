@@ -1,9 +1,176 @@
+MONGO_HOST = 'mauricevm-test.epa.ie'
+MONGO_PORT = 9214
+MONGO_DBNAME = 'aq'
+RESOURCE_METHODS = ['GET']
+ITEM_METHODS = ['GET']
+RATE_LIMIT_GET = (1, 60)
+DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
+
+#ITEMS = 'records'
+
+# We enable standard client cache directives for all resources exposed by the
+# API. We can always override these global settings later.
+CACHE_CONTROL = 'max-age=20'
+CACHE_EXPIRES = 20
+#ITEM_LOOKUP_FIELD = 'rawreadingid'
+
+#QUERY_WHERE = 'q'
+
+'''
+accounts = {
+    'item_title': 'accounts',
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'username',
+    },
+    'cache_control': '',
+    'cache_expires': 0,
+
+    'schema': {
+        'username': {
+            'type': 'string',
+            'required': True,
+            'unique': True,
+        },
+        'password': {
+            'type': 'string',
+            'required': True,
+        },
+    }
+}
+'''
+aq_measurements = {
+
+    'item_title': 'aq_measurements',
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'pollutantname',
+        #'url': 'regex("[(?<=\s|^)\d+(?=\s|$)]+")',
+        #'field': 'rawreadingid',
+        #'url': 'regex("[\w]+")',
+        #'field': 'samplingpoint',
+        },
+    'resource_methods': ['GET'],
+
+    'datasource': {
+        #'source': 'aq_measurements',
+        #'filter': {'rawreadingid'},
+        'default_sort': [('rawreadingid', 1)],
+        #'projection': {
+        #    'rawreadingid': 1,
+        #    'pollutantname': 1,
+        #    'rawdatavalue': 1,
+        #    'measurementunit': 1,
+        #    'measurementtype': 1,
+        #    'raw_reading_measurement_time': 1,
+        #    'samplingpoint': 1
+        #}
+    },
+
+    'schema': {
+        'rawreadingid': {'type': 'int64'},
+        'raw_reading_measurement_time': {'type': 'datetime'},
+        'rawdatavalue': {'type': 'double'},
+        'pollutantname': {'type': 'string'},
+        'samplingpoint': {'type': 'string'},
+        'measurementunit': {'type': 'string'},
+        'measurementtype': {'type': 'string'},
+        #'year': {'type': 'string'},
+        #'month': {'type': 'datetime'},
+        'day': {'type': 'datetime'},
+    },
+}
+
+'''
+aq_measurements2 = {
+    #'additional_lookup': {'url': 'regex("[\w]+")','field': 'rawreadingid'},
+    'resource_methods': ['GET'],
+
+    #'url': 'rawreadingid/<:rawreadingid>/',
+    #'url': 'people/<regex("[a-f0-9]{24}"):contact_id>/invoices',
+    'url': 'aq_measurements/<regex("[(?<=\s|^)\d+(?=\s|$)]+"):rawreadingid>',
+    #'url': 'rawreadingid/<regex("[a-f0-9]{24}"):rawreadingid>',
+    'item_title': 'aq_measurements2',
+
+    'datasource': {
+        #'source': 'aq_measurements',
+        #'filter': {'rawreadingid'},
+        'projection': {
+            'rawreadingid': 1,
+            'pollutantname': 1,
+            'rawdatavalue': 1,
+            'measurementunit': 1,
+            'measurementtype': 1,
+            'raw_reading_measurement_time': 1,
+            'samplingpoint': 1
+        }
+    },
+
+    'schema': {
+        'rawreadingid': {'type': 'int64'},
+        'raw_reading_measurement_time': {'type': 'datetime'},
+        'rawdatavalue': {'type': 'double'},
+        'pollutantname': {'type': 'string'},
+        'samplingpoint': {'type': 'string'},
+        'measurementunit': {'type': 'string'},
+        'measurementtype': {'type': 'string'},
+    }
+}
+'''
+
+
+#SERVER_NAME = '0.0.0.0:5014'
+#SERVER_NAME = "http://maurice-vm.epa.ie:5014"
+#URL_PREFIX = 'a'
+#QUERY_MAX_RESULTS = 'num'
+#RESOURCE_TITLE = 'http://maurice-vm.epa.ie:5016/api/aq_measurements'
+#SERVER_NAME = 'http://maurice-vm.epa.ie:5017/api
+#VERSIONING = True'
+#STATUS_OK = 'OK'
+#HATEOAS = False
+#TCP_IP = '127.0.0.1'
+TCP_PORT = 5116
+#BUFFER_SIZE = 20
+FLASK_DEBUG = False
+URL_PREFIX = 'api'
+API_VERSION = 'v1'
+XML = True
+PAGINATION = True
+PAGINATION_DEFAULT = 25
+PAGINATION_LIMIT = 50
+EMBEDDING = True
+DOMAIN = {
+    'aq_measurements': aq_measurements,
+    #'aq_measurements2': aq_measurements2
+    #'accounts': accounts,
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+
+
 # Let's just use the local mongod instance. Edit as needed.
 
 # Please note that MONGO_HOST and MONGO_PORT could very well be left
 # out as they already default to a bare bones local 'mongod' instance.
 MONGO_HOST = 'localhost'
-MONGO_PORT = 27017
+MONGO_PORT = 9214
 
 # Skip these if your db has no auth. But it really should.
 #MONGO_USERNAME = 'developeruser'
@@ -144,6 +311,7 @@ aq_measurements = {
 #ID_FIELD = 'rawreadingid'
 #VERSIONING = True
 #HATEOAS = False
+FLASK_DEBUG = False
 STATUS_OK = 'OK'
 URL_PREFIX = 'api'
 XML = False
@@ -154,3 +322,7 @@ DOMAIN = {
     'aq_measurements': aq_measurements,
     'accounts': accounts,
 }
+
+
+
+"""

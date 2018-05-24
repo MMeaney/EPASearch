@@ -1,6 +1,7 @@
 import eve
 import bcrypt
 from eve import Eve
+import logging
 #from eve_elastic import Elastic
 
 #### Added for Swagger
@@ -8,6 +9,9 @@ from eve_swagger import swagger, add_documentation
 
 #### Added for Basic Autorisation (Username/password)
 from eve.auth import BasicAuth
+
+#### Waitress WSGI Server
+from waitress import serve
 
 #### Added for Token Autorisation
 #from eve.auth import TokenAuth
@@ -21,7 +25,7 @@ def on_fetched_resource(resource, response):
         del(document['_etag'])
         del(document['_created'])
         del(document['_updated'])
-        del(document['_links'])
+        #del(document['_links'])
 
 #def on_fetched_resource(resource, response):
 #    for document in response['_item']:
@@ -62,12 +66,23 @@ class MyBasicAuth(BasicAuth):
         #return token == 'token'
 
 
+
+
 app = Eve() # MongoDB
 #app = Eve(auth=MyBasicAuth) # MongoDB
 #app = eve.Eve(data=Elastic) # Elasticsearch
 #app = eve.Eve(data=Elastic, auth=MyBasicAuth)
 ##app = eve.Eve(data=Elastic, auth=BCryptAuth)
 ##app = eve.Eve(data=Elastic, auth=TokenAuth)
+
+
+#### Logging
+def log_every_get(resource, request, payload):
+  # custom INFO-level message is sent to the log file
+  app.logger.info('GET request')
+
+app.on_post_GET += log_every_get
+
 
 
 #### Disable meta fields, e.g. '_etag', '_created', '_updated'
@@ -101,10 +116,34 @@ app.config['SWAGGER_INFO'] = {
 #### End
 
 
-app.run(host='0.0.0.0', port=5017)
+#app.run(host='0.0.0.0', port=5017)
 
 #from eve import Eve
 #app = Eve()
 
-#if __name__ == '__main__':
-#    app.run()
+if __name__ == '__main__':
+
+    # enable logging to 'app.log' file
+    handler = logging.FileHandler('app.log')
+
+    # set a custom log format, and add request
+    # metadata to each log line
+    handler.setFormatter(
+        logging.Formatter(
+            '%(asctime)s %(levelname)s: %(message)s '
+            '[IN %(filename)s:%(lineno)d] -- IP: %(clientip)s, '
+            'URL: %(url)s, METHOD:%(method)s'#, ERROR:%(error)s'
+        )
+    )
+
+    # the default log level is set to WARNING, so
+    # we have to explictly set the logging level
+    # to INFO to get our custom message logged.
+    app.logger.setLevel(logging.INFO)
+
+    # append the handler to the default application logger
+    app.logger.addHandler(handler)
+    #app.run()
+
+    #app.run(host='0.0.0.0', port=5017)
+    serve(app, host='0.0.0.0', port=5017)

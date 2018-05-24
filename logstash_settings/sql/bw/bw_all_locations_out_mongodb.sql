@@ -1,17 +1,17 @@
 SELECT
-	LOC.LocationId
-	, LOC.Code
-	, LOC.Name
+	--LOC.LocationId
+	LOC.Code 								AS [location_code]
+	, LOC.Name 							AS [location_name]
 	, LOC.Hashtag
-	, LOC.CountyName
-	, LOC.OrganisationName
-	, ORG.Code	AS [OrganisationCode]
+	, LOC.CountyName				AS [county_name]
+	, LOC.OrganisationName	AS [organisation_name]
+	, ORG.Code							AS [organisation_code]
 	, LOC.EdenMonitoredStationCode
 	, LOC.Easting
 	, LOC.Northing
 	, LOC.EtrsX
 	, LOC.EtrsY
-	, LOC.Information
+	, LOC.Information   		AS [information]-- Check html tags
 	, LOC.Assessment
 	, LOC.NextMonitoringDate
 	, LOC.MainPhotoUrl
@@ -19,9 +19,8 @@ SELECT
 	, LOC.MainPhotoThumbnailUrl
 	, LOC.ProfileUrl
 	, LOC.ProfileUrlDescription
-	, LOC.ProfileLastUpdatedOn
-	, LOC.WaterQualityName
-	, LOC.AnnualClassificationId
+	, LOC.ProfileLastUpdatedOn  -- Check nulls
+	, LOC.WaterQualityName		-- What is it used for? Where does it come from?
 	, LOC.AnnualClassificationName
 	, LOC.AnnualClassificationYear
 	, LOC.AnnualClassificationYear1Name
@@ -30,7 +29,7 @@ SELECT
 	, LOC.AnnualClassificationYear2Year
 	, LOC.AnnualClassificationYear3Name
 	, LOC.AnnualClassificationYear3Year
-	, LOC.ClosedTypeName
+	, LOC.ClosedTypeName  --??? Change data value
 	, LOC.StatusTypeName
 	, LOC.RestrictionTypeName
 	, LOC.HasRestrictionInPlace
@@ -75,11 +74,12 @@ SELECT
 	, LOC.LitterBinAvailableDetails
 	, LOC.IsRecyclingFacilityAvailable
 	, LOC.RecyclingFacilityAvailableDetails
-	, LOC.LastUpdatedOn    AS [lastupdatedon]
+	, LOC.LastUpdatedOn	AS [lastupdatedon]
 	--, LOC.Shape
 	--, LOC.CountyId
 	--, LOC.OrganisationId
 	--, LOC.WaterQualityId
+	--, LOC.AnnualClassificationId
 	--, LOC.AnnualClassificationYear1Id
 	--, LOC.AnnualClassificationYear2Id
 	--, LOC.AnnualClassificationYear3Id
@@ -91,6 +91,6 @@ FROM			[BathingWater-STG].[dbo].[Location]			LOC
 LEFT JOIN	[BathingWater-STG].[dbo].[Organisation]	ORG	ON ORG.OrganisationId	= LOC.OrganisationId
 
 WHERE			LastUpdatedOn 	<=	GETDATE()
-AND				LastUpdatedOn 	>= :sql_last_value
+--AND				LastUpdatedOn 	>= :sql_last_value
 
 ORDER BY 	LastUpdatedOn
