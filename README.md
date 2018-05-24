@@ -805,7 +805,7 @@ git push origin master:master
 ```bash
 git reset HEAD~1
 git add .
-git commit -M "Update"
+git commit -m "Update"
 git push
 ```
 
